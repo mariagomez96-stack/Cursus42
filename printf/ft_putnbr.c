@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 11:50:35 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/29 13:04:36 by marigome         ###   ########.fr       */
+/*   Created: 2024/04/29 08:44:20 by marigome          #+#    #+#             */
+/*   Updated: 2024/04/29 13:26:16 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str)
+size_t	ft_putnbr(int c, size_t counter)
 {
-	int count;
-
-	count = 0;
-	while (*str)
+	if (c == -2147483648)
 	{
-		ft_putchar(*str);
-		str++;
-		count++;
+		counter += ft_putchar('-');
+		counter += ft_putchar('2');
+		ft_putnbr(c / 10);
 	}
-	return (count);
+	else if (c < 0)
+	{
+		counter += ft_putchar('-');
+		ft_putnbr(-c);
+	}
+	else if (c > 0 && c <= 9)
+		counter += ft_putchar('0' + c);
+	else
+		ft_putnbr(c / 10);
+	return (counter);
 }

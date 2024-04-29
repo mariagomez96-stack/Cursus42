@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_hexa_lower_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 11:50:35 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/29 13:04:36 by marigome         ###   ########.fr       */
+/*   Created: 2024/04/29 12:09:39 by marigome          #+#    #+#             */
+/*   Updated: 2024/04/29 13:27:04 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putstr(char *str)
-{
-	int count;
 
-	count = 0;
-	while (*str)
+int	ft_hexa_lower(int c, int counter)
+{
+	if (c >= 16)
 	{
-		ft_putchar(*str);
-		str++;
-		count++;
+		ft_hexa_lower_fd(c / 16);
+		ft_hexa_lower_fd(c % 16);		
 	}
-	return (count);
+	else
+	{
+		if (c)
+	}
+	
 }

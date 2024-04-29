@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putint_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 11:36:37 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/26 11:41:36 by marigome         ###   ########.fr       */
+/*   Created: 2024/04/29 10:00:19 by marigome          #+#    #+#             */
+/*   Updated: 2024/04/29 13:24:24 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-void	ft_putchar_fd(char c, size_t *counter)
+int	ft_putint(int c)
 {
-	write(1, &c, 1);
-	counter++;
+	int	counter;
+
+	counter = 0;
+	if (c < 0)
+	{
+		c *= -c;
+		ft_putint(c);
+	}
+	if (c > 9)
+	{
+		ft_putnbr_u(c / 10);
+	}
+	else
+		counter += ft_putchar('0' + c);
+	return (counter);
 }

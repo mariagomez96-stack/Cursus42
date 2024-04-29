@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 11:50:35 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/29 13:04:36 by marigome         ###   ########.fr       */
+/*   Created: 2024/04/26 11:36:37 by marigome          #+#    #+#             */
+/*   Updated: 2024/04/29 13:38:59 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "printf.h"
 
-int	ft_putstr(char *str)
+int	ft_putchar(char c)
 {
-	int count;
-
-	count = 0;
-	while (*str)
-	{
-		ft_putchar(*str);
-		str++;
-		count++;
-	}
-	return (count);
+	write(1, &c, 1);
+	return (1);
 }

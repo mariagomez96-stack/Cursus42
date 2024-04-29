@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:39:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/26 11:46:34 by marigome         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:05:06 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ int		ft_printf(char const *str, ...);
 /// @brief  Con esta función %c me imprime un carácter
 /// @param c El carácter que le paso con *str
 /// @param counter El contador que necesito para mi return en printf
-void	ft_putchar_fd(char c, size_t *counter);
+int	ft_putchar_fd(char c);
+
+/// @brief Con esta funcion %f e %i, me escribe un entero
+int	ft_putnbr_fd(int c, int counter);
+
+/// @brief Con esta función, si %s, me escribe todos los carácteres de un string
+int	ft_putstr_fd(char *str);
+
+/// @brief %u -> Convertimos un entero en un numero sin signo
+int	ft_putint_fd(int c, int counter);
+
 
 #endif
