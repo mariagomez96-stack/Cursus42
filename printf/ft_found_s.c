@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_found_s.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/26 11:36:37 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/29 13:38:59 by marigome         ###   ########.fr       */
+/*   Created: 2024/05/02 11:54:36 by marigome          #+#    #+#             */
+/*   Updated: 2024/05/02 12:52:39 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	ft_putchar(char c)
+int	ft_found_s(char *s, int counter)
 {
-	write(1, &c, 1);
-	return (1);
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	else
+	{
+		while (s[i])
+		{
+			write(1, &s[i], 1);
+			i++;
+			counter++;
+		}
+	}
+	return (counter);
 }
