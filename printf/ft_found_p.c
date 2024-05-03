@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 12:13:00 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/02 13:01:45 by marigome         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:10:22 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ int	ft_found_p(uintptr_t ptr)
 		write(1, "0", 1);
 		return (3);
 	}
-	ft_found_x(ptr);
+	ft_found_hex(ptr, 'x');
 	return (len + 2);
 }

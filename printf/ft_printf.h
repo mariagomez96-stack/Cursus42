@@ -6,12 +6,13 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 11:50:40 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/02 12:39:13 by marigome         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:08:41 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -35,15 +36,14 @@ int	ft_found_s(char *s, int counter);
 /// (Hacemos un numlen)
 int	ft_found_d(int c);
 
-/// @brief Imprime un dígito hexadecimal en minúscula (/16)
-/// @param n El número que vamos a escribir
-/// @return numlen -> Hacemos un contador de los dígitos del número (/16)
-int	ft_found_x(unsigned long long n);
-
-/// @brief Imprime un digito en formato hexadecimal (Mayúscula)
-/// @param n El dígito a imprimir
-/// @return La longitud del dígito (numlen)
-int	ft_found_upperx(unsigned long long n);
+/// @brief Esta función tiene en cuenta si el prefijo está en
+/// mayus (X) o min (x) y en base a eso, utilizamos la recursividad
+/// mientras que nb sea >= 16 sumando contador para ver la longitud
+/// Una vez esta condición no se da, ft_found_c("0123456789ABCDEF"[nb % 16])
+/// @param nb numero unsigned long long
+/// @param c type 'X' | type 'x' (Con s[i])
+/// @return i
+int	ft_found_hex(unsigned long long nb, char c);
 
 /// @brief Devuelve un entero sin signo (Tiene en cuenta su máximo)
 /// @param n  Número entero que imprime

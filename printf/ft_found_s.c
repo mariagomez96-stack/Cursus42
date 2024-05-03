@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 11:54:36 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/02 12:52:39 by marigome         ###   ########.fr       */
+/*   Updated: 2024/05/03 08:05:18 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	ft_found_s(char *s, int counter)
 	int	i;
 
 	i = 0;
-	if (!s)
-		return (0);
+	if (s == NULL)
+		return (ft_found_s("(null)", counter));
 	else
 	{
 		while (s[i])
