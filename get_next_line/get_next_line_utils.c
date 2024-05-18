@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 13:08:46 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/16 13:22:47 by marigome         ###   ########.fr       */
+/*   Created: 2024/05/13 10:42:46 by marigome          #+#    #+#             */
+/*   Updated: 2024/05/14 13:38:04 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(char *src)
 	size_t	i;
 
 	i = 0;
+	if (src == NULL)
+		return (0);
 	while (src[i])
 		i++;
 	return (i);
@@ -24,7 +26,7 @@ size_t	ft_strlen(char *src)
 
 void	ft_bzero(void *ptr, size_t n)
 {
-	size_t	i;
+	size_t			i;
 
 	i = 0;
 	while (i < n)
@@ -47,45 +49,28 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-int	ft_strchr(char *s, int c)
+char	*ft_join(char *buffer, char *buffer_tmp)
 {
-	int	i;
-
-	i = 0;
-	while ((char)s[i])
-	{
-		if ((char)s[i] == (char)c)
-			return (1);
-		i++;
-	}
-	if ((char)s[i] == (char)c)
-		return (1);
-	return (0);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	size_t	i;
-	size_t	j;
+	char	*buffer_joined;
 	size_t	total_len;
-	char	*buffer;
 
-	i = 0;
-	j = 0;
-	total_len = ft_strlen(s1) + ft_strlen(s2);
-	buffer = (char *)malloc(sizeof(char) * (total_len + 1));
-	if (!buffer || !s1 || !s2)
+	total_len = ft_strlen(buffer) + ft_strlen(buffer_tmp);
+	buffer_joined = (char *)ft_calloc(sizeof(char), (total_len + 1));
+	if (!buffer_joined)
 		return (NULL);
-	while (s1[i])
+	while (*buffer)
 	{
-		buffer[i] = s1[i];
-		i++;
+		*buffer_joined = *buffer;
+		buffer_joined++;
+		buffer++;
 	}
-	while (s2[j])
+	while (*buffer_tmp)
 	{
-		buffer[i + j] = s2[j];
-		j++;
+		*buffer_joined = *buffer_tmp;
+		buffer_joined++;
+		buffer_tmp++;
 	}
-	buffer[i + j] = '\0';
-	return (buffer);
+	*buffer_joined = '\0';
+	free(buffer_tmp);
+	return (buffer_joined);
 }
