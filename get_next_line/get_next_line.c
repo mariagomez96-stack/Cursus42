@@ -5,119 +5,126 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 10:50:27 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/14 12:22:36 by marigome         ###   ########.fr       */
+/*   Created: 2024/05/16 13:04:15 by marigome          #+#    #+#             */
+/*   Updated: 2024/05/16 13:58:57 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"	
+#include "get_next_line.h"
 
-//Esta función me permite ver dentro de tmp la línea real
-
-char	*ft_free_pointer(char *ptr)
+char	*ft_new_buffer(char *buffer)
 {
-	free(ptr);
-	ptr = NULL;
-	return (NULL);
-}
-
-char	*check_line(char *buffer)
-{
+	size_t	len;
 	size_t	i;
 	size_t	j;
-	char	*bf_line;
+	char	*new_buffer;
 
 	i = 0;
 	j = 0;
+	len = ft_strlen(buffer);
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
-	bf_line = (char *)ft_calloc(sizeof(char), (i + 2));
-	if (!bf_line)
+	new_buffer = calloc(sizeof(char), (len - i));
+	if (!new_buffer)
 		return (NULL);
-	else
+	if (buffer[i] != '\0')
+		i++;
+	while (buffer[i])
 	{
-		while (buffer[j] != '\0' && buffer != '\n')
-		{
-			bf_line[j] = buffer[j];
-			j++;
-		}
-		if (buffer[j] == '\n')
-			bf_line[j] = '\n';
-		bf_line[j] = '\0';
+		new_buffer[j] = buffer[i];
+		i++;
+		j++;
 	}
-	return (bf_line);
+	buffer = ft_free_buffer(buffer);
+	return (new_buffer);
 }
 
-char	*read_buff(char *buffer, int fd)
+char	*ft_free_buffer(char *ptr)
 {
-	//Creo un buffer tmp para ir guardando la información
-	char	*buffer_tmp;
-	ssize_t	bytes;
-	//Igualo bytes a 1 para entrar al bucle
-	bytes = 1;
-	buffer_tmp = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
-	if (!buffer_tmp)
-		return (NULL);
-	while (bytes > 0)
+	free(ptr);
+	ptr = NULL;
+	return (ptr);
+}
+
+char	*ft_get_line(char *buffer)
+{
+	char	*line;
+	size_t	i;
+	size_t	j;
+
+	j = 0;
+	i = 0;
+	while (buffer[i] != '\0' || buffer[i] != '\n')
+		i++;
+	line = calloc(sizeof(char), (i + 2));
+	while (buffer[j] != '\0' || buffer[j] != '\n')
 	{
-		//Leo el archivo, 42 iteraciones y lo guardo en bf_tmp
-		bytes = read(fd, buffer_tmp, BUFFER_SIZE);
-		//Protegemos si read da error y liberamos
-		if (bytes <= 0)
+		line[j] = buffer[j];
+		j++;
+	}
+	if (buffer[j] == '\n')
+	{
+		line[j] = '\n';
+		j++;
+	}
+	line[j] = '\0';
+	return (line);
+}
+
+static char	*ft_read_from_buffer(char *buffer, int fd)
+{
+	int		bytes_readed;
+	char	*tmp;
+
+	bytes_readed = 1;
+	tmp = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
+	if (!tmp)
+		return (NULL);
+	while (bytes_readed >= 0)
+	{
+		bytes_readed = read(fd, tmp, BUFFER_SIZE);
+		if (bytes_readed < 0)
+			return (ft_free_buffer(buffer));
+		else if (bytes_readed == 0)
+			return (ft_calloc(1, 1));
+		else
 		{
-			ft_free_pointer(buffer);
-			return (ft_free_pointer(buffer_tmp));
+			tmp[bytes_readed] = '\0';
+			buffer = ft_strjoin(buffer, tmp);
+			if (ft_strchr(buffer, '\n'))
+				break ;
 		}
-		//Ponemos al final carácter nulo para que sea una cadena
-		buffer_tmp[bytes] = '\0';
-		buffer = ft_join(buffer, buffer_tmp);
-		if (*buffer_tmp == '\n')
-			break ;
+		tmp = ft_free_buffer(tmp);
 	}
 	return (buffer);
 }
 
-char	*new_buffer(char *buffer)
-{
-	char	*new_buffer;
-	size_t	i;
-	size_t	j;
-	size_t	k;
-
-	k = 0;
-	i = 0;
-	j = ft_strlen(buffer);
-	while (buffer[i])
-	{
-		if (buffer[i] == '\n')
-		{
-			i++;
-			break ;
-		}
-		i++;
-	}
-	new_buffer = ft_calloc(sizeof(char), (j - i) + 1);
-	while (buffer[i])
-	{
-		new_buffer[k++] = buffer[i++];
-	}
-	new_buffer[j] = '\0';
-	free(buffer);
-	return (new_buffer);
-}
-
-char	*ft_get_next_line(int fd)
+char	*get_next_line(int fd)
 {
 	static char	*buffer;
 	char		*line;
 
-	if (fd <= 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) < 0)
-		return (NULL);
-	else
-	{
-		buffer = read_buff(buffer, fd);
-		line = check_line(buffer);
-		buffer = new_buffer(buffer);
-	}
+	if (buffer == NULL)
+		buffer = calloc(sizeof(char), (BUFFER_SIZE + 1));
+	if (!buffer || BUFFER_SIZE < 0 || read(fd, 0, 0) <= 0)
+		return (0);
+	buffer = ft_read_from_buffer(buffer, fd);
+	line = ft_get_line(buffer);
+	buffer = ft_new_buffer(buffer);
 	return (line);
+}
+
+int main (void)
+{
+	int fd;
+	char	*line;
+	fd = open("prueba.txt", O_RDONLY);
+
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+	}
+	return (0);
 }
