@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 10:51:04 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/16 13:13:47 by marigome         ###   ########.fr       */
+/*   Created: 2024/05/24 13:32:24 by marigome          #+#    #+#             */
+/*   Updated: 2024/05/24 13:32:48 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,9 @@ void	*ft_calloc(size_t nmemb, size_t size);
 
 char	*ft_strjoin(char *s1, char *s2);
 
-char	*ft_new_buffer(char *buffer);
-
-
-char	*ft_free_buffer(char *ptr);
 
 int	    ft_strchr(char *s, int c);
 
-char	*ft_get_line (char *buffer);
 
 char	*get_next_line(int fd);
 
