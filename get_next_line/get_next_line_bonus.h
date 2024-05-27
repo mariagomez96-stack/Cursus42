@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 13:32:24 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/27 12:25:46 by marigome         ###   ########.fr       */
+/*   Updated: 2024/05/27 13:14:00 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # include <stdlib.h> //malloc
 # include <stdio.h> //printf
 # include <fcntl.h> //Para leer archivos
+# include <limits.h> //max de fd
+# include <sys/types.h>
+# include <sys/uio.h> //lect y escr en buffers simultáneos
+
 
 /// @brief Saco el tamaño de buffer y tmp para hacerles un join
 /// @param src Array 

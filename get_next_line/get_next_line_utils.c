@@ -37,9 +37,7 @@ void	ft_bzero(void *ptr, size_t n)
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
-	size_t	i;
 
-	i = 0;
 	ptr = (void *)malloc(size * nmemb);
 	if (!ptr)
 		return (NULL);

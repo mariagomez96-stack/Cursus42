@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 12:26:30 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/27 13:14:02 by marigome         ###   ########.fr       */
+/*   Created: 2024/05/27 12:56:07 by marigome          #+#    #+#             */
+/*   Updated: 2024/05/27 13:13:52 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int main (void)
 {
 	int fd;
 	char	*line;
+	int	count;
+
+	count = 0;
 
 	fd = open("new.txt", O_RDONLY);
 	printf("fd:%d\n", fd);
