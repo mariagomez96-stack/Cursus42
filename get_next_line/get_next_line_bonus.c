@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:04:15 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/16 13:58:57 by marigome         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:57:23 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-
 static char	*ft_free_strjoin(char *buffer, char *tmp)
 {
 	char	*res;
-	
+
 	res = ft_strjoin(buffer, tmp);
 	free(buffer);
 	return (res);
@@ -54,8 +53,8 @@ static char	*ft_new_buffer(char *buffer)
 static char	*ft_get_line(char *buffer)
 {
 	char	*line;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -80,13 +79,12 @@ static char	*ft_read_from_buffer(char *buffer, int fd)
 	char	*tmp;
 
 	bytes_readed = 1;
-	
 	if (!buffer)
 		ft_calloc(1, 1);
-	tmp = ft_calloc(sizeof(char), 42 + 1);
+	tmp = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
 	while (bytes_readed > 0)
 	{
-		bytes_readed = read(fd, tmp, 42);
+		bytes_readed = read(fd, tmp, BUFFER_SIZE);
 		if (bytes_readed == -1)
 		{
 			free(tmp);
@@ -103,18 +101,17 @@ static char	*ft_read_from_buffer(char *buffer, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer[FT_SETSIZE];
+	static char	*buffer[FD_SETSIZE];
 	char		*line;
 
 	if (!buffer[fd])
 		buffer[fd] = ft_calloc(sizeof(char), (1));
-	if (fd < 0 || 42 < 0 || read(fd, 0, 0) < 0)
-		return (0);
-	buffer[fd] = ft_read_from_buffer(buffer, fd);
+	if (BUFFER_SIZE < 0 || fd < 0)
+		return (NULL);
+	buffer[fd] = ft_read_from_buffer(buffer[fd], fd);
 	if (!buffer[fd])
 		return (NULL);
 	line = ft_get_line(buffer[fd]);
 	buffer[fd] = ft_new_buffer(buffer[fd]);
 	return (line);
 }
-

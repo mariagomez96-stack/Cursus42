@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:04:15 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/16 13:58:57 by marigome         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:02:29 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static char	*ft_free_strjoin(char *buffer, char *tmp)
 {
 	char	*res;
-	
+
 	res = ft_strjoin(buffer, tmp);
-	free(buffer);
+	free (buffer);
 	return (res);
 }
 
@@ -52,9 +52,9 @@ static char	*ft_new_buffer(char *buffer)
 
 static char	*ft_get_line(char *buffer)
 {
-	char	*line;
-	int	i;
-	int	j;
+	char		*line;
+	int			i;
+	int			j;
 
 	i = 0;
 	j = 0;
@@ -62,7 +62,7 @@ static char	*ft_get_line(char *buffer)
 		return (NULL);
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(sizeof(char), (i + 2));
+	line = ft_calloc(sizeof(char), (i + 1));
 	while (buffer[j] != '\0' && buffer[j] != '\n')
 	{
 		line[j] = buffer[j];
@@ -81,10 +81,10 @@ static char	*ft_read_from_buffer(char *buffer, int fd)
 	bytes_readed = 1;
 	if (!buffer)
 		ft_calloc(1, 1);
-	tmp = ft_calloc(sizeof(char), 42 + 1);
+	tmp = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
 	while (bytes_readed > 0)
 	{
-		bytes_readed = read(fd, tmp, 42);
+		bytes_readed = read(fd, tmp, BUFFER_SIZE);
 		if (bytes_readed == -1)
 		{
 			free(tmp);
@@ -106,7 +106,7 @@ char	*get_next_line(int fd)
 
 	if (!buffer)
 		buffer = ft_calloc(sizeof(char), (1));
-	if (fd < 0 || 42 < 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	buffer = ft_read_from_buffer(buffer, fd);
 	if (!buffer)
@@ -115,4 +115,3 @@ char	*get_next_line(int fd)
 	buffer = ft_new_buffer(buffer);
 	return (line);
 }
-

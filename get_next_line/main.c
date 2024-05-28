@@ -6,19 +6,21 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 12:26:30 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/27 13:14:02 by marigome         ###   ########.fr       */
+/*   Updated: 2024/05/28 13:22:48 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
+#include <fcntl.h>
 
-int main (void)
+int	main(void)
 {
-	int fd;
+	int		fd;
 	char	*line;
 
-	fd = open("new.txt", O_RDONLY);
-	printf("fd:%d\n", fd);
+	fd = open("prueba1.txt", O_RDONLY);
+	//printf("fd:%d\n", fd);
 	if (fd == -1)
 	{	
 		printf("Error al abrir el archivo");

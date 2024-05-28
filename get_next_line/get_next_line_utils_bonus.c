@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/16 13:08:46 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/16 13:22:47 by marigome         ###   ########.fr       */
+/*   Updated: 2024/05/28 11:08:54 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *src)
 {
@@ -37,9 +37,7 @@ void	ft_bzero(void *ptr, size_t n)
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*ptr;
-	size_t	i;
 
-	i = 0;
 	ptr = (void *)malloc(size * nmemb);
 	if (!ptr)
 		return (NULL);
