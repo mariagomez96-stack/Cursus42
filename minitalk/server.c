@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:10:01 by marigome          #+#    #+#             */
-/*   Updated: 2024/06/12 12:10:57 by marigome         ###   ########.fr       */
+/*   Updated: 2024/06/13 11:54:18 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ static void	ft_bit_to_char(int signal)
 	bit++;
 	if (bit == 8)
 	{
-		ft_printf(BLUE"%c", c);
+		if ((int)c <= 126)
+			ft_printf(BLUE"%c", c);
+		else if ((int)c >= 127)
+			ft_printf(GREEN"%c", c);
 		bit = 0;
-		c = 0;
+		c = '\0';
 	}
 }
 
@@ -34,15 +37,12 @@ static void	ft_get_pid(void)
 	pid_t	pid;
 
 	pid = getpid();
-	if (pid == -1)
-	{
-		ft_printf(RED MSG_PID_2);
-		exit(EXIT_FAILURE);
-	}
+	if (!pid)
+		ft_printf(RED MSG_PID_2"\n");
 	ft_printf(YELLOW "PID: %d\n", pid);
 }
 
-static void ft_welcome(void)
+static void	ft_welcome(void)
 {
 	ft_printf(GREEN" _______      _______ \n");
 	ft_printf(GREEN"|       \\    /       |\n");
@@ -71,7 +71,7 @@ int	main(void)
 	ft_struct();
 	while (1)
 	{
-		usleep(300);
+		sleep(300);
 	}
 	return (0);
 }

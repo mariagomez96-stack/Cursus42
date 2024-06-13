@@ -5,39 +5,44 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/04 13:07:42 by marigome          #+#    #+#             */
-/*   Updated: 2024/06/12 11:28:12 by marigome         ###   ########.fr       */
+/*   Created: 2024/06/13 11:03:25 by marigome          #+#    #+#             */
+/*   Updated: 2024/06/13 11:08:18 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_H
 # define MINITALK_H
-
-// =======================================================
-// To fix the visibility of the sigaction structure
-// =======================================================
-# include <unistd.h>
-
-# ifndef _POSIX_C_SOURCE
-#  define _POSIX_C_SOURCE 199309L
-# endif
-
-// =======================================================
-// Access to my libraries
-// =======================================================
-# include "libft/libft.h"
-# include "ft_printf/ft_printf.h"
-// ===========================
-
 // =======================================================
 // Libraries
 // =======================================================
-# include <signal.h>
+# include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
+# include <signal.h>
 # include <sys/types.h>
-# include <time.h>
-
+// =======================================================
+// To fix the visibility of the sigaction structure
+// =======================================================
+# ifndef _POSIX_C_SOURCE
+#  define _POSIX_C_SOURCE 200809L
+# endif
+// =======================================================
+// Access to my libraries
+// =======================================================
+# include "./libft/libft.h"
+# include "./ft_printf/ft_printf.h"
+// =======================================================
+// Define messages
+// =======================================================
+# define MSG_ARG_1 "Arguments missing"
+# define MSG_ARG_2 "Too many Arguments"
+# define MSG_PID_1 "Could not generate the PID"
+# define MSG_PID_2 "Invalid PID"
+# define MSG_WAR_1 "Delivery failed"
+# define MSG_INF_1 "Info message 1"
+# define MSG_SUC_1 "Success message 1"
+// =======================================================
+// Functions
+// =======================================================
 # define RED        "\033[0;31m"
 # define GREEN      "\033[0;32m"
 # define YELLOW     "\033[0;33m"
@@ -83,15 +88,5 @@
 // FBLOCK   ███████████████████
 // EBLOCK   ▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍▍
 // ARROWRG  ⤑⤑⤑⤑⤑⤑⤑⤑⤑⤑⤑⤑⤑⤑
-
-// Define messages
-// =======================================================
-# define MSG_ARG_1 "Arguments missing"
-# define MSG_ARG_2 "Too many Arguments"
-# define MSG_PID_1 "Could not generate the PID"
-# define MSG_PID_2 "Invalid PID"
-# define MSG_WAR_1 "Delivery failed"
-# define MSG_INF_1 "Info message 1"
-# define MSG_SUC_1 "Succees message"
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 13:09:57 by marigome          #+#    #+#             */
-/*   Updated: 2024/06/12 12:00:33 by marigome         ###   ########.fr       */
+/*   Updated: 2024/06/13 12:22:24 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static void	ft_char_to_bit(int pid, char c)
+static void	ft_char_to_bit(const int pid, char c)
 {
 	int	bit;
 
@@ -28,24 +28,17 @@ static void	ft_char_to_bit(int pid, char c)
 			kill(pid, SIGUSR2);
 		}
 		bit--;
-		usleep(300);
+		usleep(100);
 	}
 }
 
-static int	ft_check_pid(char *arg)
+static void	ft_check_pid(int pid)
 {
-	size_t	i;
-
-	i = 0;
-	if (!arg)
-		return (0);
-	while (arg[i])
+	if (pid <= 0)
 	{
-		if ((arg[i] < '0') | (arg[i] > '9'))
-			return (0);
-		i++;
+		ft_printf(RED MSG_PID_2 "\n");
+		exit(EXIT_FAILURE);
 	}
-	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -55,18 +48,26 @@ int	main(int argc, char **argv)
 
 	i = 0;
 	if (argc <= 2)
-		printf(RED MSG_ARG_1);
-	else if (argc == 3)
+	{	
+		printf(RED MSG_ARG_1"\n");
+		return (1);
+	}
+	if (argc >= 4)
 	{
-		ft_check_pid(argv[1]);
-		pid = ft_atoi(argv[1]);
+		ft_printf(RED MSG_ARG_2"\n");
+		return (1);
+	}
+	
+	pid = ft_atoi(argv[1]);
+	ft_check_pid(pid);
+	if (argc == 3)
+	{
 		while (argv[2][i])
 		{
 			ft_char_to_bit(pid, argv[2][i]);
 			i++;
 		}
+		ft_char_to_bit(pid, '\n');
 	}
-	else
-		printf(RED MSG_ARG_2);
 	return (0);
 }
