@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:41:16 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 11:07:51 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/06 12:51:15 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	ft_check_num(char *src)
 	{
 		if (src[i] < '0' && src[i] > '9')
 			return (0);
+		i++;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:59:07 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 12:02:35 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:03:44 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,24 @@ t_stack	*ft_new_node(unsigned long n)
 	return (node);
 }
 
-void	ft_add_stack(t_stack **stack_a, t_stack *new_node)
+t_stack	*ft_add_stack(t_stack **stack_a, t_stack *new_node)
 {
 	t_stack	*run;
 
 	run = *stack_a;
 	if (!new_node)
-		return ;
+		return (NULL);
 	if (!*stack_a)
 	{
 		*stack_a = new_node;
 	}
 	else
 	{
-		while (run)
+		while (run->next)
 			run = run->next;
 		run->next = new_node;
 	}
+	return (*stack_a);
 }
 
 t_stack	*stack_tail(t_stack *a)

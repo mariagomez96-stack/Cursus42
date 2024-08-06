@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:44:40 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 12:26:30 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:32:33 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_stack	*ft_get_stack(t_stack **stack_a, char **argv, int argc)
 	{
 		n = ft_atol(param[i]);
 		node = ft_new_node(n);
-		ft_add_stack(stack_a, node);
+		*stack_a = ft_add_stack(stack_a, node);
 		i++;
 	}
 	get_index(stack_a);
@@ -61,14 +61,14 @@ int	main(int ac, char **argv)
 
 	stack_a = NULL;
 	stack_b = NULL;
-	if (ac < 2)
-		ft_exit_error(&stack_a, &stack_b);
-	else
+	if (ac >= 2)
 	{
 		ft_checker_args(ac, argv);
 		stack_a = ft_get_stack(&stack_a, argv, ac);
-		if (stack_size(&stack_a) == 2 && checker_sort(&stack_a))
+		if ((stack_size(&stack_a) == 2) && (checker_sort(&stack_a)))
 			sa(&stack_a);
 	}
+	else
+		ft_exit_error(&stack_a, &stack_b);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:46:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 12:10:27 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:03:25 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_stack		*get_min_index(t_stack **a);
 t_stack		*ft_get_stack(t_stack **stack_a, char **argv, int argc);
 void		get_index(t_stack **a);
 t_stack		*ft_new_node(unsigned long n);
-void		ft_add_stack(t_stack **stack_a, t_stack *new_node);
+t_stack		*ft_add_stack(t_stack **stack_a, t_stack *new_node);
 t_stack		*stack_tail(t_stack *a);
 t_stack		*stack_before_tail(t_stack *a);
 int			stack_size(t_stack **a);

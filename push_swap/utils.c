@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 10:03:21 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 10:32:20 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:11:21 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	checker_sort(t_stack **a)
 
 	tmp = *a;
 	counter = 0;
-	while (tmp)
+	while (tmp && tmp->next)
 	{
 		if (tmp->data > tmp->next->data)
 			counter++;

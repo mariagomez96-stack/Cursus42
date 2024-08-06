@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:42:39 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 11:08:20 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/06 13:35:19 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	ft_free_stack(t_stack **stack)
 
 void	ft_exit_error(t_stack **a, t_stack **b)
 {
-	if (!a || !(*a))
+	if (a)
 		ft_free_stack(a);
-	if (!b || !(*b))
+	if (b)
 		ft_free_stack(b);
 	ft_putstr("Error\n");
 	exit(1);
