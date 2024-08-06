@@ -1,17 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_index.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/06 09:43:54 by marigome          #+#    #+#             */
+/*   Updated: 2024/08/06 09:44:32 by marigome         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 /*Get min index:
 
-Si index = -1 porque no tiene índice asignado, empezamos a tener en cuenta que la flag sea 0 (Porque no se ha asignado ese índice como mínimo)
+Si index = -1 porque no tiene índice asignado,
+empezamos a tener en cuenta que la flag sea 0 
+(Porque no se ha asignado ese índice como mínimo)
 y que el índice que se esté comparando sea menor que el asignado
 
 Get index:
 Le asignamos índices al stack a partiendo del mínimo*/
 
-
 t_stack	*get_min_index(t_stack **a)
 {
-    t_stack	*tmp;
+	t_stack	*tmp;
 	t_stack	*min;
 	int		flag_min;
 

@@ -17,11 +17,11 @@ MID_GRAY =		\033[38;5;245m
 DARK_GREEN =	\033[38;2;75;179;82m
 DARK_YELLOW =	\033[38;5;143m
 
-SRCS = main.c \
-		cost.c do_moves.c position.c \
+SRCS = push_swap.c \
+		checker_args.c error_stack.c get_index.c \
 		push.c reverse_rotate.c \
-		split.c rotate.c sort_three.c sort.c \
-		stack.c start.c swap.c utils.c
+		split.c rotate.c stack.c swap.c \
+		utils.c
 
 INCLUDE = ./push_swap.h
 
@@ -53,17 +53,3 @@ fclean:
 re: fclean all
 
 .PHONY: all clean fclean re
-
-
-
-
-
-
-
-
-
-
-
-
-
-
