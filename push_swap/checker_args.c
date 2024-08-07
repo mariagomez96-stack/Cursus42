@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:41:16 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 13:48:25 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:50:24 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_check_num(char *src)
 	int	i;
 
 	i = 0;
+	if (src[i] == '\0')
+		return (0);
 	if (src[i] == '-' || src[i] == '+')
 		i++;
 	while (src[i])
@@ -44,6 +46,16 @@ int	ft_check_duplicates(char **args, int i, long n)
 	return (0);
 }
 
+static void	ft_checker_basics(char **args, int i, long int n)
+{
+		if (ft_check_num(args[i]) == 0)
+			ft_exit_error(NULL, NULL);
+		if (ft_check_duplicates(args, i, n) == 1)
+			ft_exit_error(NULL, NULL);
+		if (n < -2147483648 || n > 2147483647)
+			ft_exit_error(NULL, NULL);
+}
+
 void	ft_checker_args(int argc, char **argv)
 {
 	char			**args;
@@ -58,15 +70,12 @@ void	ft_checker_args(int argc, char **argv)
 		i = 1;
 		args = argv;
 	}
+	if (!args || !args[i])
+		ft_exit_error(NULL, NULL);
 	while (args[i])
 	{
 		n = ft_atol(args[i]);
-		if (!ft_check_num(argv[i]))
-			ft_putstr("Error\n");
-		if (ft_check_duplicates(args, i, n) == 1)
-			ft_putstr("Error\n");
-		if (n < -2147483648 || n > 2147483647)
-			ft_putstr("Error\n");
+		ft_checker_basics(args, i, n);
 		i++;
 	}
 	if (argc == 2)

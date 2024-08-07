@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:44:40 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 13:06:35 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/07 16:38:49 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_stack	*ft_get_stack(t_stack **stack_a, char **argv, int argc)
 	char			**param;
 	t_stack			*node;
 	int				i;
-	unsigned long	n;
+	long int		n;
 
 	i = 0;
 	if (argc == 2)
@@ -46,7 +46,7 @@ t_stack	*ft_get_stack(t_stack **stack_a, char **argv, int argc)
 	}
 	get_index(stack_a);
 	if (argc == 2)
-		free(argv);
+		free(param);
 	return (*stack_a);
 }
 //Liberamos en este caso porque hemos creado memoria dinámica//
