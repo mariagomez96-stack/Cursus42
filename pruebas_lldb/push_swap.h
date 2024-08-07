@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:46:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 13:05:35 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/07 13:59:46 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 # include <stdlib.h> //malloc, free, exit
 # include <unistd.h>
-# include "libft.h"
-# include "ft_printf.h"
 
 typedef struct s_stack
 {
@@ -55,6 +53,7 @@ int			stack_size(t_stack **a);
 // FUCTIONS //
 void		ft_putstr(char *src);
 long int	ft_atol(char *src);
+char		**ft_split(char const *s, char c);
 
 // MOVEMENTS //
 // push //
@@ -78,4 +77,5 @@ void		ss(t_stack **a, t_stack **b);
 
 // SORTS //
 void		ft_sort_three(t_stack **a);
+
 #endif

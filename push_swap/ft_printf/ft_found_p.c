@@ -1,46 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_found_p.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 09:52:10 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 09:58:35 by marigome         ###   ########.fr       */
+/*   Created: 2024/05/02 12:13:00 by marigome          #+#    #+#             */
+/*   Updated: 2024/06/12 09:41:55 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "ft_printf.h"
 
-static void	rotate(t_stack **a)
+static int	ft_lenhex(unsigned long long n)
 {
-	t_stack	*tmp;
-	t_stack	*tail;
+	unsigned long long	counter;
 
-	if (!*a || (*a)->next == NULL)
-		return ;
-	tmp = *a;
-	*a = (*a)->next;
-	tmp->next = NULL;
-	tail = stack_tail(*a);
-	tail->next = tmp;
+	counter = 0;
+	while (n > 0)
+	{
+		n /= 16;
+		counter++;
+	}
+	return (counter);
 }
 
-void	ra(t_stack **a)
+int	ft_found_p(uintptr_t ptr)
 {
-	rotate(a);
-	ft_putstr("ra\n");
-}
+	int	len;
 
-void	rb(t_stack **b)
-{
-	rotate(b);
-	ft_putstr("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	rotate(a);
-	rotate(b);
-	ft_putstr("rr\n");
+	len = ft_lenhex(ptr);
+	write(1, "0x", 2);
+	if (ptr == 0)
+	{
+		write(1, "0", 1);
+		return (3);
+	}
+	ft_found_hex(ptr, 'x');
+	return (len + 2);
 }

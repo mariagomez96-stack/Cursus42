@@ -1,46 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 09:52:10 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 09:58:35 by marigome         ###   ########.fr       */
+/*   Created: 2024/04/23 14:25:59 by marigome          #+#    #+#             */
+/*   Updated: 2024/06/12 09:33:56 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-static void	rotate(t_stack **a)
+void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	t_stack	*tmp;
-	t_stack	*tail;
-
-	if (!*a || (*a)->next == NULL)
+	if (!lst || !del)
 		return ;
-	tmp = *a;
-	*a = (*a)->next;
-	tmp->next = NULL;
-	tail = stack_tail(*a);
-	tail->next = tmp;
-}
-
-void	ra(t_stack **a)
-{
-	rotate(a);
-	ft_putstr("ra\n");
-}
-
-void	rb(t_stack **b)
-{
-	rotate(b);
-	ft_putstr("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	rotate(a);
-	rotate(b);
-	ft_putstr("rr\n");
+	(del)(lst->content);
+	free(lst);
+	lst = NULL;
 }

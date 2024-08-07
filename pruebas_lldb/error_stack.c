@@ -1,46 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   error_stack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 09:52:10 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 09:58:35 by marigome         ###   ########.fr       */
+/*   Created: 2024/08/06 09:42:39 by marigome          #+#    #+#             */
+/*   Updated: 2024/08/06 13:35:19 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rotate(t_stack **a)
+void	ft_free_stack(t_stack **stack)
 {
 	t_stack	*tmp;
-	t_stack	*tail;
 
-	if (!*a || (*a)->next == NULL)
-		return ;
-	tmp = *a;
-	*a = (*a)->next;
-	tmp->next = NULL;
-	tail = stack_tail(*a);
-	tail->next = tmp;
+	while (*stack)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
+	}
 }
 
-void	ra(t_stack **a)
+void	ft_exit_error(t_stack **a, t_stack **b)
 {
-	rotate(a);
-	ft_putstr("ra\n");
-}
-
-void	rb(t_stack **b)
-{
-	rotate(b);
-	ft_putstr("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	rotate(a);
-	rotate(b);
-	ft_putstr("rr\n");
+	if (a)
+		ft_free_stack(a);
+	if (b)
+		ft_free_stack(b);
+	ft_putstr("Error\n");
+	exit(1);
 }

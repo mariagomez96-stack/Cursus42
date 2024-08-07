@@ -1,46 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/06 09:52:10 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 09:58:35 by marigome         ###   ########.fr       */
+/*   Created: 2024/08/06 09:48:58 by marigome          #+#    #+#             */
+/*   Updated: 2024/08/06 11:01:53 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rotate(t_stack **a)
+static void	push(t_stack **src, t_stack **dest)
 {
 	t_stack	*tmp;
-	t_stack	*tail;
 
-	if (!*a || (*a)->next == NULL)
+	if (!*src)
 		return ;
-	tmp = *a;
-	*a = (*a)->next;
-	tmp->next = NULL;
-	tail = stack_tail(*a);
-	tail->next = tmp;
+	tmp = *src;
+	*src = (*src)->next;
+	tmp->next = *dest;
+	*dest = tmp;
 }
 
-void	ra(t_stack **a)
+void	push_a(t_stack **a, t_stack **b)
 {
-	rotate(a);
-	ft_putstr("ra\n");
+	push(b, a);
+	ft_putstr("pa\n");
 }
 
-void	rb(t_stack **b)
+void	push_b(t_stack **a, t_stack **b)
 {
-	rotate(b);
-	ft_putstr("rb\n");
-}
-
-void	rr(t_stack **a, t_stack **b)
-{
-	rotate(a);
-	rotate(b);
-	ft_putstr("rr\n");
+	push(a, b);
+	ft_putstr("pb\n");
 }

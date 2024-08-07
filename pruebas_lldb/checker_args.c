@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:41:16 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 13:48:25 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:11:22 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_checker_args(int argc, char **argv)
 	while (args[i])
 	{
 		n = ft_atol(args[i]);
-		if (!ft_check_num(argv[i]))
+		if (!ft_check_num(args[i]))
 			ft_putstr("Error\n");
 		if (ft_check_duplicates(args, i, n) == 1)
 			ft_putstr("Error\n");
