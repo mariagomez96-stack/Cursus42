@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:41:16 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 16:50:24 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/08 10:55:47 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ int	ft_check_num(char *src)
 	i = 0;
 	if (src[i] == '\0')
 		return (0);
-	if (src[i] == '-' || src[i] == '+')
-		i++;
 	while (src[i])
 	{
-		if (src[i] < '0' && src[i] > '9')
+		if ((src[i] == '-' || src[i] == '+' )
+			&& (src[i + 1] >= '0' && src[i + 1] <= '9'))
+			i++;
+		if (src[i] < 48 || src[i] > 57)
 			return (0);
 		i++;
 	}
@@ -48,12 +49,12 @@ int	ft_check_duplicates(char **args, int i, long n)
 
 static void	ft_checker_basics(char **args, int i, long int n)
 {
-		if (ft_check_num(args[i]) == 0)
-			ft_exit_error(NULL, NULL);
-		if (ft_check_duplicates(args, i, n) == 1)
-			ft_exit_error(NULL, NULL);
-		if (n < -2147483648 || n > 2147483647)
-			ft_exit_error(NULL, NULL);
+	if (ft_check_num(args[i]) == 0)
+		ft_exit_error(NULL, NULL);
+	if (ft_check_duplicates(args, i, n) == 1)
+		ft_exit_error(NULL, NULL);
+	if (n < -2147483648 || n > 2147483647)
+		ft_exit_error(NULL, NULL);
 }
 
 void	ft_checker_args(int argc, char **argv)

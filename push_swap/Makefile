@@ -6,7 +6,7 @@
 #    By: marigome <marigome@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 12:34:06 by marigome          #+#    #+#              #
-#    Updated: 2024/08/07 16:57:54 by marigome         ###   ########.fr        #
+#    Updated: 2024/08/08 13:09:40 by marigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ SRCS = push_swap.c \
 		stack.c \
 		swap.c \
 		utils.c \
-		sort_three.c 
+		sort_three.c \
+		sort_numbers.c
 
 LIBFT_PATH = libft
 LIBFT_ARCHIVE = $(LIBFT_PATH)/libft.a

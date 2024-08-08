@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:46:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 13:05:35 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:17:56 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,15 @@ int			checker_sort(t_stack **a);
 
 // ERROR //
 void		ft_exit_error(t_stack **a, t_stack **b);
+void		ft_free_stack(t_stack **stack);
 
 // STACK //
-void		ft_free_stack(t_stack **stack);
 t_stack		*get_min_index(t_stack **a);
 t_stack		*ft_get_stack(t_stack **stack_a, char **argv, int argc);
 void		get_index(t_stack **a);
-t_stack		*ft_new_node(unsigned long n);
+void	ft_get_index(t_stack **a, int stack_size);
+
+t_stack		*ft_new_node(long int n);
 t_stack		*ft_add_stack(t_stack **stack_a, t_stack *new_node);
 t_stack		*stack_tail(t_stack *a);
 t_stack		*stack_before_tail(t_stack *a);
@@ -78,4 +80,6 @@ void		ss(t_stack **a, t_stack **b);
 
 // SORTS //
 void		ft_sort_three(t_stack **a);
+void		first(t_stack **a, t_stack **b);
+
 #endif

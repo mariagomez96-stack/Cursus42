@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 10:03:21 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 13:11:21 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:36:31 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,4 @@ int	checker_sort(t_stack **a)
 	if (counter)
 		return (1);
 	return (0);
-}
-
-int	stack_size(t_stack **a)
-{
-	t_stack	*tmp;
-	int		i;
-
-	tmp = *a;
-	i = 0;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	return (i);
 }

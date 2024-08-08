@@ -6,13 +6,28 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:59:07 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 11:58:52 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/08 13:18:28 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_new_node(unsigned long n)
+int	stack_size(t_stack **a)
+{
+	t_stack	*tmp;
+	int		i;
+
+	tmp = *a;
+	i = 0;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+t_stack	*ft_new_node(long int n)
 {
 	t_stack	*node;
 

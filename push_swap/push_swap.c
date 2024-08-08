@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:44:40 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 16:38:49 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:23:27 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_stack	*ft_get_stack(t_stack **stack_a, char **argv, int argc)
 		*stack_a = ft_add_stack(stack_a, node);
 		i++;
 	}
-	get_index(stack_a);
+	ft_get_index(stack_a, stack_size(stack_a));
 	if (argc == 2)
 		free(param);
 	return (*stack_a);

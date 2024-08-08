@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:43:54 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 09:44:32 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/08 11:22:28 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,33 @@ void	get_index(t_stack **a)
 	{
 		tmp->index = index++;
 		tmp = get_min_index(a);
+	}
+}
+
+void	ft_get_index(t_stack **a, int stack_size)
+{
+	t_stack	*tmp;
+	t_stack	*biggest;
+	int		value;
+
+	while (stack_size > 0)
+	{
+		tmp = *a;
+		biggest = NULL;
+		value = -2147483648;
+		while (tmp)
+		{
+			if (tmp->data == value && tmp->index == -1)
+				tmp->index = 1;
+			else if (tmp->data > value && tmp->index == -1)
+			{
+				value = tmp->data;
+				biggest = tmp;
+			}
+			tmp = tmp->next;
+		}
+		if (biggest != NULL)
+			biggest->index = stack_size;
+		stack_size--;
 	}
 }
