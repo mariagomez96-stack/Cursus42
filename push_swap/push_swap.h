@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:46:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/08 13:17:56 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/09 08:16:27 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_stack
 	int				data; //Valor
 	int				index; //Índice
 	int				position; //Posición actual
-	int				ordered_position; //Nodo ordenado
+	int				target_position; // Posición objetivo
 	int				cost_a; //Coste de mov en a
 	int				cost_b; //Coste de mov en b
 	struct s_stack	*next; //Puntero a la propia estructura
@@ -42,11 +42,11 @@ int			checker_sort(t_stack **a);
 void		ft_exit_error(t_stack **a, t_stack **b);
 void		ft_free_stack(t_stack **stack);
 
-// STACK //
-t_stack		*get_min_index(t_stack **a);
+// STACK && NODE//
+//t_stack		*get_min_index(t_stack **a);
 t_stack		*ft_get_stack(t_stack **stack_a, char **argv, int argc);
-void		get_index(t_stack **a);
-void	ft_get_index(t_stack **a, int stack_size);
+//void		get_index(t_stack **a);//
+
 
 t_stack		*ft_new_node(long int n);
 t_stack		*ft_add_stack(t_stack **stack_a, t_stack *new_node);
@@ -57,6 +57,11 @@ int			stack_size(t_stack **a);
 // FUCTIONS //
 void		ft_putstr(char *src);
 long int	ft_atol(char *src);
+
+// INDEX, POSITION & TARGET //
+int	ft_get_target(t_stack **a, int index_b, int limit_max);
+void	ft_get_index(t_stack **a, int stack_size);
+
 
 // MOVEMENTS //
 // push //
