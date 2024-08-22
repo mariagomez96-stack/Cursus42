@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:07:30 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/09 08:09:46 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/14 11:31:26 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,29 @@ void    ft_get_position(t_stack **a)
 	while (tmp)
 	{
 		tmp->position = position;
+		tmp = tmp->next;
 		position++;
+	}
+}
+
+int	position_lowest_index(t_stack **a)
+{
+	int	min_index;
+	int	min_position;
+	t_stack	*tmp;
+
+	min_index = INT_MAX;
+	tmp = *a;
+	ft_get_position(a);
+	min_position = tmp->position;
+	while (tmp)
+	{
+		if (tmp->index < min_index)
+		{
+			min_index = tmp->index;
+			min_position = tmp->position;
+		}
 		tmp = tmp->next;
 	}
+	return(min_position);
 }

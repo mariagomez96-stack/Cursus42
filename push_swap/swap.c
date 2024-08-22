@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 10:02:03 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 10:49:26 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/14 10:26:18 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 static void	swap(t_stack **a)
 {
 	t_stack	*tmp;
-	t_stack	*tmp2;
 
 	if (!(*a) || ((*a)->next) == NULL)
 		return ;
-	tmp = (*a)->next;
-	tmp2 = *a;
-	*a = tmp;
-	(*a)->next = tmp2;
+	tmp = *a;
+	*a = (*a)->next;
+	tmp->next = (*a)->next;
+	(*a)->next = tmp;
 }
 
 void	sa(t_stack **a)

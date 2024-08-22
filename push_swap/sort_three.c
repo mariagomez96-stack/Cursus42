@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 09:30:45 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 10:14:26 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:03:09 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ void	ft_sort_three(t_stack **a)
 	first = tmp->data;
 	second = tmp->next->data;
 	third = tmp->next->next->data;
-	if (!checker_sort(&tmp))
+	if (checker_sort(tmp))
 		return ;
 	else
-		ft_moves(&tmp, first, second, third);
+		ft_moves(a, first, second, third);
 }
+
+
+

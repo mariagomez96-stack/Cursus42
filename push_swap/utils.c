@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 10:03:21 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/08 11:36:31 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:00:46 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,22 @@ long int	ft_atol(char *src)
 	return (res * counter);
 }
 
-int	checker_sort(t_stack **a)
+int	checker_sort(t_stack *a)
 {
-	t_stack	*tmp;
-	int		counter;
-
-	tmp = *a;
-	counter = 0;
-	while (tmp && tmp->next)
-	{
-		if (tmp->data > tmp->next->data)
-			counter++;
-		tmp = tmp->next;
-	}
-	if (counter)
+	if (!a)
 		return (1);
-	return (0);
+	while (a->next != NULL)
+	{
+		if (a->data > a->next->data)
+			return (0);
+		a = a->next;		
+	}
+	return (1);
+}
+
+int	abs(int cost)
+{
+	if (cost < 0)
+		return (cost * -1);
+	return (cost);
 }

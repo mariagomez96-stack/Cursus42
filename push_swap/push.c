@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:48:58 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/06 11:01:53 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:04:43 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void	push(t_stack **src, t_stack **dest)
 {
 	t_stack	*tmp;
 
-	if (!*src)
+	if (*src == NULL)
 		return ;
-	tmp = *src;
-	*src = (*src)->next;
-	tmp->next = *dest;
-	*dest = tmp;
+	tmp = (*src)->next;
+	(*src)->next = (*dest);
+	(*dest) = *src;
+	(*src) = tmp;
 }
 
 void	push_a(t_stack **a, t_stack **b)

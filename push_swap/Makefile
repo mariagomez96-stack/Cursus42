@@ -6,7 +6,7 @@
 #    By: marigome <marigome@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/07 12:34:06 by marigome          #+#    #+#              #
-#    Updated: 2024/08/09 08:16:56 by marigome         ###   ########.fr        #
+#    Updated: 2024/08/10 09:19:30 by marigome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ SRCS = push_swap.c \
 		sort_three.c \
 		sort_numbers.c \
 		ft_get_target.c \
-		ft_get_position.c
+		ft_get_position.c \
+		cost.c \
+		do_move.c
 
 LIBFT_PATH = libft
 LIBFT_ARCHIVE = $(LIBFT_PATH)/libft.a
