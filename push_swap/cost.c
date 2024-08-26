@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 19:54:33 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/22 14:52:07 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:54:36 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,5 @@ void	cheapest_move(t_stack **a, t_stack **b)
         }
         tmp = tmp->next;
     }
-
-    //printf("Selected costs -> cost_a: %d, cost_b: %d\n", cost_a, cost_b);
     do_move(a, b, cost_a, cost_b);
 }

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/08 11:37:12 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/22 15:13:15 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:34:15 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,10 @@ void	push_stack(t_stack **a, t_stack **b)
 		{
 			push_b(a, b);
 			push++;
-			//printf("Pushed to stack_b, push count: %d\n", push);
 		}
 		else
 		{	
 			ra(a);
-			//printf("Rotated stack_a\n");
 		}
 		i++;
 	}
@@ -45,25 +43,25 @@ void	push_stack(t_stack **a, t_stack **b)
 
 void	sort_stack(t_stack **a)
 {
-	int	min_position;
-	int	moves;
+	int	target_position;
+	int	size;
 
-	min_position = position_lowest_index(a);
-	moves = stack_size(*a);
-	if (min_position > moves / 2)
+	target_position = position_lowest_index(a);
+	size = stack_size(*a);
+	if (target_position > size / 2)
 	{
-		while (min_position < moves)
+		while (target_position < size)
 		{	
 			rra(a);
-			min_position++;
+			target_position++;
 		}
 	}
 	else
 	{
-		while (min_position > 0)
+		while (target_position > 0)
 		{
 			ra(a);
-			min_position--;
+			target_position--;
 		}
 	}
 }
