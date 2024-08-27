@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 07:51:12 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/14 11:33:41 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 09:49:57 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_get_target(t_stack **a, int index_b, int limit_max, int target)
 		}
 		tmp = tmp->next;
 	}
-	return(target);
+	return (target);
 }
 
 void	ft_get_target_position(t_stack **a, t_stack **b)

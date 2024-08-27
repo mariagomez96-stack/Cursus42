@@ -1,3 +1,4 @@
+
 NAME = libftprintf.a
 
 FILES = 	ft_found_c.c\

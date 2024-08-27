@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:42:39 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/13 10:55:39 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 13:12:27 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,16 @@ void	ft_free_stack(t_stack **stack)
 		free(*stack);
 		*stack = tmp;
 	}
+}
+
+void	free_args(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+		free(argv[i++]);
+	free(argv);
 }
 
 void	ft_exit_error(t_stack **a, t_stack **b)

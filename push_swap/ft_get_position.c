@@ -6,15 +6,15 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 08:07:30 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/14 11:31:26 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 09:49:50 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    ft_get_position(t_stack **a)
+void	ft_get_position(t_stack **a)
 {
-    int	position;
+	int		position;
 	t_stack	*tmp;
 
 	position = 0;
@@ -29,8 +29,8 @@ void    ft_get_position(t_stack **a)
 
 int	position_lowest_index(t_stack **a)
 {
-	int	min_index;
-	int	min_position;
+	int		min_index;
+	int		min_position;
 	t_stack	*tmp;
 
 	min_index = INT_MAX;
@@ -46,5 +46,5 @@ int	position_lowest_index(t_stack **a)
 		}
 		tmp = tmp->next;
 	}
-	return(min_position);
+	return (min_position);
 }

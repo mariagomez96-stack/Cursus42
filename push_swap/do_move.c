@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 20:30:18 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/22 13:48:14 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 09:49:21 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	rr_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
 {
 	while (*cost_a < 0 && *cost_b < 0)
-	{	
+	{
 		(*cost_a)++;
 		(*cost_b)++;
 		rrr(a, b);
@@ -32,7 +32,7 @@ static void	rotate_both(t_stack **a, t_stack **b, int *cost_a, int *cost_b)
 	}
 }
 
-static void rotate_a(t_stack **a, int *cost_a)
+static void	rotate_a(t_stack **a, int *cost_a)
 {
 	while (*cost_a)
 	{
@@ -66,9 +66,9 @@ static void	rotate_b(t_stack **b, int *cost_b)
 	}
 }
 
-void    do_move(t_stack **a, t_stack **b, int cost_a, int cost_b)
+void	do_move(t_stack **a, t_stack **b, int cost_a, int cost_b)
 {
-    if (cost_a < 0 && cost_b < 0)
+	if (cost_a < 0 && cost_b < 0)
 		rr_both(a, b, &cost_a, &cost_b);
 	else if (cost_a > 0 && cost_b > 0)
 		rotate_both(a, b, &cost_a, &cost_b);

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 09:30:45 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/22 14:03:09 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 09:55:54 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,3 @@ void	ft_sort_three(t_stack **a)
 	else
 		ft_moves(a, first, second, third);
 }
-
-
-

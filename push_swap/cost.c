@@ -6,15 +6,15 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/09 19:54:33 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/26 15:54:36 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 09:48:48 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    ft_cost(t_stack **a, t_stack **b)
+void	ft_cost(t_stack **a, t_stack **b)
 {
-    t_stack	*tmp_a;
+	t_stack	*tmp_a;
 	t_stack	*tmp_b;
 	int		size_a;
 	int		size_b;
@@ -44,15 +44,15 @@ void	cheapest_move(t_stack **a, t_stack **b)
 
 	tmp = *b;
 	cheapest_move = INT_MAX;
-    while (tmp)
-    {
-        if (abs(tmp->cost_a) + abs(tmp->cost_b) < cheapest_move)
-        {
-            cheapest_move = abs(tmp->cost_a) + abs(tmp->cost_b);
-            cost_a = tmp->cost_a;
-            cost_b = tmp->cost_b;
-        }
-        tmp = tmp->next;
-    }
-    do_move(a, b, cost_a, cost_b);
+	while (tmp)
+	{
+		if (abs(tmp->cost_a) + abs(tmp->cost_b) < cheapest_move)
+		{
+			cheapest_move = abs(tmp->cost_a) + abs(tmp->cost_b);
+			cost_a = tmp->cost_a;
+			cost_b = tmp->cost_b;
+		}
+		tmp = tmp->next;
+	}
+	do_move(a, b, cost_a, cost_b);
 }

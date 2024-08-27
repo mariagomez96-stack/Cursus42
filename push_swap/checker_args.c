@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:41:16 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/14 10:26:55 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 13:12:39 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ void	ft_checker_args(int argc, char **argv)
 		i++;
 	}
 	if (argc == 2)
-		free(args);
+		free_args(args);
 }

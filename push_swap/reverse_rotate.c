@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:50:31 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/22 15:05:35 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 09:54:56 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,3 @@ void	rrr(t_stack **a, t_stack **b)
 	reverse_rotate(b);
 	ft_putstr("rrr\n");
 }
-

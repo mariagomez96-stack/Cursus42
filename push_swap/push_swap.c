@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 09:44:40 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/26 13:36:12 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 13:10:55 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_stack	*ft_get_stack(t_stack **stack_a, char **argv, int argc)
 	}
 	ft_get_index(*stack_a, stack_size(*stack_a) + 1);
 	if (argc == 2)
-		free(param);
+		free_args(param);
 	return (*stack_a);
 }
 
@@ -62,23 +62,15 @@ int	main(int ac, char **argv)
 		ft_checker_args(ac, argv);
 		stack_a = ft_get_stack(&stack_a, argv, ac);
 		if ((stack_size(stack_a) == 2) && (!checker_sort(stack_a)))
-		{
 			sa(&stack_a);
-		}
 		else if ((stack_size(stack_a) == 3 && (!checker_sort(stack_a))))
-		{
 			ft_sort_three(&stack_a);
-		}
 		else if ((stack_size(stack_a) > 3) && (!checker_sort(stack_a)))
-		{
 			sort(&stack_a, &stack_b);
-		}
 	}
 	else
 		ft_exit_error(&stack_a, &stack_b);
-	
 	ft_free_stack(&stack_a);
 	ft_free_stack(&stack_b);
 	return (0);
 }
-

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 10:03:21 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/22 14:00:46 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/27 09:56:07 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	checker_sort(t_stack *a)
 	{
 		if (a->data > a->next->data)
 			return (0);
-		a = a->next;		
+		a = a->next;
 	}
 	return (1);
 }
