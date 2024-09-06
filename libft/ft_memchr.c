@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 16:52:18 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/16 09:19:03 by marigome         ###   ########.fr       */
+/*   Updated: 2024/06/12 10:04:34 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	while (i < n)
 	{
 		if (s1[i] == (char)c)
-			return ((void *)&s[i]);
+			return ((void *)&s1[i]);
 		i++;
 	}
 	return (NULL);

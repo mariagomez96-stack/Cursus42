@@ -6,12 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 12:54:12 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/19 11:26:23 by marigome         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:33:28 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-//#include <stdio.h>
 
 char	*ft_strtrim(const char *s1, const char *set)
 {

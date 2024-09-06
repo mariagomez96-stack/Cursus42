@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 13:42:41 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/25 10:07:39 by marigome         ###   ########.fr       */
+/*   Updated: 2024/06/10 10:32:57 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,42 +189,23 @@ t_list		*ft_lstlast(t_list *lst);
 /// @param lst **nodo
 /// @param new *nodo que añadimos al final de la lista
 void		ft_lstadd_back(t_list **lst, t_list *new);
-<<<<<<< HEAD
 /// @brief Elimina el nodo
 /// @param lst lista
 /// @param del f (del)
-=======
-/// @brief Del a node from lst
-/// @param lst list
-/// @param del delete fuction
->>>>>>> 9f34c9157b427d25225d3eeb36b38c6f3985cc12
 void		ft_lstdelone(t_list *lst, void (*del)(void *));
 /// @brief Elimina el ultimo nodo de la lista de listas
 /// @param lst 
 /// @param del 
-<<<<<<< HEAD
 void		ft_lstclear(t_list **lst, void (*del)(void *));
 /// @brief Elimina de la lista completa todos los nodos
 /// @param lst 
 /// @param f 
 void		ft_lstiter(t_list *lst, void (*f)(void *));
-=======
-void    ft_lstclear(t_list **lst, void (*del)(void *));
-/// @brief Elimina de la lista completa todos los nodos
-/// @param lst 
-/// @param f 
-void    ft_lstiter(t_list *lst, void (*f)(void));
->>>>>>> 9f34c9157b427d25225d3eeb36b38c6f3985cc12
 /// @brief Se le aplica la funcion a cada nodo de la lista generando uno nuevo
 /// Y aplica del para eliminar la lista en caso de que el nodo no exista
 /// @param lst 
 /// @param f 
 /// @param del 
 /// @return 
-<<<<<<< HEAD
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-=======
-t_list  *ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-
->>>>>>> 9f34c9157b427d25225d3eeb36b38c6f3985cc12
 #endif

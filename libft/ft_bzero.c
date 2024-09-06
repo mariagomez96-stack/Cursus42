@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:34:48 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/19 14:27:40 by marigome         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:34:06 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,3 @@ void	ft_bzero(void *ptr, size_t n)
 		i++;
 	}
 }
-
-/*#include <stdio.h>
-int main(void)
-{
-	char prueba[] = "Hola que tal";
-	ft_bzero(prueba, 3);
-	printf("%s", prueba);
-	return (0);
-}*/

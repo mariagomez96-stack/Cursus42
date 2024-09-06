@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 16:14:09 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/12 09:47:11 by marigome         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:33:38 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,3 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)&s[i]);
 	return (0);
 }
-
-/*#include <stdio.h>
-int main(void)
-{
-	printf("%s", ft_strchr("hola que tal", '\0'));
-	return (0);
-}*/

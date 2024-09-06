@@ -6,13 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 18:51:21 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/11 14:01:25 by marigome         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:35:54 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-//#include <stdio.h>
 
 int	ft_atoi(const char *str)
 {

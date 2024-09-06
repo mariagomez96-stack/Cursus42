@@ -6,81 +6,81 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:46:20 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/25 09:04:53 by marigome         ###   ########.fr       */
+/*   Updated: 2024/08/07 13:55:58 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-static int	ft_word_len(char const *s, int i, char c)
+size_t	ft_strlen(const char *s)
 {
-	int	len;
-
-	len = 0;
-	while (s[i] && s[i] != c)
-	{
-		i++;
-		len++;
-	}
-	return (len);
-}
-
-static int	ft_count_words(char const *s, char c)
-{
-	int	i;
-	int	counter;
+	size_t	i;
 
 	i = 0;
-	counter = 0;
 	while (s[i])
-	{
-		if (s[i] != c)
-		{
-			counter++;
-			while (s[i] && s[i] != c)
-			{
-				i++;
-			}
-		}
-		else
-			i++;
-	}
-	return (counter);
+		i++;
+	return (i);
 }
 
-static void	ft_free_buffer(char **buffer, int is)
+static int	count_words(const char *str, char c)
 {
-	while (is > 0)
+	int	i;
+	int	trigger;
+
+	i = 0;
+	trigger = 0;
+	while (*str)
 	{
-		is--;
-		free(buffer[is]);
+		if (*str != c && trigger == 0)
+		{
+			trigger = 1;
+			i++;
+		}
+		else if (*str == c)
+			trigger = 0;
+		str++;
 	}
-	free (buffer);
+	return (i);
+}
+
+static char	*word_dup(const char *str, int start, int finish)
+{
+	char	*word;
+	int		i;
+
+	i = 0;
+	word = malloc((finish - start + 1) * sizeof(char));
+	while (start < finish)
+		word[i++] = str[start++];
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	int		i;
-	int		bi;
-	char	**buffer;
+	size_t	i;
+	size_t	j;
+	int		index;
+	char	**split;
 
+	split = malloc((count_words(s, c) + 1) * sizeof(char *));
+	if (!s || !split)
+		return (0);
 	i = 0;
-	bi = -1;
-	buffer = malloc(sizeof(char *) * (ft_count_words(s, c) + 1));
-	if (!buffer)
-		return (NULL);
-	while (++bi < ft_count_words(s, c))
+	j = 0;
+	index = -1;
+	while (i <= ft_strlen(s))
 	{
-		while (s[i] == c)
-			i++;
-		buffer[bi] = ft_substr(s, i, ft_word_len(s, i, c));
-		if (!buffer[bi])
+		if (s[i] != c && index < 0)
+			index = i;
+		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
 		{
-			ft_free_buffer(buffer, bi);
-			return (0);
+			split[j++] = word_dup(s, index, i);
+			index = -1;
 		}
-		i += ft_word_len(s, i, c);
+		i++;
 	}
-	buffer[bi] = 0;
-	return (buffer);
+	split[j] = 0;
+	return (split);
 }

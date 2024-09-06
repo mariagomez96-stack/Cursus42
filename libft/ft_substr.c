@@ -6,11 +6,10 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 11:32:29 by marigome          #+#    #+#             */
-/*   Updated: 2024/04/25 08:56:30 by marigome         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:33:27 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)

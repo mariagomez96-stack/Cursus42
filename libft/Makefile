@@ -35,11 +35,7 @@ FILES = \
 	ft_putchar_fd.c\
 	ft_putstr_fd.c\
 	ft_putendl_fd.c\
-<<<<<<< HEAD
 	ft_putnbr_fd.c
-=======
-	ft_putnbr_fd.c\
->>>>>>> 9f34c9157b427d25225d3eeb36b38c6f3985cc12
 
 
 BFILES = \
@@ -51,11 +47,7 @@ BFILES = \
 	ft_lstdelone_bonus.c\
 	ft_lstclear_bonus.c\
 	ft_lstiter_bonus.c\
-<<<<<<< HEAD
 	ft_lstmap_bonus.c
-=======
-	ft_lstmap_bonus.c\
->>>>>>> 9f34c9157b427d25225d3eeb36b38c6f3985cc12
 	
 OBJ = $(FILES:.c=.o)
 OBJB = $(BFILES:.c=.o)
