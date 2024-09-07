@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:27:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/06 15:08:45 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/07 11:21:12 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,9 @@ typedef struct s_fdf
 	int			win_width;	//window width:   -	//
 	int			win_height;	// window height: |	//
 }	t_fdf;
+
+// CHECKERS && MANAGEMENT ERRORS //
+int		ft_checker_args(int argc, char **argv);
+void	ft_error(char *src);
 
 #endif
