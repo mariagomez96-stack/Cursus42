@@ -1,58 +1,58 @@
+# ══ Names ═══════════════════════════════════════════════════════════════════ #
 NAME = fdf
 
-# ***** APARIENCE ************************************************************* #
+# ══ Compilation and Commands════════════════════════════════════════════════ #
+CC = clang
+CFLAGS = -Wall -Werror -Wextra
+RM = rm -f
+MKDIR = mkdir -p
 
-DEL_LINE 			= \033[2K
-ITALIC 				= \033[3m
-BOLD 				= \033[1m
-DEF_COLOR 			= \033[0;39m
-GRAY 				= \033[0;90m
-RED 				= \033[0;91m
-GREEN 				= \033[0;92m
-YELLOW 				= \033[0;93m
-BLUE 				= \033[0;94m
-MAGENTA 			= \033[0;95m
-CYAN 				= \033[0;96m
-WHITE 				= \033[0;97m
-BLACK 				= \033[0;99m
-ORANGE 				= \033[38;5;209m
-BROWN 				= \033[38;2;184;143;29m
-DARK_GRAY 			= \033[38;5;234m
-MID_GRAY 			= \033[38;5;245m
-DARK_GREEN 			= \033[38;2;75;179;82m
-DARK_YELLOW 		= \033[38;5;143m
+# ══ Directories ═════════════════════════════════════════════════════════════ #
+SRC_DIRS = src src_cam src_map projection events checker error
+OBJ_DIR = obj
+INCLUDES_DIR = includes
+LIBFT_DIR = libs/libft
+PRINTF_DIR = libs/printf
+MLX42_LIB_DIR = MLX42/lib
+MLX42_INCLUDE_DIR = MLX42/include/MLX42
 
-# ***** COMPILE ************************************************************* #
+# ══ Files ══════════════════════════════════════════════════════════════════ #
+SRC = $(foreach dir,$(SRC_DIRS),$(wildcard $(dir)/*.c))
+OBJ = $(SRC:%.c=$(OBJ_DIR)/%.o)
 
-CC 					= clang
-AR 					= ar rcs
-RM 					= rm -f
-MK 					= make -C
-MKD					= mkdir -p
-MCL 				= make clean -C
-MFCL 				= make fclean -C
-MK_					= && make
+# ══ Flags ══════════════════════════════════════════════════════════════════ #
+IFLAGS = -I$(INCLUDES_DIR) -I$(MLX42_INCLUDE_DIR) -I$(LIBFT_DIR) -I$(PRINTF_DIR)
+LFLAGS = -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf -L$(MLX42_LIB_DIR) -lmlx42 -lglfw -ldl -lm -lpthread
 
-# ***** DIRECTORIES ************************************************************* #
+# ══ Rules ══════════════════════════════════════════════════════════════════ #
+.PHONY: all clean fclean re
 
-SRC_DIR				= ./src
-CONTROL_DIR			= ./control
-DRAW_DIR			= ./draw
-ERRORS_DIR			= ./errors
-INIT_DIR			= ./init
-UTILS_DIR			= ./utils
-LIBRARIES			= ./libs
-OBJ_DIR				= ./objects
-LIBFT_DIR			= libft
-PRINTFT_DIR			= printf
-GNL_DIR				= gnl
-INCLUDES_DIR		= ./includes
-MLX42_LIB			= ./MLX42/lib
-MLX42_INCLUDE		= ./MLX42/include/MLX42
+all: $(NAME)
 
-# ***** LIBRARY .a ************************************************************* #
+$(NAME): $(OBJ)
+	@$(CC) $(OBJ) $(LFLAGS) -o $(NAME)
+	@echo "$(NAME) compiled successfully!"
 
-LIBFT_A				= ${LIBRARIES}/${LIBFT_DIR}/libft.a
-PRINTFT_A			= ${LIBRARIES}/${PRINTFT_DIR}/libftprintf.a
-LIBMLX42_A			= ${MLX42_LIB}/libmlx42.a
+$(OBJ_DIR)/%.o: %.c
+	@$(MKDIR) $(dir $@)
+	@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
 
+clean:
+	@$(RM) $(OBJ)
+	@echo "Object files cleaned."
+
+fclean: clean
+	@$(RM) $(NAME)
+	@echo "Binary and object files cleaned."
+
+re: fclean all
+
+# ══ Library Compilation Rules ══════════════════════════════════════════════ #
+libft:
+	@make -C $(LIBFT_DIR)
+
+printf:
+	@make -C $(PRINTF_DIR)
+
+mlx:
+	@make -C $(MLX42_LIB_DIR)

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:04:36 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/07 14:24:12 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/10 14:09:35 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@
 # define DEF_MENU_HEIGHT 250
 # define EXIT_FAILURE 1
 # define EXIT_SUCCESS 0
+# define M_PI					3.14159265358979323846
 # define NAME_ERR "Insert a [.fdf]"
 # define ERROR_NUM_ARG "Please, insert the right number of arguments!"
 # define MEMMORY_ERROR "Failed alocated memmory"
 # define MLX_ERROR "Mlx startup failure"
+# define FILE_OPEN_ERROR "Error opening the file"
 
 #endif

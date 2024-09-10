@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 10:41:06 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/07 14:27:46 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/10 19:15:48 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	ft_checker_args(int argc, char **argv)
 	}
 	if (ft_checker_ext(argv[1]) != EXIT_SUCCESS)
 	{
-		ft_error(MLX_INVEXT);
+		ft_error("File as invalid extension");
 		exit(EXIT_FAILURE);
 	}
 	exit(EXIT_SUCCESS);

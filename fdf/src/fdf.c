@@ -6,60 +6,74 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:50:20 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/07 13:28:48 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:08:22 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	main(int argc, char **argv)
+t_fdf	*init_fdf(char *map_name)
 {
-	t_map	*map;
 	t_fdf	*fdf;
 
-
-
-
-
+	fdf = (t_fdf *)malloc(sizeof(t_fdf));
+	if (!fdf)
+	{
+		mlx_strerror(MLX_MEMFAIL);
+		return (NULL);
+	}
+	fdf->map = init_map(map_name);
+	if (!fdf->map)
+	{
+		free(fdf);
+		return (NULL);
+	}
+	fdf->cam = (t_cam *)malloc(sizeof(t_cam));
+	if (!fdf->cam)
+	{
+		free_map(fdf->map);
+		free(fdf);
+		return (NULL);
+	}
+	init_cam(fdf->cam, fdf->map);
+	return (fdf);
 }
 
-
-
-
-
-
-
-
-
-
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_fdf *rol;
-	t_map *map;
+	t_fdf	*fdf;
 
-	ft_control_args(argc, argv);
-	rol = ft_init(argv[1]);
+	// Verificar que el número de argumentos es correcto
+	if (argc != 2)
+	{
+		ft_error("Usage: ./fdf <map_file>");
+		return (EXIT_FAILURE);
+	}
 
-	// Inicializa un mapa de prueba en lugar de leer desde un archivo
-	map = ft_init_map(argv[1]);
-	//ft_test_map(map);
+	// Inicializar la estructura fdf, cargar el mapa y la cámara
+	fdf = init_fdf(argv[1]);
+	if (!fdf)
+		return (EXIT_FAILURE);
 
-	rol->map = map;  // Asigna el mapa de prueba al rol
-	ft_control_map(argv, rol->map);
-	rol->cam = ft_cam_init(rol);
-	ft_manage_hook(rol);
+	// Inicializar MLX42 y crear la ventana
+	fdf->mlx = mlx_init(WIDTH, HEIGHT, "FdF", true);
+	if (!fdf->mlx)
+	{
+		ft_error("MLX initialization failed");
+		free(fdf);
+		return (EXIT_FAILURE);
+	}
+	// Crear la imagen donde dibujaremos
+	fdf->image = mlx_new_image(fdf->mlx, WIDTH, HEIGHT);
+	// Proyectar y dibujar el mapa
+	project_and_draw_map(fdf);
 
-	printf("Starting drawing process...\n");
-	ft_draw(rol->map, rol);
-	printf("Drawing completed.\n");
+	// Mostrar la imagen en la ventana
+	mlx_image_to_window(fdf->mlx, fdf->image, 0, 0);
+	mlx_key_hook(fdf->mlx, handle_events, fdf);
 
-	mlx_loop(rol->mlx);
-	mlx_terminate(rol->mlx);
-
-	// Liberar la memoria del mapa después de su uso
-	// ... Código para liberar map y otros recursos ...
-	ft_free_map(map);
-	ft_free_fdf(rol);
-
-	return 0;
+	// Iniciar el loop principal de eventos de MLX
+	mlx_loop(fdf->mlx);
+	free_fdf(fdf);
+	return (EXIT_SUCCESS);
 }

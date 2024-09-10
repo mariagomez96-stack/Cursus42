@@ -12,7 +12,7 @@
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen(char *src)
+size_t	ft_strlen_mine(char *src)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(char *src)
 	return (i);
 }
 
-void	ft_bzero(void *ptr, size_t n)
+void	ft_bzero_mine(void *ptr, size_t n)
 {
 	size_t	i;
 
@@ -34,7 +34,7 @@ void	ft_bzero(void *ptr, size_t n)
 	}
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_calloc_mine(size_t nmemb, size_t size)
 {
 	void	*ptr;
 
@@ -45,7 +45,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (ptr);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchr_mine(char *s, int c)
 {
 	int	i;
 
@@ -61,7 +61,7 @@ char	*ft_strchr(char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_mine(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
