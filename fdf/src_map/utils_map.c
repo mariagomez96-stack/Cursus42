@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:57:51 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/10 19:15:13 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:01:58 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,31 +51,8 @@ int	ft_columns_counter(char *line)
 }
 
 
-int	columns_to_map(t_map *map, char **columns, int row)
-{
-	int	col;
-	int	i;
 
-	col = 0;
-	i = 0;
-	while (col < map->columns)
-	{
-		map->map[row][col] = (int *)malloc(sizeof(int) * 2);
-		if (!map->map[row][col])
-		{
-			while (i < col)
-				free(map->map[row][i++]);
-			free(map->map[row]);
-			return (0);
-		}
-		map->map[row][col][0] = col;
-		map->map[row][col][1] = ft_atoi(columns[col]);
-        col++;
-	}
-	return (1);
-}
-
-int	process_line(t_map *map, char *line, int row)
+/*static int	process_line(t_map *map, char *line, int row)
 {
 	char	**columns;
 
@@ -94,4 +71,4 @@ int	process_line(t_map *map, char *line, int row)
     }
     ft_free_columns(columns);
     return (1);
-}
+}*/

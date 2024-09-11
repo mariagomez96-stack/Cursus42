@@ -12,7 +12,7 @@
 
 #include "get_next_line_bonus.h"
 
-size_t	ft_strlen_mine(char *src)
+size_t	ft_strlen_mine2(char *src)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t	ft_strlen_mine(char *src)
 	return (i);
 }
 
-void	ft_bzero_mine(void *ptr, size_t n)
+void	ft_bzero_mine2(void *ptr, size_t n)
 {
 	size_t	i;
 
@@ -34,18 +34,18 @@ void	ft_bzero_mine(void *ptr, size_t n)
 	}
 }
 
-void	*ft_calloc_mine(size_t nmemb, size_t size)
+void	*ft_calloc_mine2(size_t nmemb, size_t size)
 {
 	void	*ptr;
 
 	ptr = (void *)malloc(size * nmemb);
 	if (!ptr)
 		return (NULL);
-	ft_bzero(ptr, size * nmemb);
+	ft_bzero_mine2(ptr, size * nmemb);
 	return (ptr);
 }
 
-char	*ft_strchr_mine(char *s, int c)
+char	*ft_strchr_mine2(char *s, int c)
 {
 	int	i;
 
@@ -61,7 +61,7 @@ char	*ft_strchr_mine(char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin_mine(char *s1, char *s2)
+char	*ft_strjoin_mine2(char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -70,7 +70,7 @@ char	*ft_strjoin_mine(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	total_len = ft_strlen(s1) + ft_strlen(s2);
+	total_len = ft_strlen_mine2(s1) + ft_strlen_mine2(s2);
 	buffer = (char *)malloc(sizeof(char) * (total_len + 1));
 	if (!buffer || !s1 || !s2)
 		return (NULL);

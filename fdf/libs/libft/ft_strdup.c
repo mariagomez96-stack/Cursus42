@@ -6,11 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:43:01 by marigome          #+#    #+#             */
-/*   Updated: 2024/06/12 10:05:16 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 08:46:24 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/libft.h"
 
 char	*ft_strdup(const char *s)
 {

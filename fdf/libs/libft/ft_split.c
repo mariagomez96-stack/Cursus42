@@ -6,14 +6,13 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 10:46:20 by marigome          #+#    #+#             */
-/*   Updated: 2024/08/07 13:55:58 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 09:28:18 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "../../includes/libft.h"
 
-size_t	ft_strlen(const char *s)
+static size_t	ft_strlen2(const char *s)
 {
 	size_t	i;
 
@@ -70,11 +69,11 @@ char	**ft_split(char const *s, char c)
 	i = 0;
 	j = 0;
 	index = -1;
-	while (i <= ft_strlen(s))
+	while (i <= ft_strlen2(s))
 	{
 		if (s[i] != c && index < 0)
 			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		else if ((s[i] == c || i == ft_strlen2(s)) && index >= 0)
 		{
 			split[j++] = word_dup(s, index, i);
 			index = -1;

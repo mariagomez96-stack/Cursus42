@@ -6,11 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 12:54:18 by marigome          #+#    #+#             */
-/*   Updated: 2024/06/12 09:33:48 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 09:05:36 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/libft.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

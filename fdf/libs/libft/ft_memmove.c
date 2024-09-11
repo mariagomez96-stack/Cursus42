@@ -6,11 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 13:54:44 by marigome          #+#    #+#             */
-/*   Updated: 2024/06/12 09:33:45 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 08:46:30 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/libft.h"
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {

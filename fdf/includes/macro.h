@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:04:36 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/10 14:09:35 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:51:14 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,12 @@
 # define MEMMORY_ERROR "Failed alocated memmory"
 # define MLX_ERROR "Mlx startup failure"
 # define FILE_OPEN_ERROR "Error opening the file"
+
+# define MOUSE_CLICK_LEFT		1
+# define MOUSE_CLICK_RIGHT		2
+# define MOUSE_CLICK_MIDDLE		3
+# define MOUSE_WHEEL_UP			4
+# define MOUSE_WHEEL_DOWN		5
+# define MLX_MOTION				6
 
 #endif

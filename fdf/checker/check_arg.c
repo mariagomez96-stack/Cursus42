@@ -6,26 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 10:41:06 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/10 19:15:48 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 11:48:14 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-static int	ft_strncheck(char *src, char *look, int i)
-{
-	int	j;
-
-	j = 0;
-	while (look[j] && src[i])
-	{
-		if (src[i] != look[j])
-			return (0);
-		j++;
-		i++;
-	}
-	return (1);
-}
 
 static int	ft_checker_ext(char *map_name)
 {
@@ -36,15 +21,15 @@ static int	ft_checker_ext(char *map_name)
 	{
 		mlx_strerror(MLX_INVEXT);
 		//ft_error(NAME_ERR);
-		exit(EXIT_FAILURE);
+		return (0);
 	}
-	if (!ft_strncheck(map_name, ".fdf", size - 4))
+	if (ft_strnstr(map_name, ".fdf\0", 6) == 0)
 	{
 		mlx_strerror(MLX_INVEXT);
 		//ft_error(NAME_ERR);
-		exit(EXIT_FAILURE);
+		return (0);
 	}
-	return (MLX_SUCCESS);
+	return (1);
 }
 
 int	ft_checker_args(int argc, char **argv)
@@ -54,10 +39,10 @@ int	ft_checker_args(int argc, char **argv)
 		ft_error(ERROR_NUM_ARG);
 		exit(EXIT_FAILURE);
 	}
-	if (ft_checker_ext(argv[1]) != EXIT_SUCCESS)
+	else if (ft_checker_ext(argv[1]) != 1)
 	{
 		ft_error("File as invalid extension");
 		exit(EXIT_FAILURE);
 	}
-	exit(EXIT_SUCCESS);
+	return (EXIT_SUCCESS);
 }

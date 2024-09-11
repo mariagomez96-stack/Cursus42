@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:35:28 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/10 19:19:15 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:01:58 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,16 @@ void	ft_free_columns(char **columns)
 	while (columns[i])
 		free(columns[i++]);
 	free(columns);
+}
+
+void	ft_free_split(char **argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i])
+		free(argv[i++]);
+	free (argv);
 }
 
 void	free_map(t_map *map)

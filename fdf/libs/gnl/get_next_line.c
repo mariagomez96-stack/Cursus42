@@ -16,7 +16,7 @@ static char	*ft_free_strjoin(char *buffer, char *tmp)
 {
 	char	*res;
 
-	res = ft_strjoin(buffer, tmp);
+	res = ft_strjoin_mine(buffer, tmp);
 	free (buffer);
 	return (res);
 }
@@ -30,7 +30,7 @@ static char	*ft_new_buffer(char *buffer)
 
 	i = 0;
 	j = 0;
-	len = ft_strlen(buffer);
+	len = ft_strlen_mine(buffer);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
 	if (!buffer[i])
@@ -38,7 +38,7 @@ static char	*ft_new_buffer(char *buffer)
 		free(buffer);
 		return (NULL);
 	}
-	new_buffer = ft_calloc(sizeof(char), (len - i) + 1);
+	new_buffer = ft_calloc_mine(sizeof(char), (len - i) + 1);
 	if (!new_buffer)
 		return (NULL);
 	i++;
@@ -62,7 +62,7 @@ static char	*ft_get_line(char *buffer)
 		return (NULL);
 	while (buffer[i] != '\0' && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(sizeof(char), (i + 1));
+	line = ft_calloc_mine(sizeof(char), (i + 1));
 	while (buffer[j] != '\0' && buffer[j] != '\n')
 	{
 		line[j] = buffer[j];
@@ -80,8 +80,8 @@ static char	*ft_read_from_buffer(char *buffer, int fd)
 
 	bytes_readed = 1;
 	if (!buffer)
-		ft_calloc(1, 1);
-	tmp = ft_calloc(sizeof(char), BUFFER_SIZE + 1);
+		ft_calloc_mine(1, 1);
+	tmp = ft_calloc_mine(sizeof(char), BUFFER_SIZE + 1);
 	while (bytes_readed > 0)
 	{
 		bytes_readed = read(fd, tmp, BUFFER_SIZE);
@@ -92,7 +92,7 @@ static char	*ft_read_from_buffer(char *buffer, int fd)
 		}		
 		tmp[bytes_readed] = 0;
 		buffer = ft_free_strjoin(buffer, tmp);
-		if (ft_strchr(tmp, '\n'))
+		if (ft_strchr_mine(tmp, '\n'))
 			break ;
 	}
 	free (tmp);
@@ -105,7 +105,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	if (!buffer)
-		buffer = ft_calloc(sizeof(char), (1));
+		buffer = ft_calloc_mine(sizeof(char), (1));
 	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	buffer = ft_read_from_buffer(buffer, fd);

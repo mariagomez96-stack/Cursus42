@@ -6,12 +6,13 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:13:29 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/10 19:17:53 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 13:33:40 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
+// used //
 int open_map_file(const char *map_name)
 {
     int fd;
@@ -25,54 +26,8 @@ int open_map_file(const char *map_name)
     return (fd);
 }
 
-t_map   *initialize_map(void)
-{
-    t_map   *map;
+// New used //
 
-    map = (t_map *)malloc(sizeof(t_map));
-    if (!map)
-    {
-        mlx_strerror(MLX_MEMFAIL);
-        return (NULL);
-    }
-    map->lines = 0;
-    map->columns = -1;
-    map->max_depth = 0;
-    map->min_depth = 0;
-    map->map = NULL;
-    return (map);
-}
-
-int read_lines(t_map *map, int fd)
-{
-    char    *line;
-    int     row;
-
-    row = 0;
-    while ((line = get_next_line(fd)))
-    {
-        if (map->columns == -1)
-            map->columns = ft_columns_counter(line);
-        if (map->map == NULL)
-        {
-            map->map = (int ***)malloc(sizeof(int **) * map->lines);
-            if (!map->map)
-            {
-                free(line);
-                return (0);
-            }
-        }
-        if (!process_line(map, line, row))
-        {
-            free(line);
-            return (0);
-        }
-        free(line);
-        row++;
-        map->lines++;
-    }
-    return (1);
-}
 
 void    update_depth(t_map *map, int z)
 {

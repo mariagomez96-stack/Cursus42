@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 13:08:23 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/10 12:16:08 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 14:31:40 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,30 @@
 
 void	init(t_fdf *pointer, const char *map_name)
 {
-	pointer->mlx = mlx_init(WIDTH, HEIGHT, map_name, true);
+	pointer->win_height = DEF_HEIGHT;
+	pointer->win_width = DEF_WIDTH;
+	pointer->mlx = mlx_init(DEF_WIDTH, DEF_HEIGHT, map_name, true);
 	if (!pointer->mlx)
 	{
 		ft_error(MLX_ERROR);
 		exit(EXIT_FAILURE);
 	}
-	pointer->image = mlx_new_image(pointer->mlx, WIDTH, HEIGHT);
+	ft_printf(ORANGE "\nMLX " GREEN "initialized successfully...\n" RESET);
+	pointer->image = mlx_new_image(pointer->mlx, DEF_WIDTH, DEF_HEIGHT);
 	if (!pointer->image)
 	{	
 		mlx_strerror(MLX_INVIMG);
 		mlx_terminate(pointer->mlx);
 		exit(EXIT_FAILURE);
 	}
+	ft_printf(ORANGE "Image " GREEN "created successfully...\n" RESET);
 	if (mlx_image_to_window(pointer->mlx, pointer->image, 0, 0) == -1)
 	{
+		mlx_close_window(pointer->mlx);
 		mlx_strerror(MLX_INVIMG);
-		mlx_terminate(pointer->mlx);
 		exit(EXIT_FAILURE);
 	}
+	ft_printf(ORANGE "Image " GREEN "added to window successfully...\n" RESET);
 }
 
 t_fdf	*init_mlx(char *name)
@@ -54,6 +59,12 @@ t_fdf	*init_mlx(char *name)
 		return (NULL);
 	}
 	init(fdf, map_name);
+	fdf->mouse = (t_mouse *)malloc(sizeof(t_mouse));
+	if (!fdf->mouse)
+	{
+		ft_error("Error de ratón");
+		exit (EXIT_FAILURE);
+	}
 	fdf->map = NULL;
 	fdf->cam = NULL;
 	free(map_name);

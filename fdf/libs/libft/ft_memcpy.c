@@ -6,11 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 14:36:34 by marigome          #+#    #+#             */
-/*   Updated: 2024/06/12 09:33:46 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 08:46:31 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/libft.h"
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {

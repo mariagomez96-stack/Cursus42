@@ -41,7 +41,7 @@ void	*ft_calloc_mine(size_t nmemb, size_t size)
 	ptr = (void *)malloc(size * nmemb);
 	if (!ptr)
 		return (NULL);
-	ft_bzero(ptr, size * nmemb);
+	ft_bzero_mine(ptr, size * nmemb);
 	return (ptr);
 }
 
@@ -70,7 +70,7 @@ char	*ft_strjoin_mine(char *s1, char *s2)
 
 	i = 0;
 	j = 0;
-	total_len = ft_strlen(s1) + ft_strlen(s2);
+	total_len = ft_strlen_mine(s1) + ft_strlen_mine(s2);
 	buffer = (char *)malloc(sizeof(char) * (total_len + 1));
 	if (!buffer || !s1 || !s2)
 		return (NULL);

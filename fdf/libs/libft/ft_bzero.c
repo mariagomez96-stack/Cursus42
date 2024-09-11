@@ -6,11 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/10 13:34:48 by marigome          #+#    #+#             */
-/*   Updated: 2024/06/12 09:34:06 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 08:46:46 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/libft.h"
 
 void	ft_bzero(void *ptr, size_t n)
 {

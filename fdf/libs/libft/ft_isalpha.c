@@ -6,11 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 11:06:04 by marigome          #+#    #+#             */
-/*   Updated: 2024/06/12 09:34:04 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/11 08:46:43 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/libft.h"
 
 int	ft_isalpha(int c)
 {
