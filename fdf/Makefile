@@ -96,7 +96,8 @@ ERROR			= ${ERROR_DIR}/ft_error.c
 PROJECTION		= ${PROJECTION_DIR}/draw.c \
 					${PROJECTION_DIR}/ft_angles.c \
 					${PROJECTION_DIR}/map_events.c \
-					${PROJECTION_DIR}/project.c
+					${PROJECTION_DIR}/project.c \
+					${PROJECTION_DIR}/pixel.c
 
 SRC 				= ${SRC_DIR}/fdf.c \
 						${SRC_DIR}/init_mlx.c
@@ -105,7 +106,6 @@ SRC_CAM				= ${SRC_CAM_DIR}/cam.c
 
 SRC_MAP			= ${SRC_MAP_DIR}/init_map.c \
 					${SRC_MAP_DIR}/utils_map.c \
-					${SRC_MAP_DIR}/utils_map_2.c
 
 GNL					= ${LIBRARIES}/${GNL_DIR}/get_next_line.c \
 						${LIBRARIES}/${GNL_DIR}/get_next_line_utils.c \

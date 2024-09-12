@@ -6,33 +6,15 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:17:41 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/12 16:15:02 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/12 18:45:16 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// New used //
-
-t_map   *initialize_map(void)
+static void	read_map(t_map *map, int fd)
 {
-    t_map   *map;
-
-    map = (t_map *)malloc(sizeof(t_map));
-    if (!map)
-    {
-        mlx_strerror(MLX_MEMFAIL);
-        return (NULL);
-    }
-    map->lines = 0;
-    map->columns = 0;
-    map->map = NULL;
-    return (map);
-}
-
-static void read_map(t_map *map, int fd)
-{
-    char	*line;
+	char	*line;
 	char	**subline;
 
 	line = get_next_line(fd);
@@ -52,7 +34,6 @@ static void read_map(t_map *map, int fd)
 	lseek(fd, 0, SEEK_SET);
 }
 
-
 static void	fill_lines(t_map *map, char **columns, int row)
 {
 	int	col;
@@ -71,11 +52,10 @@ static void	fill_lines(t_map *map, char **columns, int row)
 			return ;
 		}
 		map->map[row][col][0] = ft_atoi(columns[col]);
-        col++;
+		col++;
 	}
 }
 
-// New used //
 static int	allocate_lines(t_map *map, char *line, int i)
 {
 	char	**subline;
@@ -88,18 +68,15 @@ static int	allocate_lines(t_map *map, char *line, int i)
 	}
 	subline = ft_split(line, ' ');
 	if (!subline)
-	{	
+	{
 		ft_free_split(subline);
 		return (0);
 	}
-	ft_printf("Filas completadas\n");
 	fill_lines(map, subline, i);
-	ft_printf("Columnas añadidas al mapa\n");
 	ft_free_split(subline);
 	return (1);
 }
 
-// New used //
 static void	ft_complet_map(t_map *map, int fd)
 {
 	char	*line;
@@ -109,7 +86,6 @@ static void	ft_complet_map(t_map *map, int fd)
 	i = 0;
 	while (line && i < map->lines)
 	{
-		ft_printf("Line readed\n");
 		if (!allocate_lines(map, line, i))
 		{
 			free_map(map);
@@ -121,12 +97,11 @@ static void	ft_complet_map(t_map *map, int fd)
 	}
 }
 
-
-t_map   *init_map(const char *map_name)
+t_map	*init_map(const char *map_name)
 {
-    t_map   *map;
-    int     fd;
-    
+	t_map	*map;
+	int		fd;
+
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
