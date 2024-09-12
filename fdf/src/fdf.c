@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:50:20 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/11 14:12:43 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:53:23 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,14 @@ int	main(int argc, char **argv)
 	t_fdf	*fdf;
 	t_map	*map;
 
-	// Verificar que el número de argumentos es correcto
 	ft_checker_args(argc, argv);
-	ft_printf("Argumentos leídos\n");
-	// Inicializar la estructura fdf
 	fdf = init_mlx(argv[1]);
-	ft_printf("mlx inicialized\n");
 	map = init_map(argv[1]);
-	ft_printf("map inicialized\n");
 	fdf->map = map;
 	ft_control_map(argv, map);
-	ft_printf("Control map done\n");
-	fdf->cam = init_cam(fdf->cam, map);
-	ft_printf("cam initialiced\n");
-	ft_manage_hook(fdf);
-	ft_printf("hooked map\n");
-	
+	fdf->cam = init_cam(fdf);
+	manage_moves(fdf);
+	ft_draw(fdf->map, fdf);
 	mlx_loop(fdf->mlx);
 	mlx_terminate(fdf->mlx);
 	return (0);

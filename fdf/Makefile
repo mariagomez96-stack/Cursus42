@@ -43,7 +43,6 @@ MK_					= && make
 
 CHECKER_DIR				= ./checker
 ERROR_DIR				= ./error
-MAP_EVENTS_DIR			= ./map_events
 MAPS_DIR				= ./maps
 PROJECTION_DIR			= ./projection
 SRC_DIR					= ./src
@@ -94,11 +93,10 @@ CHECKER			= ${CHECKER_DIR}/check_arg.c
 
 ERROR			= ${ERROR_DIR}/ft_error.c
 
-MAP_E           = ${MAP_EVENTS_DIR}/map_events.c \
-					${MAP_EVENTS_DIR}/project_draw_map.c \
-					${MAP_EVENTS_DIR}/draw_map.c
-
-PROJECTION		= ${PROJECTION_DIR}/iso.c
+PROJECTION		= ${PROJECTION_DIR}/draw.c \
+					${PROJECTION_DIR}/ft_angles.c \
+					${PROJECTION_DIR}/map_events.c \
+					${PROJECTION_DIR}/project.c
 
 SRC 				= ${SRC_DIR}/fdf.c \
 						${SRC_DIR}/init_mlx.c
@@ -117,7 +115,6 @@ GNL					= ${LIBRARIES}/${GNL_DIR}/get_next_line.c \
 
 OBJ_CHECKER				= $(patsubst ${CHECKER_DIR}/%.c, ${OBJ_DIR}/%.o, ${CHECKER})
 OBJ_ERR				= $(patsubst ${ERROR_DIR}/%.c, ${OBJ_DIR}/%.o, ${ERROR})
-OBJ_MAP_EV				= $(patsubst ${MAP_EVENTS_DIR}/%.c, ${OBJ_DIR}/%.o, ${MAP_E})
 OBJ_PROJECTION				= $(patsubst ${PROJECTION_DIR}/%.c, ${OBJ_DIR}/%.o, ${PROJECTION})
 OBJ_SRC				= $(patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC})
 OBJ_SRC_CAM				= $(patsubst ${SRC_CAM_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC_CAM})
@@ -144,12 +141,12 @@ OBJ_GNL				= $(patsubst ${LIBRARIES}/${GNL_DIR}/%.c, ${OBJ_DIR}/%.o, \
 all: ${NAME}
 
 ${NAME}: ftlibft ftprintf ${LIBMLX42_A} ${OBJ_CHECKER} ${OBJ_GNL} \
-									${OBJ_ERR} ${OBJ_MAP_EV} ${OBJ_PROJECTION} \
+									${OBJ_ERR} ${OBJ_PROJECTION} \
 									${OBJ_SRC} ${OBJ_SRC_CAM} ${OBJ_SRC_MAP}
 
 	@echo "$(YELLOW)Compiling root ...$(DEF_COLOR)"
 	@${CC} ${CFLAGS} ${IFLAGS} -o ${NAME} ${OBJ_CHECKER} ${OBJ_GNL} ${OBJ_ERR} \
-									${OBJ_MAP_EV} ${OBJ_PROJECTION} ${OBJ_SRC} \
+									${OBJ_PROJECTION} ${OBJ_SRC} \
 									${OBJ_SRC_CAM} ${OBJ_SRC_MAP} ${LFLAGS}
 	@echo "$(GREEN) $(NAME) all created ✓$(DEF_COLOR)"
 
@@ -162,10 +159,6 @@ ${OBJ_DIR}/%.o: ${LIBRARIES}/${GNL_DIR}/%.c
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
 ${OBJ_DIR}/%.o: ${ERROR_DIR}/%.c
-	@${MKD} $(dir $@)
-	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
-
-${OBJ_DIR}/%.o: ${MAP_EVENTS_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 

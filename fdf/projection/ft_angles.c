@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_map_2.c                                      :+:      :+:    :+:   */
+/*   ft_angles.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 13:13:29 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/12 15:22:03 by marigome         ###   ########.fr       */
+/*   Created: 2024/09/12 12:35:26 by marigome          #+#    #+#             */
+/*   Updated: 2024/09/12 15:07:39 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-// used //
-int open_map_file(const char *map_name)
+double  ft_reset_ang(double *angle)
 {
-    int fd;
+    double  pi2;
 
-    fd = open(map_name, O_RDONLY);
-    if (fd < 0)
-    {
-        ft_error(FILE_OPEN_ERROR);
-        return (-1);
-    }
-    return (fd);
+    pi2 = 2.00 * M_PI;
+    while (*angle >= pi2)
+        *angle -= pi2;
+    while (*angle < 0)
+        *angle += pi2;
+    return (*angle);
 }

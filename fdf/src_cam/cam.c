@@ -6,34 +6,41 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:50:11 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/11 13:36:36 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/12 12:01:27 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-t_cam   *init_cam(t_cam *cam, t_map *map)
+static int  check_under(int n1, int n2)
 {
+    if (n1 < n2)
+        return (n1);
+    return (n2);
+}
+
+
+t_cam   *init_cam(t_fdf *fdf)
+{
+    t_cam  *cam;
+    
     cam = (t_cam *)malloc(sizeof(t_cam));
     if (!cam)
     {
         ft_error("Error cam\n");
         exit (EXIT_FAILURE);
     }    
-    cam->zoom = 20; //zoom basico inicial
-    cam->x_ang = 0.0;
-    cam->y_ang = 0.0;
-    cam->z_ang = 0.0;
-    cam->x_offset = 0;
-    cam->y_offset = 0;
+    cam->zoom = check_under(DEF_WIDTH / fdf->map->columns / 2, \
+    DEF_HEIGHT / fdf->map->lines / 2); //zoom basico inicial
+    cam->x_ang = -0.61547297;
+    cam->y_ang = -0.523599;
+    cam->z_ang = 0.61547297;
+    cam->x_offset = fdf->win_width / 2;
+    cam->y_offset = fdf->win_height / 2;
     cam->z_height = 1.0;
-    cam->iso = 1; //Proyeccion isometrica
+    cam->iso = 1;
+    cam->prev_x = 0;
+    cam->prev_y = 0; //Proyeccion isometrica
 
-    if (map->lines > 0 && map->columns > 0)
-    {
-        cam->zoom = (DEF_WIDTH / map->columns) / 2;
-        cam->x_offset = DEF_WIDTH / 2;
-        cam->y_offset = DEF_HEIGHT / 2;
-    }
     return (cam);
 }

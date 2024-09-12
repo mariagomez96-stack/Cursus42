@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:27:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/11 14:37:21 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/12 15:52:55 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct s_point
 {
 	int				x; // __ //
 	int				y; // || //
-	int				z; // height //
+	int				z;
+	int				reverse; // height //
 	unsigned long	color;
 }	t_point;
 
@@ -58,8 +59,8 @@ typedef struct s_map
 {
 	int	columns;	// width //
 	int	lines;		// height //
-	int	min_depth;		// z_min //
-	int	max_depth;		// z_max //
+	int	min_z;		// z_min //
+	int	max_z;		// z_max //
 	int	***map;			// (x, y, z) //
 }	t_map;
 
@@ -84,18 +85,11 @@ typedef struct s_fdf
 	t_map		*map;
 	t_cam		*cam;
 	t_mouse		*mouse;
+	void		*imgstatic;
 	int			win_width;	//window width:   -	//
-	int			win_height;	// window height: |	//
+	int			win_height;
+	int			steep;	// window height: |	//
 }	t_fdf;
-
-typedef struct s_bresenham
-{
-	int dx;
-	int dy;
-	int sx;
-	int sy;
-	int err;
-}	t_bresenham;
 
 
 // CHECKERS && MANAGEMENT ERRORS //
@@ -120,35 +114,17 @@ int create_map_row(t_map *map, int row);
 int open_map_file(const char *map_name);
 int read_lines(t_map *map, int fd);
 t_map   *initialize_map(void);
-void    update_depth(t_map *map, int z);
-void    calculate_depth(t_map *map);
 
 t_map   *init_map(const char *map_name);
 
 // CAM //
-t_cam    *init_cam(t_cam *cam, t_map *map);
+t_cam    *init_cam(t_fdf *fdf);
 
-// ISO && BRESENHAM //
-void    iso_projection(int *x, int *y, int z, t_cam *cam);
-void    put_pixel(mlx_image_t *image, int x, int y, uint32_t color);
-void	init_bresenham(t_point start, t_point end, t_bresenham *bres);
-void    put_line_pixels(t_fdf *fdf, t_point start, t_point end, t_bresenham *bres);
-void    draw_line(t_fdf *fdf, t_point start, t_point end);
-
-// MAP EVENTS //
-void ft_manage_hook(t_fdf *rol);
-
-void	project_point(t_point *point, t_cam *cam);
-void	draw_map_line(t_fdf *fdf, t_point start, t_point end);
-void	draw_horizontal_lines(t_fdf *fdf, int y);
-void	draw_vertical_lines(t_fdf *fdf, int x);
-void	project_and_draw_map(t_fdf *fdf);
-
-// DRAW_MAP //
-void	ft_draw_line(t_point start, t_point end, t_fdf *rol);
-void	ft_draw_horizvert(int x, int y, t_map *map, t_fdf *rol);
-void	ft_draw_grid(t_map *map, t_fdf *rol);
-void	ft_draw(t_map *map, t_fdf *rol);
-t_point	ft_project_iso(int x, int y, int z, t_fdf *rol);
+// PROJECTION //
+double  ft_reset_ang(double *angle);
+void    manage_moves(t_fdf *fdf);
+// void plot_map(t_fdf *fdf);
+void	ft_draw(t_map *map, t_fdf *fdf);
+t_point	project(int x, int y, t_fdf *rol);
 
 #endif

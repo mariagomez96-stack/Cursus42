@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:17:41 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/11 13:37:06 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:15:02 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ t_map   *initialize_map(void)
         return (NULL);
     }
     map->lines = 0;
-    map->columns = -1;
-    map->max_depth = 0;
-    map->min_depth = 0;
+    map->columns = 0;
     map->map = NULL;
     return (map);
 }
@@ -148,6 +146,5 @@ t_map   *init_map(const char *map_name)
 	ft_printf("map readed\n");
 	ft_complet_map(map, fd);
 	close (fd);
-	calculate_depth(map);
 	return (map);
 }
