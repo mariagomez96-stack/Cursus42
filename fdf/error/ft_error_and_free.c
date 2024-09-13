@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_error.c                                         :+:      :+:    :+:   */
+/*   ft_error_and_free.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:35:28 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/11 13:01:58 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:53:13 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,3 @@ void	free_map(t_map *map)
 	}
 	free(map);
 }
-
-void free_fdf(t_fdf *fdf)
-{
-    int	i;
-
-	i = 0;
-	if (fdf)
-    {
-        // Libera la memoria de la imagen si existe
-        if (fdf->image)
-            mlx_delete_image(fdf->mlx, fdf->image);
-
-        // Libera la memoria de la estructura del mapa si existe
-        if (fdf->map)
-        {
-            while (i < fdf->map->lines)
-                free(fdf->map->map[i++]);  // Suponiendo que `map` es una matriz
-            free(fdf->map->map);
-            free(fdf->map);
-        }
-
-        // Libera la estructura de la cámara si existe
-        if (fdf->cam)
-            free(fdf->cam);
-
-        // Finalmente, libera la estructura principal de fdf
-        free(fdf);
-    }
-}
-

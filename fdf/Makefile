@@ -91,11 +91,11 @@ LFLAGS				= -L${LIBRARIES}/${LIBFT_DIR} -lft \
 
 CHECKER			= ${CHECKER_DIR}/check_arg.c
 
-ERROR			= ${ERROR_DIR}/ft_error.c
+ERROR			= ${ERROR_DIR}/ft_error_and_free.c
 
 PROJECTION		= ${PROJECTION_DIR}/draw.c \
 					${PROJECTION_DIR}/ft_angles.c \
-					${PROJECTION_DIR}/map_events.c \
+					${PROJECTION_DIR}/conf_events.c \
 					${PROJECTION_DIR}/project.c \
 					${PROJECTION_DIR}/pixel.c
 

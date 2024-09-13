@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:50:20 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/12 18:51:33 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/13 10:48:38 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@ int	main(int argc, char **argv)
 	manage_moves(fdf);
 	ft_draw(fdf->map, fdf);
 	mlx_loop(fdf->mlx);
+	mlx_delete_image(fdf->mlx, fdf->image);
 	mlx_terminate(fdf->mlx);
+	free_map(map);
+	free(fdf);
 	return (0);
 }
