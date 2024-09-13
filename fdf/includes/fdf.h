@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:27:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/13 11:42:03 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/13 13:21:57 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int		ft_columns_counter(char *line);
 char	**split_lines_in_columns(char *line);
 void	columns_to_map(t_map *map, char **columns, int row);
 int		create_map_row(t_map *map, int row);
+t_map	*init_map(const char *map_name);
 
 int		open_map_file(const char *map_name);
 int		read_lines(t_map *map, int fd);
@@ -128,5 +129,7 @@ float	ft_fpart(float n);
 float	ft_rfpart(float n);
 void	ft_put_pixel(t_fdf *fdf, int x, int y, int color);
 int		ft_lerp(int first, int second, double p);
+
+t_cam	*init_cam(t_fdf *fdf);
 
 #endif
