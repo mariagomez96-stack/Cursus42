@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:27:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/13 11:21:18 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/13 11:42:03 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ typedef struct s_point
 	int				reverse; // height //
 	unsigned long	color;
 }	t_point;
+
+typedef struct s_cam
+{
+	int32_t			zoom;
+	double			x_ang;
+	double			y_ang;
+	double			z_ang;
+	float			z_height;
+	int32_t			x_offset;
+	int32_t			y_offset;
+	int32_t			prev_x;
+	int32_t			prev_y;
+	int32_t			iso;
+}	t_cam;
 
 typedef struct s_mouse
 {
@@ -69,6 +83,7 @@ typedef struct s_fdf
 	mlx_image_t	*image;
 	t_map		*map;
 	t_mouse		*mouse;
+	t_cam		*cam;
 	void		*imgstatic;
 	int			win_width;	//window width:   -	//
 	int			win_height;
