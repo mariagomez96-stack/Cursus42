@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 13:50:11 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/13 13:30:17 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/15 17:31:31 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_cam	*init_cam(t_fdf *fdf)
 		ft_error("Error cam\n");
 		exit (EXIT_FAILURE);
 	}
-	cam->zoom = 40;
+	cam->zoom = 10;
 	cam->x_ang = -0.61547297;
 	cam->y_ang = -0.523599;
 	cam->z_ang = 0.61547297;

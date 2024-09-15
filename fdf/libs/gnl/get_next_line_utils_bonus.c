@@ -3,87 +3,108 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rdel-olm <rdel-olm@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 13:08:46 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/28 11:08:54 by marigome         ###   ########.fr       */
+/*   Created: 2024/05/27 11:32:35 by rdel-olm          #+#    #+#             */
+/*   Updated: 2024/09/09 15:11:50 by rdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "../includes/get_next_line_bonus.h"
 
-size_t	ft_strlen_mine2(char *src)
+size_t	ft_strlen2(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while (src[i])
+	while (s[i] != '\0')
+	{
 		i++;
+	}
 	return (i);
 }
 
-void	ft_bzero_mine2(void *ptr, size_t n)
+char	*ft_strdup2(const char *s)
 {
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		((char *)ptr)[i] = '\0';
-		i++;
-	}
-}
-
-void	*ft_calloc_mine2(size_t nmemb, size_t size)
-{
-	void	*ptr;
-
-	ptr = (void *)malloc(size * nmemb);
-	if (!ptr)
-		return (NULL);
-	ft_bzero_mine2(ptr, size * nmemb);
-	return (ptr);
-}
-
-char	*ft_strchr_mine2(char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return (&s[i]);
-		i++;
-	}
-	if (s[i] == (char)c)
-		return (&s[i]);
-	return (0);
-}
-
-char	*ft_strjoin_mine2(char *s1, char *s2)
-{
+	char	*str;
 	size_t	i;
 	size_t	j;
-	size_t	total_len;
-	char	*buffer;
 
 	i = 0;
-	j = 0;
-	total_len = ft_strlen_mine2(s1) + ft_strlen_mine2(s2);
-	buffer = (char *)malloc(sizeof(char) * (total_len + 1));
-	if (!buffer || !s1 || !s2)
-		return (NULL);
-	while (s1[i])
+	j = ft_strlen2(s);
+	str = (char *) malloc((j + 1) * sizeof(char));
+	if (str == NULL)
+		return (0);
+	while (s[i] != '\0')
 	{
-		buffer[i] = s1[i];
+		str[i] = s[i];
 		i++;
 	}
-	while (s2[j])
+	str[i] = '\0';
+	return (str);
+}
+
+size_t	ft_strlcpy2(char *dest, const char *src, size_t size)
+{
+	size_t			i;
+	unsigned int	count;
+
+	i = 0;
+	count = 0;
+	while (src[count] != '\0')
+		count++;
+	if (size < 1)
+		return (count);
+	while (src[i] != '\0' && i < size - 1)
 	{
-		buffer[i + j] = s2[j];
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (count);
+}
+
+char	*ft_strjoin2(char const *s1, char const *s2)
+{
+	char	*str3;
+	int		totallen;
+	int		i;
+	int		j;
+
+	totallen = ft_strlen2(s1) + ft_strlen2(s2);
+	i = 0;
+	j = 0;
+	str3 = (char *) malloc((totallen + 1) * sizeof(char));
+	if (!str3)
+		return (0);
+	while (s1[i] != '\0')
+	{
+		str3[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		str3[i] = s2[j];
+		i++;
 		j++;
 	}
-	buffer[i + j] = '\0';
-	return (buffer);
+	str3[i] = '\0';
+	return (str3);
+}
+
+char	*ft_substr2(char const *s, unsigned int start, size_t len)
+{
+	char	*str;
+
+	if (!s)
+		return (NULL);
+	if (start >= ft_strlen2(s))
+		return (ft_strdup2(""));
+	if (len > ft_strlen2(s + start))
+		len = ft_strlen2(s + start);
+	str = (char *) malloc((len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	ft_strlcpy2(str, (s + start), len + 1);
+	return (str);
 }

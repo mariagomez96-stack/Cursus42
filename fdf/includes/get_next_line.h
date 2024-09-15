@@ -3,51 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rdel-olm <rdel-olm@student.42malaga.com>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/24 13:32:24 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/10 15:48:21 by marigome         ###   ########.fr       */
+/*   Created: 2024-04-24 07:07:14 by rdel-olm          #+#    #+#             */
+/*   Updated: 2024-04-24 07:07:14 by rdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <unistd.h>
-# include <stdlib.h>
+# include <stdlib.h>  //para typedef, malloc
+# include <unistd.h> // para write()
 
+//variable estatica
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
 
-/// @brief len (buffer + tmp) -> to join
-/// @param src
-/// @return len
-size_t	ft_strlen_mine(char *src);
-
-/// @brief Inside of calloc to put zeros inside the buffer
-/// @param ptr buffer
-/// @param n size of buffer
-void	ft_bzero_mine(void *ptr, size_t n);
-
-/// @brief To put n membs of byte size (1 char, 4 int)
-/// @param nmemb size (len)
-/// @param size bytes
-/// @return void
-void	*ft_calloc_mine(size_t nmemb, size_t size);
-
-/// @brief join s1 & s2 
-/// @param s1 
-/// @param s2 
-/// @return buffer (1 & s2 joined)
-char	*ft_strjoin_mine(char *s1, char *s2);
-
-/// @brief Looking for c (\n) inside tmp to break
-/// @param s buffer
-/// @param c character to look for
-/// @return A pointer if c is found
-char	*ft_strchr_mine(char *s, int c);
-
+//funciones principales
 char	*get_next_line(int fd);
 
-#endif 
+//funciones utiles de ayuda
+size_t	ft_strlen1(const char *s);
+char	*ft_strchr1(const char *s, int c);
+char	*ft_strdup1(const char *s);
+size_t	ft_strlcpy1(char *dest, const char *src, size_t size);
+char	*ft_strjoin1(char const *s1, char const *s2);
+char	*ft_substr1(char const *s, unsigned int start, size_t len);
+
+#endif

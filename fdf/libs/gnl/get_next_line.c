@@ -1,117 +1,117 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rdel-olm <rdel-olm@student.42malaga.com>   #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/16 13:04:15 by marigome          #+#    #+#             */
-/*   Updated: 2024/05/28 11:02:29 by marigome         ###   ########.fr       */
+/*   Created: 2024-05-14 09:58:51 by rdel-olm          #+#    #+#             */
+/*   Updated: 2024-05-14 09:58:51 by rdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
-static char	*ft_free_strjoin(char *buffer, char *tmp)
+/**
+ * The get_next_line() function write a function that returns the line read 
+ * from a file descriptor.
+ * 
+ * @param int fd    file descriptor to read from.
+ * 
+ * returns  If all goes well: the line read
+ *          On failure or if reading ends: NULL
+ * 
+*/
+
+char	*ft_strchr1(const char *s, int c)
 {
-	char	*res;
-
-	res = ft_strjoin_mine(buffer, tmp);
-	free (buffer);
-	return (res);
+	while (*s != '\0')
+	{
+		if (*s == (char) c)
+			return ((char *) s);
+		else
+			s++;
+	}
+	if ((char) c == '\0')
+		return ((char *)s);
+	return (0);
 }
 
-static char	*ft_new_buffer(char *buffer)
+static char	*manage_readed_line(char	*treat_line)
 {
-	size_t	len;
+	char	*new_buffer_print;	
 	size_t	i;
-	size_t	j;
-	char	*new_buffer;
 
 	i = 0;
-	j = 0;
-	len = ft_strlen_mine(buffer);
-	while (buffer[i] && buffer[i] != '\n')
+	while (treat_line[i] != '\n' && treat_line[i] != '\0')
 		i++;
-	if (!buffer[i])
-	{	
-		free(buffer);
-		return (NULL);
-	}
-	new_buffer = ft_calloc_mine(sizeof(char), (len - i) + 1);
-	if (!new_buffer)
-		return (NULL);
-	i++;
-	while (buffer[i])
+	if (treat_line[i] == 0 || treat_line[1] == 0)
 	{
-		new_buffer[j++] = buffer[i++];
+		free(treat_line);
+		return (NULL);
 	}
-	free(buffer);
-	return (new_buffer);
+	new_buffer_print = ft_substr1(treat_line, i + 1, ft_strlen1(treat_line) \
+	- i);
+	if (*new_buffer_print == 0 || *new_buffer_print == '\0')
+	{
+		free(new_buffer_print);
+		new_buffer_print = NULL;
+	}
+	treat_line[i + 1] = '\0';
+	return (new_buffer_print);
 }
 
-static char	*ft_get_line(char *buffer)
+static char	*read_fill_line(int fd, char *buffer_readed, char *buffer_print)
 {
-	char		*line;
-	int			i;
-	int			j;
-
-	i = 0;
-	j = 0;
-	if (!buffer[i])
-		return (NULL);
-	while (buffer[i] != '\0' && buffer[i] != '\n')
-		i++;
-	line = ft_calloc_mine(sizeof(char), (i + 1));
-	while (buffer[j] != '\0' && buffer[j] != '\n')
-	{
-		line[j] = buffer[j];
-		j++;
-	}
-	if (buffer[j] == '\n')
-		line[j] = '\n';
-	return (line);
-}
-
-static char	*ft_read_from_buffer(char *buffer, int fd)
-{
-	int		bytes_readed;
-	char	*tmp;
+	ssize_t			bytes_readed;	
+	char			*buffer_tmp;
 
 	bytes_readed = 1;
-	if (!buffer)
-		ft_calloc_mine(1, 1);
-	tmp = ft_calloc_mine(sizeof(char), BUFFER_SIZE + 1);
 	while (bytes_readed > 0)
 	{
-		bytes_readed = read(fd, tmp, BUFFER_SIZE);
-		if (bytes_readed == -1)
-		{
-			free(tmp);
+		bytes_readed = read(fd, buffer_readed, BUFFER_SIZE);
+		if (bytes_readed < 0){
+			free(buffer_readed);
+			free(buffer_print); 
 			return (NULL);
-		}		
-		tmp[bytes_readed] = 0;
-		buffer = ft_free_strjoin(buffer, tmp);
-		if (ft_strchr_mine(tmp, '\n'))
+		}
+		else if (bytes_readed == 0)
+			break ;
+		buffer_readed[bytes_readed] = '\0';
+		if (!buffer_print)
+			buffer_print = ft_strdup1("");
+		buffer_tmp = buffer_print;
+		buffer_print = ft_strjoin1(buffer_tmp, buffer_readed);
+		free(buffer_tmp);
+		buffer_tmp = NULL;
+		if (ft_strchr1(buffer_readed, '\n'))
 			break ;
 	}
-	free (tmp);
-	return (buffer);
+	return (buffer_print);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
-	char		*line;
+	char			*buffer_readed;
+	char			*line_print;
+	static char		*buffer_print;
 
-	if (!buffer)
-		buffer = ft_calloc_mine(sizeof(char), (1));
-	if (fd < 0 || BUFFER_SIZE < 0 || read(fd, 0, 0) < 0)
+	buffer_readed = (void *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (fd < 0 || BUFFER_SIZE <= 0 || read (fd, 0, 0) < 0)
+	{
+		free(buffer_print);
+		free(buffer_readed);
+		buffer_print = NULL;
+		buffer_readed = NULL;
 		return (NULL);
-	buffer = ft_read_from_buffer(buffer, fd);
-	if (!buffer)
+	}
+	if (!buffer_readed)
 		return (NULL);
-	line = ft_get_line(buffer);
-	buffer = ft_new_buffer(buffer);
-	return (line);
+	line_print = read_fill_line(fd, buffer_readed, buffer_print);
+	free(buffer_readed);
+	buffer_readed = NULL;
+	if (!line_print)
+		return (NULL);
+	buffer_print = manage_readed_line(line_print);
+	return (line_print);
 }

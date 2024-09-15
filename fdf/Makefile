@@ -97,7 +97,8 @@ PROJECTION		= ${PROJECTION_DIR}/draw.c \
 					${PROJECTION_DIR}/ft_angles.c \
 					${PROJECTION_DIR}/conf_events.c \
 					${PROJECTION_DIR}/project.c \
-					${PROJECTION_DIR}/pixel.c
+					${PROJECTION_DIR}/pixel.c \
+					${PROJECTION_DIR}/ft_default_color_project.c
 
 SRC 				= ${SRC_DIR}/fdf.c \
 						${SRC_DIR}/init_mlx.c

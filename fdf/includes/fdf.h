@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:27:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/13 13:21:57 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/15 17:30:13 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "get_next_line.h"
 # include "get_next_line_bonus.h"
 # include "colors.h"
-# include "macro.h"
+# include "ft_macros.h"
 # include <unistd.h>		// for write...
 # include <stdlib.h>		// for typedef, malloc...
 # include <math.h>			// for PI, etc.
@@ -129,6 +129,7 @@ float	ft_fpart(float n);
 float	ft_rfpart(float n);
 void	ft_put_pixel(t_fdf *fdf, int x, int y, int color);
 int		ft_lerp(int first, int second, double p);
+int	ft_get_default_color(int z, t_map *map);
 
 t_cam	*init_cam(t_fdf *fdf);
 
