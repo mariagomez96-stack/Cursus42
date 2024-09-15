@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 22:22:32 by rdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/15 17:30:30 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:47:23 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  *  1080 * 1080 RRSS publications and profile images, 1:1
  * 
  */
-# define DEFWIDTH			1280
+# define DEF_WIDTH			1280
 # define DEF_HEIGHT			720
 # define WIDTH					1920
 # define HEIGHT					1080

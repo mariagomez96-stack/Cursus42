@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 13:08:23 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/12 18:51:19 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:48:00 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init(t_fdf *pointer, const char *map_name)
 	pointer->mlx = mlx_init(DEF_WIDTH, DEF_HEIGHT, map_name, true);
 	if (!pointer->mlx)
 	{
-		ft_error(MLX_ERROR);
+		ft_error("mlx error");
 		exit(EXIT_FAILURE);
 	}
 	ft_printf(ORANGE "\nMLX " GREEN "initialized successfully...\n" RESET);
@@ -67,7 +67,7 @@ t_fdf	*init_mlx(char *name)
 	map_name = ft_substr(name, 0, ft_strlen(name) - 4);
 	if (!map_name)
 	{
-		ft_error(RED MEMMORY_ERROR);
+		ft_error("memory error");
 		free(fdf);
 		return (NULL);
 	}

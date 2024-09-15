@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:57:51 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/12 18:01:57 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/15 19:48:21 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	open_map_file(const char *map_name)
 	fd = open(map_name, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_error(FILE_OPEN_ERROR);
+		ft_error("File open error");
 		return (-1);
 	}
 	return (fd);
