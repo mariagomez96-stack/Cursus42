@@ -78,8 +78,9 @@ LIBMLX42_A			= ${MLX42_LIB}/libmlx42.a
 CFLAGS 				= -Wall -Werror -Wextra
 IFLAGS				= -I${INCLUDES_DIR} -I${MLX42_INCLUDE}
 LFLAGS				= -L${LIBRARIES}/${LIBFT_DIR} -lft \
-						-L${LIBRARIES}/${PRINTFT_DIR} -lftprintf \
-						-L$(MLX42_LIB) -lmlx42 -lglfw -ldl -lm -lpthread
+					  -L${LIBRARIES}/${PRINTFT_DIR} -lftprintf \
+					  -L$(MLX42_LIB) -lmlx42 -lglfw -ldl -lm -lpthread 
+
 
 # ══ Flags Bonus══════════════════════════════════════════════════════════════ #
 #    -----------                                                               #
@@ -106,6 +107,7 @@ SRC 				= ${SRC_DIR}/fdf.c \
 SRC_CAM				= ${SRC_CAM_DIR}/cam.c
 
 SRC_MAP			= ${SRC_MAP_DIR}/init_map.c \
+					${SRC_MAP_DIR}/read_z.c 
 					
 
 GNL					= ${LIBRARIES}/${GNL_DIR}/get_next_line.c \

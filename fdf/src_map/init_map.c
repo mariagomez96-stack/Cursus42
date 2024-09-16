@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:17:41 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/15 15:16:48 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:25:27 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ static void	fill_lines(t_map *map, char **subline, int row)
 	i = 0;
 	while (i < map->columns && subline[i] != NULL)
 	{
-		map->map[row][i] = (int *)malloc(sizeof(int));
+		map->map[row][i] = (int *)malloc(2 * sizeof(int));
 		if (!map->map[row][i])
 		{
 			ft_free_sub(map->map[row], i);
 			return ;
 		}
 		map->map[row][i][0] = ft_atoi(subline[i]);
+		ft_check_commas(subline[i], map, row, i);
 		i++;
 	}
 }
@@ -112,8 +113,7 @@ t_map	*init_map(const char *map_name)
 		ft_manage_err(INIT_E);
 	}
 	ft_complet_map(map, fd);
-	map->max_z = 0;
-	map->min_z = 0;
+	ft_read_z(map);
 	close(fd);
 	return (map);
 }

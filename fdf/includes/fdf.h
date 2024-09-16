@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:27:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/16 13:34:21 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:56:11 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ t_fdf	*init_mlx(char *name);
 // INIT MAP //
 t_map	*init_map(const char *map_name);
 
+// READ Z //
+void	ft_read_z(t_map *map);
+int		ft_check_commas(char *str, t_map *map, int row, int j);
+
 // CONFIG MAP && MANAGE EVENTS //
 void	manage_moves(t_fdf *fdf);
 void	ft_move_img(int key, t_fdf *fdf);
@@ -130,5 +134,7 @@ int		ft_lerp(int first, int second, double p);
 // INIT CAM //
 t_cam	*init_cam(t_fdf *fdf);
 int32_t	ft_get_min(int32_t nbr1, int32_t nbr2);
+
+void	init_points(t_point *p1);
 
 #endif

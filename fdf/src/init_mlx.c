@@ -1,16 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*   init_mlx->c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marigome <marigome@student->42->fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 13:08:23 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/16 13:36:53 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:44:48 by marigome         ###   ########->fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	init_points(t_point *p1)
+{
+	p1->x = 0;
+	p1->y = 0;
+	p1->z = 0;
+	p1->color = 0xFFFFFF;
+	p1->reverse = 0;
+}
 
 void	init(t_fdf *pointer, const char *map_name)
 {
@@ -21,7 +30,7 @@ void	init(t_fdf *pointer, const char *map_name)
 	{
 		ft_manage_err(MLX_ERROR);
 	}
-	ft_printf(ORANGE "\nMLX " GREEN "initialized successfully...\n" RESET);
+	ft_printf(ORANGE "\nMLX " GREEN "initialized successfully->->->\n" RESET);
 	pointer->image = mlx_new_image(pointer->mlx, DEF_WIDTH, DEF_HEIGHT);
 	if (!pointer->image)
 	{
@@ -29,14 +38,14 @@ void	init(t_fdf *pointer, const char *map_name)
 		ft_printf("Error de imagen");
 		ft_manage_err(INIT_E);
 	}
-	ft_printf(ORANGE "Image " GREEN "created successfully...\n" RESET);
+	ft_printf(ORANGE "Image " GREEN "created successfully->->->\n" RESET);
 	if (mlx_image_to_window(pointer->mlx, pointer->image, 0, 0) == -1)
 	{
 		mlx_close_window(pointer->mlx);
 		mlx_strerror(MLX_INVIMG);
 		ft_manage_err(INIT_E);
 	}
-	ft_printf(ORANGE "Image " GREEN "added to window successfully...\n" RESET);
+	ft_printf(ORANGE "Image " GREEN "added to window successfully->->->\n" RESET);
 }
 
 static t_mouse	*init_mouse(void)
@@ -59,10 +68,7 @@ t_fdf	*init_mlx(char *name)
 
 	fdf = (t_fdf *)malloc(sizeof(t_fdf));
 	if (!fdf)
-	{
-		mlx_terminate(fdf->mlx);
 		return (NULL);
-	}
 	map_name = ft_substr(name, 0, (ft_strlen(name) - 4));
 	if (!map_name)
 	{
@@ -73,7 +79,7 @@ t_fdf	*init_mlx(char *name)
 	fdf->mouse = init_mouse();
 	if (!fdf->mouse)
 	{
-		free(fdf->mouse);
+		free(map_name);
 		clean_fdf(fdf);
 	}
 	fdf->map = NULL;

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 15:39:32 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/15 15:06:15 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/16 18:06:42 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ t_point	project(int x, int y, t_fdf *fdf)
 	int		iso_x;
 	int		iso_y;
 
+	init_points(&point);
+	if (x < 0 || x >= fdf->map->columns || y < 0 || y >= fdf->map->lines)
+		init_points(&point);
 	z = fdf->map->map[y][x][0];
 	point.x = (x - fdf->map->columns / 2) * fdf->cam->zoom;
 	point.y = (y - fdf->map->lines / 2) * fdf->cam->zoom;
@@ -96,12 +99,9 @@ t_point	project(int x, int y, t_fdf *fdf)
 	iso_y = (point.x + point.y) * sin(0.523599) - z;
 	point.x = iso_x + fdf->cam->x_offset;
 	point.y = iso_y + fdf->cam->y_offset;
-	if (fdf->map->map[y][x][1] >= 0)
+	if (fdf->map->map[y][x][1] != 16777215)
 		point.color = fdf->map->map[y][x][1];
 	else
-	{
-		point.color = ft_get_default_color(fdf->map->map[y][x][0], \
-		fdf->map);
-	}
+		point.color = ft_get_default_color(fdf->map->map[y][x][0], fdf->map);
 	return (point);
 }
