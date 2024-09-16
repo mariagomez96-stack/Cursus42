@@ -92,13 +92,13 @@ LFLAGS				= -L${LIBRARIES}/${LIBFT_DIR} -lft \
 CHECKER			= ${CHECKER_DIR}/check_arg.c
 
 ERROR			= ${ERROR_DIR}/ft_error_and_free.c \
-					${ERROR_DIR}/ft_manage.c
 
 PROJECTION		= ${PROJECTION_DIR}/draw.c \
 					${PROJECTION_DIR}/ft_angles.c \
 					${PROJECTION_DIR}/conf_events.c \
 					${PROJECTION_DIR}/project.c \
-					${PROJECTION_DIR}/pixel.c
+					${PROJECTION_DIR}/pixel.c \
+					${PROJECTION_DIR}/manage_events.c 
 
 SRC 				= ${SRC_DIR}/fdf.c \
 						${SRC_DIR}/init_mlx.c
@@ -209,15 +209,17 @@ clean:
 	@echo "$(YELLOW)Removing object files!$(DEF_COLOR)"
 	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${LIBFT_DIR} clean
 	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${PRINTFT_DIR} clean
-	@$(RM) ${OBJ_DIR}/*.o
+	@find ${OBJ_DIR} -name "*.o" -type f -delete
 	@echo "$(RED)Object files removed! $(DEF_COLOR)"
+
 
 fclean:	clean
 	@echo "$(YELLOW)Removing binaries!$(DEF_COLOR)"
 	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${LIBFT_DIR} fclean
 	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${PRINTFT_DIR} fclean
-	@${RM} ${NAME} ${NAME_BONUS}
+	@${RM} ${NAME}
 	@echo "$(RED)Binaries removed! $(DEF_COLOR)"
+
 
 re:	fclean all
 

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:27:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/16 10:50:06 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:34:21 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,33 +97,29 @@ void	ft_cleanup(t_map *map, char *line, char **split_line, int32_t row);
 void	ft_free_map(t_map *map);
 void	ft_free_sub(int32_t **sub, int32_t size);
 void	ft_free_superarray(t_map *map, int32_t rows);
+void	clean_fdf(t_fdf *fdf);
+void	ft_control_map(char **argv, t_map *map);
 
 // MLX INIT //
 void	init(t_fdf *pointer, const char *map_name);
 t_fdf	*init_mlx(char *name);
 
 // INIT MAP //
-int		ft_columns_counter(char *line);
-char	**split_lines_in_columns(char *line);
-void	columns_to_map(t_map *map, char **columns, int row);
-int		create_map_row(t_map *map, int row);
 t_map	*init_map(const char *map_name);
 
-int		open_map_file(const char *map_name);
-int		read_lines(t_map *map, int fd);
-t_map	*initialize_map(void);
-
-// CONFIG MAP_EVENTS //
-void	ft_press_scape(mlx_key_data_t keydata, void *param);
+// CONFIG MAP && MANAGE EVENTS //
 void	manage_moves(t_fdf *fdf);
+void	ft_move_img(int key, t_fdf *fdf);
+void	ft_move_height(int key, t_fdf *fdf);
+void	ft_move_projection(t_fdf *fdf);
+void	ft_reset(t_fdf *fdf);
+void	ft_move_zoom(mlx_key_data_t keydata, void *param);
 
 // PROJECTION //
 double	ft_reset_ang(double *angle);
 void	ft_draw(t_map *map, t_fdf *fdf);
 t_point	project(int x, int y, t_fdf *rol);
 void	ft_draw_line(t_point s, t_point e, t_fdf *fdf);
-
-// PIXEL //
 float	ft_abs1(float n);
 int		ft_ipart(float n);
 float	ft_fpart(float n);
@@ -131,6 +127,7 @@ float	ft_rfpart(float n);
 void	ft_put_pixel(t_fdf *fdf, int x, int y, int color);
 int		ft_lerp(int first, int second, double p);
 
+// INIT CAM //
 t_cam	*init_cam(t_fdf *fdf);
 int32_t	ft_get_min(int32_t nbr1, int32_t nbr2);
 

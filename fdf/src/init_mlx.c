@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 13:08:23 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/15 13:41:03 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:36:53 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,16 @@ t_fdf	*init_mlx(char *name)
 	map_name = ft_substr(name, 0, (ft_strlen(name) - 4));
 	if (!map_name)
 	{
-		ft_manage_err(RED MEMMORY_ERROR);
-		free(fdf);
+		clean_fdf(fdf);
 		return (NULL);
 	}
 	init(fdf, map_name);
 	fdf->mouse = init_mouse();
+	if (!fdf->mouse)
+	{
+		free(fdf->mouse);
+		clean_fdf(fdf);
+	}
 	fdf->map = NULL;
 	fdf->cam = NULL;
 	free(map_name);

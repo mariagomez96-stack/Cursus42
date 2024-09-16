@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 10:41:06 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/15 12:28:59 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:36:24 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,35 @@ int	ft_checker_args(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
+}
+
+void	clean_fdf(t_fdf *fdf)
+{
+	if (fdf->mlx)
+		mlx_terminate(fdf->mlx);
+	if (fdf->mouse)
+		free(fdf->mouse);
+	if (fdf->cam)
+		free(fdf->cam);
+	if (fdf->map)
+		ft_free_map(fdf->map);
+	free(fdf);
+}
+
+void	ft_control_map(char **argv, t_map *map)
+{
+	(void) argv;
+	if (!map || !map->map)
+	{
+		ft_printf("Map or superarray is NULL\n");
+		ft_manage_err(INIT_E);
+	}
+	ft_printf(ORANGE "Map dimensions: " RESET GREEN "Width " RESET "%d, " \
+	GREEN"Height " RESET "%d\n", map->columns, map->lines);
+}
+
+void	ft_manage_err(const char *err)
+{
+	ft_printf("Error: %s\n", err);
+	exit (EXIT_FAILURE);
 }
