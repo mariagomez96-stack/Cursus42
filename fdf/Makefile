@@ -91,14 +91,14 @@ LFLAGS				= -L${LIBRARIES}/${LIBFT_DIR} -lft \
 
 CHECKER			= ${CHECKER_DIR}/check_arg.c
 
-ERROR			= ${ERROR_DIR}/ft_error_and_free.c
+ERROR			= ${ERROR_DIR}/ft_error_and_free.c \
+					${ERROR_DIR}/ft_manage.c
 
 PROJECTION		= ${PROJECTION_DIR}/draw.c \
 					${PROJECTION_DIR}/ft_angles.c \
 					${PROJECTION_DIR}/conf_events.c \
 					${PROJECTION_DIR}/project.c \
-					${PROJECTION_DIR}/pixel.c \
-					${PROJECTION_DIR}/ft_default_color_project.c
+					${PROJECTION_DIR}/pixel.c
 
 SRC 				= ${SRC_DIR}/fdf.c \
 						${SRC_DIR}/init_mlx.c
@@ -106,7 +106,7 @@ SRC 				= ${SRC_DIR}/fdf.c \
 SRC_CAM				= ${SRC_CAM_DIR}/cam.c
 
 SRC_MAP			= ${SRC_MAP_DIR}/init_map.c \
-					${SRC_MAP_DIR}/utils_map.c \
+					
 
 GNL					= ${LIBRARIES}/${GNL_DIR}/get_next_line.c \
 						${LIBRARIES}/${GNL_DIR}/get_next_line_utils.c \
@@ -145,7 +145,7 @@ ${NAME}: ftlibft ftprintf ${LIBMLX42_A} ${OBJ_CHECKER} ${OBJ_GNL} \
 									${OBJ_ERR} ${OBJ_PROJECTION} \
 									${OBJ_SRC} ${OBJ_SRC_CAM} ${OBJ_SRC_MAP}
 
-	@echo "$(YELLOW)Compiling root ...$(DEF_COLOR)"
+	@echo "$(YELLOW)Compiling ...$(DEF_COLOR)"
 	@${CC} ${CFLAGS} ${IFLAGS} -o ${NAME} ${OBJ_CHECKER} ${OBJ_GNL} ${OBJ_ERR} \
 									${OBJ_PROJECTION} ${OBJ_SRC} \
 									${OBJ_SRC_CAM} ${OBJ_SRC_MAP} ${LFLAGS}
@@ -180,10 +180,10 @@ ${OBJ_DIR}/%.o: ${SRC_MAP_DIR}/%.c
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
 ftlibft:
-	@cd ${LIBRARIES}/${LIBFT_DIR} ${MK_} all
+	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${LIBFT_DIR} all
 
 ftprintf:
-	@cd ${LIBRARIES}/${PRINTFT_DIR} ${MK_} all
+	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${PRINTFT_DIR} all
 
 
 # bonus: ${NAME_BONUS}
@@ -206,22 +206,18 @@ ftprintf:
 # 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
 clean:
-	@echo "$(YELLOW)Removing object files ...$(DEF_COLOR)"
-
-	@cd ${LIBRARIES}/${LIBFT_DIR} ${MK_} clean
-	@cd ${LIBRARIES}/${PRINTFT_DIR} ${MK_} clean
+	@echo "$(YELLOW)Removing object files!$(DEF_COLOR)"
+	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${LIBFT_DIR} clean
+	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${PRINTFT_DIR} clean
 	@$(RM) ${OBJ_DIR}/*.o
-
-	@echo "$(RED)Object files removed $(DEF_COLOR)"
+	@echo "$(RED)Object files removed! $(DEF_COLOR)"
 
 fclean:	clean
-	@echo "$(YELLOW)Removing binaries ...$(DEF_COLOR)"
-
-	@cd ${LIBRARIES}/${LIBFT_DIR} ${MK_} fclean
-	@cd ${LIBRARIES}/${PRINTFT_DIR} ${MK_} fclean
+	@echo "$(YELLOW)Removing binaries!$(DEF_COLOR)"
+	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${LIBFT_DIR} fclean
+	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${PRINTFT_DIR} fclean
 	@${RM} ${NAME} ${NAME_BONUS}
-
-	@echo "$(RED)Binaries removed $(DEF_COLOR)"
+	@echo "$(RED)Binaries removed! $(DEF_COLOR)"
 
 re:	fclean all
 

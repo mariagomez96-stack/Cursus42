@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:17:41 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/12 18:45:16 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/15 15:16:48 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	read_map(t_map *map, int fd)
 	char	**subline;
 
 	line = get_next_line(fd);
+	subline = NULL;
 	while (line)
 	{
 		if (map->lines == 0)
@@ -34,25 +35,21 @@ static void	read_map(t_map *map, int fd)
 	lseek(fd, 0, SEEK_SET);
 }
 
-static void	fill_lines(t_map *map, char **columns, int row)
+static void	fill_lines(t_map *map, char **subline, int row)
 {
-	int	col;
 	int	i;
 
-	col = 0;
 	i = 0;
-	while (col < map->columns && columns != NULL)
+	while (i < map->columns && subline[i] != NULL)
 	{
-		map->map[row][col] = (int *)malloc(sizeof(int));
-		if (!map->map[row][col])
+		map->map[row][i] = (int *)malloc(sizeof(int));
+		if (!map->map[row][i])
 		{
-			while (i < col)
-				free(map->map[row][i++]);
-			free(map->map[row]);
+			ft_free_sub(map->map[row], i);
 			return ;
 		}
-		map->map[row][col][0] = ft_atoi(columns[col]);
-		col++;
+		map->map[row][i][0] = ft_atoi(subline[i]);
+		i++;
 	}
 }
 
@@ -62,14 +59,11 @@ static int	allocate_lines(t_map *map, char *line, int i)
 
 	map->map[i] = (int **)malloc(map->columns * sizeof(int *));
 	if (!map->map[i])
-	{
-		free(map->map[i]);
 		return (0);
-	}
 	subline = ft_split(line, ' ');
 	if (!subline)
 	{
-		ft_free_split(subline);
+		free(map->map[i]);
 		return (0);
 	}
 	fill_lines(map, subline, i);
@@ -88,7 +82,7 @@ static void	ft_complet_map(t_map *map, int fd)
 	{
 		if (!allocate_lines(map, line, i))
 		{
-			free_map(map);
+			ft_cleanup(map, line, NULL, i);
 			return ;
 		}
 		free(line);
@@ -102,24 +96,24 @@ t_map	*init_map(const char *map_name)
 	t_map	*map;
 	int		fd;
 
+	fd = open(map_name, O_RDONLY);
+	if (fd < 0)
+		ft_manage_err(INIT_E);
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
-		return (NULL);
-	map = initialize_map();
-	ft_printf("map initialized\n");
-	fd = open_map_file(map_name);
-	if (fd < 0)
-	{
-		free(map);
-		return (NULL);
-	}
-	ft_printf("map opened\n");
+		ft_manage_err(INIT_E);
+	map->lines = 0;
+	map->columns = 0;
 	read_map(map, fd);
 	map->map = (int ***)malloc(map->lines * sizeof(int **));
 	if (!map->map)
-		free_map(map);
-	ft_printf("map readed\n");
+	{
+		ft_free_map(map);
+		ft_manage_err(INIT_E);
+	}
 	ft_complet_map(map, fd);
-	close (fd);
+	map->max_z = 0;
+	map->min_z = 0;
+	close(fd);
 	return (map);
 }

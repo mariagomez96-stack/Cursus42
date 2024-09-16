@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 11:50:20 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/13 10:48:38 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/15 14:17:54 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ static void	ft_control_map(char **argv, t_map *map)
 {
 	(void) argv;
 	if (!map || !map->map)
+	{
 		ft_printf("Map or superarray is NULL\n");
+		ft_manage_err(INIT_E);
+	}
 	ft_printf(ORANGE "Map dimensions: " RESET GREEN "Width " RESET "%d, " \
 	GREEN"Height " RESET "%d\n", map->columns, map->lines);
 }
@@ -30,14 +33,11 @@ int	main(int argc, char **argv)
 	fdf = init_mlx(argv[1]);
 	map = init_map(argv[1]);
 	fdf->map = map;
-	ft_control_map(argv, map);
+	ft_control_map(argv, fdf->map);
 	fdf->cam = init_cam(fdf);
 	manage_moves(fdf);
 	ft_draw(fdf->map, fdf);
 	mlx_loop(fdf->mlx);
-	mlx_delete_image(fdf->mlx, fdf->image);
 	mlx_terminate(fdf->mlx);
-	free_map(map);
-	free(fdf);
 	return (0);
 }

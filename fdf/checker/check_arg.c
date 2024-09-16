@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 10:41:06 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/15 19:46:31 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/15 12:28:59 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	ft_checker_args(int argc, char **argv)
 {
 	if (argc != 2)
 	{
-		ft_error("ERROR");
+		ft_manage_err(ERROR_NUM_ARG);
 		exit(EXIT_FAILURE);
 	}
 	else if (!ft_checker_ext(argv[1]))
 	{
-		ft_error("File as invalid extension");
+		ft_manage_err("File as invalid extension");
 		exit(EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

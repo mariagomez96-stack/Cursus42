@@ -6,19 +6,26 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:35:28 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/13 10:53:13 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/15 13:20:37 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	ft_error(char *src)
+void	ft_free_sub(int32_t **sub, int32_t size)
 {
-	ft_printf("Error: %s\n", src);
-	exit(EXIT_FAILURE);
+	int32_t	i;
+
+	i = 0;
+	while (i < size)
+	{
+		free(sub[i]);
+		i++;
+	}
+	free (sub);
 }
 
-void	ft_free_columns(char **columns)
+void	ft_free_split(char **columns)
 {
 	int	i;
 
@@ -28,26 +35,60 @@ void	ft_free_columns(char **columns)
 	free(columns);
 }
 
-void	ft_free_split(char **argv)
+void	ft_free_superarray(t_map *map, int32_t rows)
 {
-	int	i;
+	int32_t	i;
+	int32_t	j;
 
 	i = 0;
-	while (argv[i])
-		free(argv[i++]);
-	free (argv);
+	while (i < rows)
+	{
+		j = 0;
+		while (j < map->columns)
+		{
+			free(map->map[i][j]);
+			j++;
+		}
+		free(map->map[i]);
+		i++;
+	}
+	free(map->map);
 }
 
-void	free_map(t_map *map)
+void	ft_cleanup(t_map *map, char *line, char **split_line, int32_t row)
+{
+	if (split_line)
+		ft_free_split(split_line);
+	if (line)
+		free(line);
+	ft_free_superarray(map, row);
+}
+
+void	ft_free_map(t_map *map)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	if (map->map)
+	if (map != NULL && map->map != NULL)
 	{
 		while (i < map->lines)
-			free(map->map[i++]);
+		{
+			j = 0;
+			if (map->map[i] != NULL)
+			{
+				while (j < map->columns)
+				{
+					free(map->map[i][j]);
+					map->map[i][j] = NULL;
+					j++;
+				}
+				free(map->map[i]);
+				map->map[i] = NULL;
+			}
+			i++;
+		}
 		free(map->map);
+		map->map = NULL;
 	}
-	free(map);
 }

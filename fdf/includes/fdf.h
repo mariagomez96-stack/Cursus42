@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 10:27:05 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/15 19:47:30 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/16 10:50:06 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "get_next_line.h"
 # include "get_next_line_bonus.h"
 # include "colors.h"
-# include "ft_macros.h"
+# include "macro.h"
 # include <unistd.h>		// for write...
 # include <stdlib.h>		// for typedef, malloc...
 # include <math.h>			// for PI, etc.
@@ -29,11 +29,11 @@
 
 typedef struct s_point
 {
-	int				x; // __ //
-	int				y; // || //
-	int				z;
-	int				reverse; // height //
-	unsigned long	color;
+	int32_t			x; // __ //
+	int32_t			y; // || //
+	int32_t			z;
+	int32_t			reverse; // height //
+	long			color;
 }	t_point;
 
 typedef struct s_cam
@@ -70,11 +70,11 @@ typedef struct s_line_params
 
 typedef struct s_map
 {
-	int	columns;	// width //
-	int	lines;		// height //
-	int	min_z;		// z_min //
-	int	max_z;		// z_max //
-	int	***map;			// (x, y, z) //
+	int32_t			columns;	// width //
+	int32_t			lines;		// height //
+	int32_t			min_z;		// z_min //
+	int32_t			max_z;		// z_max //
+	int32_t			***map;			// (x, y, z) //
 }	t_map;
 
 typedef struct s_fdf
@@ -84,18 +84,19 @@ typedef struct s_fdf
 	t_map		*map;
 	t_mouse		*mouse;
 	t_cam		*cam;
-	void		*imgstatic;
-	int			win_width;	//window width:   -	//
-	int			win_height;
-	int			steep;	// window height: |	//
+	int32_t		win_width;	//window width:   -	//
+	int32_t		win_height;
+	int32_t		steep;	// window height: |	//
 }	t_fdf;
 
 // CHECKERS && MANAGEMENT ERRORS //
 int		ft_checker_args(int argc, char **argv);
-void	ft_error(char *src);
-void	ft_free_columns(char **columns);
-void	ft_free_split(char **argv);
-void	free_map(t_map *map);
+void	ft_manage_err(const char *err);
+void	ft_free_split(char **columns);
+void	ft_cleanup(t_map *map, char *line, char **split_line, int32_t row);
+void	ft_free_map(t_map *map);
+void	ft_free_sub(int32_t **sub, int32_t size);
+void	ft_free_superarray(t_map *map, int32_t rows);
 
 // MLX INIT //
 void	init(t_fdf *pointer, const char *map_name);
@@ -129,8 +130,8 @@ float	ft_fpart(float n);
 float	ft_rfpart(float n);
 void	ft_put_pixel(t_fdf *fdf, int x, int y, int color);
 int		ft_lerp(int first, int second, double p);
-int	ft_get_default_color(int z, t_map *map);
 
 t_cam	*init_cam(t_fdf *fdf);
+int32_t	ft_get_min(int32_t nbr1, int32_t nbr2);
 
 #endif

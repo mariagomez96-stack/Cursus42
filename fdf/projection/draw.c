@@ -6,17 +6,19 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 13:40:57 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/15 16:40:42 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/16 10:55:31 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	ft_lerp(int first, int second, double p)
+int	ft_clamp(int value, int min, int max)
 {
-	if (first == second)
-		return (first);
-	return ((int)((double)first + (second - first) * p));
+	if (value < min)
+		return min;
+	if (value > max)
+		return max;
+	return value;
 }
 
 static int	ft_get_color(int x, t_point s, t_point e, float factor)
@@ -26,24 +28,39 @@ static int	ft_get_color(int x, t_point s, t_point e, float factor)
 	int		b;
 	float	percent;
 
+
 	percent = ft_abs1(x - s.x) / ft_abs1(e.x - s.x);
+
+
+	/*if (percent < 0 || percent > 1 || s.color == 0 || e.color == 0)
+		return (0xFFFFFF);  // Color blanco*/
+
 	if (s.reverse)
 	{
-		r = ft_lerp((e.color >> 16) & 0xFF, (s.color >> 16) & 0xFF, percent);
-		g = ft_lerp((e.color >> 8) & 0xFF, (s.color >> 8) & 0xFF, percent);
-		b = ft_lerp(e.color & 0xFF, s.color & 0xFF, percent);
+		r = ft_lerp((e.color >> 24) & 0xFF, (s.color >> 24) & 0xFF, percent);
+		g = ft_lerp((e.color >> 16) & 0xFF, (s.color >> 16) & 0xFF, percent);
+		b = ft_lerp((e.color >> 8) & 0xFF, (s.color >> 8) & 0xFF, percent);
+		//a = ft_lerp(e.color & 0xFF, s.color & 0xFF, percent);
 	}
 	else
 	{
 		r = ft_lerp((s.color >> 16) & 0xFF, (e.color >> 16) & 0xFF, percent);
 		g = ft_lerp((s.color >> 8) & 0xFF, (e.color >> 8) & 0xFF, percent);
 		b = ft_lerp(s.color & 0xFF, e.color & 0xFF, percent);
+		//a = ft_lerp(e.color & 0xFF, s.color & 0xFF, percent);
 	}
-	r *= fabs(factor);
-	g *= fabs(factor);
-	b *= fabs(factor);
-	return ((0xFF << 24) |(r << 16) | (g << 8) | b);
+
+	r *= factor;
+	g *= factor;
+	b *= factor;
+
+
+	/*if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+		return (0xFFFFFF);  // 0xRRGGBBAA*/
+
+	return (0xFF | (r << 24) | (g << 16) | (b << 8));
 }
+
 
 static void	ft_swap(int *a, int *b)
 {
@@ -54,8 +71,14 @@ static void	ft_swap(int *a, int *b)
 	*b = tmp;
 }
 
-static void	ft_draw_line_loop(t_point s, t_point e, float gradient, \
-t_fdf *rol)
+int	ft_lerp(int first, int second, double p)
+{
+	if (first == second)
+		return (first);
+	return ((int)((double)first + (second - first) * p));
+}
+
+static void	ft_draw_line_loop(t_point s, t_point e, float gradient, t_fdf *fdf)
 {
 	float	inter_y;
 	int		x;
@@ -64,37 +87,40 @@ t_fdf *rol)
 	x = s.x;
 	while (x <= e.x)
 	{
-		if (rol->steep)
+		if (fdf->steep)
 		{
-			ft_put_pixel(rol, ft_ipart(inter_y), x, \
+			ft_put_pixel(fdf, ft_ipart(inter_y), x,
 				ft_get_color(x, s, e, ft_rfpart(inter_y)));
-			ft_put_pixel(rol, ft_ipart(inter_y) + 1, x, \
+			ft_put_pixel(fdf, ft_ipart(inter_y) + 1, x,
 				ft_get_color(x, s, e, ft_fpart(inter_y)));
 		}
 		else
 		{
-			ft_put_pixel(rol, x, ft_ipart(inter_y), \
+			ft_put_pixel(fdf, x, ft_ipart(inter_y),
 				ft_get_color(x, s, e, ft_rfpart(inter_y)));
-			ft_put_pixel(rol, x, ft_ipart(inter_y) + 1, \
+			ft_put_pixel(fdf, x, ft_ipart(inter_y) + 1,
 				ft_get_color(x, s, e, ft_fpart(inter_y)));
 		}
+		
+		// Puedes agregar estas líneas para depuración
+			ft_get_color(x, s, e, ft_rfpart(inter_y));
+		
 		inter_y += gradient;
 		x++;
 	}
 }
 
-void	ft_draw_line(t_point s, t_point e, t_fdf *rol)
+void	ft_draw_line(t_point s, t_point e, t_fdf *fdf)
 {
 	float	dy;
 	float	dx;
 	float	gradient;
-
-	if ((s.x < 0 || s.x >= rol->win_width || s.y < 0 || \
-	s.y >= rol->win_height) && \
-	(e.x < 0 || e.x >= rol->win_width || e.y < 0 || e.y >= rol->win_height))
+	
+	if ((s.x < 0 || s.x >= fdf->win_width || s.y < 0 || s.y >= fdf->win_height)
+	&& (e.x < 0 || e.x >= fdf->win_width || e.y < 0 || e.y >= fdf->win_height))
 		return ;
-	rol->steep = ft_abs1(e.y - s.y) > ft_abs1(e.x - s.x);
-	if (rol->steep)
+	fdf->steep = ft_abs1(e.y - s.y) > ft_abs1(e.x - s.x);
+	if (fdf->steep)
 	{
 		ft_swap(&s.x, &s.y);
 		ft_swap(&e.x, &e.y);
@@ -110,5 +136,5 @@ void	ft_draw_line(t_point s, t_point e, t_fdf *rol)
 	gradient = dy / dx;
 	if (dx == 0.0f)
 		gradient = 1.f;
-	ft_draw_line_loop(s, e, gradient, rol);
+	ft_draw_line_loop(s, e, gradient, fdf);
 }
