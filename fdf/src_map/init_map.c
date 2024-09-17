@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 12:17:41 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/16 16:25:27 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/17 10:12:28 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	read_map(t_map *map, int fd)
 	lseek(fd, 0, SEEK_SET);
 }
 
-static void	fill_lines(t_map *map, char **subline, int row)
+static int	fill_lines(t_map *map, char **subline, int row)
 {
 	int	i;
 
@@ -46,12 +46,13 @@ static void	fill_lines(t_map *map, char **subline, int row)
 		if (!map->map[row][i])
 		{
 			ft_free_sub(map->map[row], i);
-			return ;
+			return (0);
 		}
 		map->map[row][i][0] = ft_atoi(subline[i]);
 		ft_check_commas(subline[i], map, row, i);
 		i++;
 	}
+	return (1);
 }
 
 static int	allocate_lines(t_map *map, char *line, int i)
@@ -60,14 +61,23 @@ static int	allocate_lines(t_map *map, char *line, int i)
 
 	map->map[i] = (int **)malloc(map->columns * sizeof(int *));
 	if (!map->map[i])
+	{
+		ft_free_superarray(map, i);
 		return (0);
+	}
 	subline = ft_split(line, ' ');
 	if (!subline)
 	{
 		free(map->map[i]);
+		ft_free_superarray(map, i);
 		return (0);
 	}
-	fill_lines(map, subline, i);
+	if (!fill_lines(map, subline, i))
+	{
+		ft_free_split(subline);
+		ft_free_superarray(map, i);
+		return (0);
+	}
 	ft_free_split(subline);
 	return (1);
 }
@@ -83,7 +93,7 @@ static void	ft_complet_map(t_map *map, int fd)
 	{
 		if (!allocate_lines(map, line, i))
 		{
-			ft_cleanup(map, line, NULL, i);
+			free(line);
 			return ;
 		}
 		free(line);

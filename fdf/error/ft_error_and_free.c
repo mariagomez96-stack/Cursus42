@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/06 15:35:28 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/15 13:20:37 by marigome         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:40:39 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,6 @@ void	ft_free_map(t_map *map)
 			i++;
 		}
 		free(map->map);
-		map->map = NULL;
+		free(map);
 	}
 }

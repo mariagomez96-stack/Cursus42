@@ -79,7 +79,7 @@ CFLAGS 				= -Wall -Werror -Wextra
 IFLAGS				= -I${INCLUDES_DIR} -I${MLX42_INCLUDE}
 LFLAGS				= -L${LIBRARIES}/${LIBFT_DIR} -lft \
 					  -L${LIBRARIES}/${PRINTFT_DIR} -lftprintf \
-					  -L$(MLX42_LIB) -lmlx42 -lglfw -ldl -lm -lpthread 
+					  -L$(MLX42_LIB) -lmlx42 -lglfw -ldl -lm -lpthread
 
 
 # ══ Flags Bonus══════════════════════════════════════════════════════════════ #

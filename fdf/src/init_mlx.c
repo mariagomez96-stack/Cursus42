@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mlx->c                                         :+:      :+:    :+:   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marigome <marigome@student->42->fr>          +#+  +:+       +#+        */
+/*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 13:08:23 by marigome          #+#    #+#             */
-/*   Updated: 2024/09/16 17:44:48 by marigome         ###   ########->fr       */
+/*   Updated: 2024/09/17 07:35:56 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,22 @@ void	init(t_fdf *pointer, const char *map_name)
 	{
 		ft_manage_err(MLX_ERROR);
 	}
-	ft_printf(ORANGE "\nMLX " GREEN "initialized successfully->->->\n" RESET);
+	ft_printf(ORANGE "\nMLX " GREEN "initialized successfully!\n" RESET);
 	pointer->image = mlx_new_image(pointer->mlx, DEF_WIDTH, DEF_HEIGHT);
 	if (!pointer->image)
 	{
 		mlx_close_window(pointer->mlx);
-		ft_printf("Error de imagen");
+		ft_printf(RED "Image Error");
 		ft_manage_err(INIT_E);
 	}
-	ft_printf(ORANGE "Image " GREEN "created successfully->->->\n" RESET);
+	ft_printf(YELLOW "Image " GREEN "created successfully!\n");
 	if (mlx_image_to_window(pointer->mlx, pointer->image, 0, 0) == -1)
 	{
 		mlx_close_window(pointer->mlx);
 		mlx_strerror(MLX_INVIMG);
 		ft_manage_err(INIT_E);
 	}
-	ft_printf(ORANGE "Image " GREEN "added to window successfully->->->\n" RESET);
+	ft_printf(ORANGE "Image " GREEN "added to window successfully!\n");
 }
 
 static t_mouse	*init_mouse(void)
