@@ -1,0 +1,191 @@
+https://github.com/gabcollet/pipex/blob/master/srcs/utils.c
+
+
+
+FIND_PATH ----> VAMOS A ENCONTRAR DONDE ESTÁ EL COMANDO DENTRO DEL PATH
+
+En sistemas Unix, la variable de entorno PATH contiene una lista de directorios donde se buscan los programas ejecutables. Por ejemplo, si escribes ls en la terminal, el sistema no sabe automáticamente dónde está el comando ls. Lo que hace es buscar en los directorios indicados en la variable PATH.
+
+Ejemplo de una variable PATH típica:
+
+bash
+Copiar código
+/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+Esto significa que cuando escribes un comando como ls, el sistema buscará en esos directorios secuencialmente hasta encontrar el archivo ejecutable ls.
+
+Paso 1: Extraer las rutas después de "PATH="
+El código de la función find_path primero encuentra la variable PATH en el entorno (envp) y luego separa sus rutas usando el carácter : como delimitador.
+
+Supongamos que envp contiene la siguiente línea:
+
+arduino
+Copiar código
+envp[i] = "PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin";
+Primero, encontramos la línea que empieza con "PATH". Luego, hacemos lo siguiente:
+
+c
+Copiar código
+paths = ft_split(envp[i] + 5, ':');
+envp[i] + 5 ignora los primeros 5 caracteres de "PATH=" para obtener la parte que contiene las rutas: "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin".
+ft_split(envp[i] + 5, ':') separa esta cadena en un array de cadenas usando : como delimitador. El resultado sería:
+c
+Copiar código
+paths[0] = "/usr/local/bin";
+paths[1] = "/usr/bin";
+paths[2] = "/bin";
+paths[3] = "/usr/sbin";
+paths[4] = "/sbin";
+Este array paths contiene todos los directorios donde el sistema buscará los ejecutables.
+
+Paso 2: Formar la ruta completa para cada comando
+Una vez que tenemos el array paths con todos los directorios posibles, necesitamos construir la ruta completa donde se buscará el comando que queremos ejecutar.
+
+Por ejemplo, si quieres ejecutar el comando ls, debes buscar el archivo ls en cada uno de estos directorios.
+
+
+part_path = ft_strjoin(paths[i], "/");
+path = ft_strjoin(part_path, cmd);
+Este código une el directorio actual con el nombre del comando (en este caso ls).
+
+Ejemplo con el comando ls:
+paths[0] = "/usr/local/bin"
+part_path = "/usr/local/bin/" (agrega una barra / al final del directorio).
+path = "/usr/local/bin/ls" (une el directorio con el comando ls).
+Ahora tienes la posible ruta "/usr/local/bin/ls", que puede o no existir.
+
+Paso 3: Verificar si la ruta es válida
+El siguiente paso es comprobar si el archivo que acabas de construir realmente existe y es ejecutable. Para eso, se usa la función access() con el flag F_OK:
+
+if (access(path, F_OK) == 0)
+Este código verifica si el archivo path existe y puede ser accedido.
+
+Ejemplo:
+Supongamos que en el primer directorio (/usr/local/bin/) no existe ls. Entonces, access("/usr/local/bin/ls", F_OK) devolverá -1, lo que significa que ese archivo no existe.
+
+El programa entonces pasa al siguiente directorio.
+
+paths[1] = "/usr/bin"
+part_path = "/usr/bin/"
+path = "/usr/bin/ls"
+access("/usr/bin/ls", F_OK) devuelve 0, lo que significa que se ha encontrado el archivo.
+En este caso, find_path devuelve la ruta "/usr/bin/ls" como la ruta válida donde se encuentra el comando ls.
+
+Paso 4: Liberar memoria
+En caso de que no se encuentre el archivo en ninguno de los directorios, es importante liberar la memoria usada para almacenar las rutas antes de retornar NULL.
+
+Esto se logra con el siguiente código:
+
+c
+Copiar código
+i = -1;
+while (paths[++i])
+    free(paths[i]);
+free(paths);
+Este bucle libera todas las cadenas que formaban parte del array paths, y luego se libera el array paths en sí.
+
+EXECUTE ------> EJECUTAMOS
+
+Esta función se encarga de ejecutar un comando que se le pasa como argumento. Primero, busca la ruta correcta del comando en el sistema (utilizando la función find_path que ya analizamos) y luego ejecuta el comando usando execve.
+
+Supongamos que estás ejecutando la siguiente línea en el programa:
+
+
+execute("ls -l /home", envp);
+
+Paso 1: Dividir el comando
+
+cmd = ft_split("ls -l /home", ' '); produce el siguiente array:
+
+cmd[0] = "ls";
+cmd[1] = "-l";
+cmd[2] = "/home";
+cmd[3] = NULL;
+
+
+Paso 2: Buscar la ruta del comando
+
+path = find_path(cmd[0], envp); busca el comando ls en los directorios especificados por la variable PATH.
+
+Supongamos que find_path encuentra el ejecutable en "/usr/bin/ls", por lo que path = "/usr/bin/ls".
+
+
+Paso 3: Verificar si la ruta es válida
+Dado que path = "/usr/bin/ls" (una ruta válida), la función no entra en el bloque de manejo de errores.
+
+Paso 4: Ejecutar el comando
+La función llama a execve("/usr/bin/ls", ["ls", "-l", "/home", NULL], envp); para ejecutar el comando ls -l /home.
+Este comando lista el contenido del directorio /home en formato detallado (-l).
+
+Paso 5: Si execve falla
+Si por alguna razón execve falla (por ejemplo, si no tiene permisos para ejecutar el comando), la función llamará a error() para manejar el error y salir del programa.
+
+
+MAIN
+
+int	main(int argc, char **argv, char **envp)
+{
+	int		fd[2];
+	pid_t	pid1;
+
+	if (argc == 5)
+	{
+		if (pipe(fd) == -1)
+			error();
+		pid1 = fork();
+		if (pid1 == -1)
+			error();
+		if (pid1 == 0)
+			child_process(argv, envp, fd);
+		waitpid(pid1, NULL, 0);
+		parent_process(argv, envp, fd);
+	}
+
+
+La razón por la que el proceso hijo se ejecuta cuando pid == 0 está relacionada con cómo funciona la función fork() en sistemas operativos basados en Unix.
+
+Explicación del proceso fork():
+fork() es una función del sistema que crea un nuevo proceso al clonar el proceso actual. El proceso original se llama proceso padre, y el proceso nuevo se llama proceso hijo.
+Cuando se llama a fork(), se ejecutan dos copias del programa: una en el proceso padre y otra en el proceso hijo. La diferencia es que el valor de retorno de fork() es diferente en cada uno:
+En el proceso padre, fork() devuelve el PID del proceso hijo (un número positivo).
+En el proceso hijo, fork() devuelve 0.
+Si fork() falla, devuelve -1.
+Ejemplo del comportamiento de fork():
+Imagina que el proceso padre tiene un PID de 1234 y llama a fork(). Entonces:
+En el proceso padre, el valor de pid1 será el PID del proceso hijo, supongamos 5678.
+En el proceso hijo, pid1 será 0.
+Esto permite a los programas distinguir entre si están ejecutándose en el proceso padre o en el proceso hijo.
+
+Aplicación en el main de tu código:
+c
+Copiar código
+if (pid1 == 0)
+	child_process(argv, envp, fd);
+Cuando pid1 == 0, significa que el código está siendo ejecutado dentro del proceso hijo. Por lo tanto, este bloque de código se encarga de ejecutar las acciones específicas para el proceso hijo, que en este caso es llamar a child_process(argv, envp, fd);.
+
+En el proceso padre, pid1 tendrá el valor del PID del hijo (un número positivo), por lo que el proceso padre no ejecuta el bloque que está dentro del if (pid1 == 0). En su lugar, el padre ejecuta waitpid(pid1, NULL, 0);, lo que significa que espera a que el proceso hijo termine antes de continuar.
+
+Flujo del código en el main:
+Crear una tubería:
+
+pipe(fd) crea un mecanismo de comunicación entre el proceso padre e hijo.
+Llamada a fork():
+
+pid1 = fork(); crea un nuevo proceso (el hijo) y retorna su PID en el proceso padre, mientras que retorna 0 en el proceso hijo.
+Proceso hijo (pid1 == 0):
+
+Si pid1 == 0, significa que estamos en el proceso hijo. Aquí, se llama a child_process(argv, envp, fd);, que es responsable de realizar tareas específicas del proceso hijo, como redirigir la salida o manejar archivos de entrada.
+Proceso padre:
+
+El proceso padre sigue su ejecución fuera del bloque if (pid1 == 0). Aquí, el proceso padre llama a waitpid(pid1, NULL, 0); para esperar a que el proceso hijo termine antes de continuar.
+Después de que el hijo haya terminado, el proceso padre ejecuta su propio código, en este caso, llamando a parent_process(argv, envp, fd);.
+Por qué es importante separar el proceso hijo del padre:
+Aislamiento de tareas:
+
+El proceso hijo puede realizar tareas específicas, como la redirección de entrada o salida, sin interferir con el proceso padre. De esta manera, el proceso hijo puede manipular archivos o tuberías de forma independiente.
+Ejecución en paralelo:
+
+Aunque en tu código el proceso padre espera al hijo (con waitpid()), en muchos casos, los procesos pueden ejecutarse en paralelo, lo que permite que el padre y el hijo hagan cosas diferentes al mismo tiempo.
+Evitar conflictos:
+
+El hijo y el padre tienen espacios de memoria separados, lo que significa que cualquier cambio en los datos que el proceso hijo hace no afecta al proceso padre.
+
