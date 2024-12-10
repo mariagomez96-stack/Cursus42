@@ -40,13 +40,10 @@ MK_					= && make
 #    -----------                                                               #
 
 SRC_DIR				= ./philo/src
-ERRORS_DIR			= ./philo/errors
-INIT_DIR			= ./philo/init
-UTILS_DIR			= ./philo/utils
+INIT_DIR			= ./philo/init_struct
+SIM_DIR				= ./philo/simulator
 OBJ_DIR				= ./philo/obj
 INCLUDES_DIR		= ./philo/includes
-MGE_PHILOS			= ./philo/manage_philos
-MGE_THREADS			= ./philo/manage_threads
 
 
 # ══ Flags ═══════════════════════════════════════════════════════════════════ #
@@ -58,30 +55,22 @@ LFLAGS				= -lpthread
 # ══ Sources ═════════════════════════════════════════════════════════════════ #
 #    -------                                                                   #
 
-SRC 				= ${SRC_DIR}/philosophers.c
+SRC 				= ${SRC_DIR}/checker.c \
+                      	${SRC_DIR}/free.c \
+					  	${SRC_DIR}/manage_threats.c \
+					  	${SRC_DIR}/utils_philos.c \
+					  	${SRC_DIR}/utils.c
 
-ERR					= ${ERRORS_DIR}/ft_manage_err.c
 
-INT					= ${INIT_DIR}/ft_init_struct.c \
-						${INIT_DIR}/ft_init.c
+INT					= ${INIT_DIR}/philo_env_structs.c \
+						${INIT_DIR}/sim_init.c
 
-MPH					= ${MGE_PHILOS}/ft_philos.c
-
-MTH					= ${MGE_THREADS}/ft_threads.c
-
-UTL					= ${UTILS_DIR}/ft_utils.c \
-						${UTILS_DIR}/ft_utils_2.c
+SIM					= ${SIM_DIR}/philo.c
 												
-
 OBJ_SRC				= $(patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC})
-OBJ_ERR				= $(patsubst ${ERRORS_DIR}/%.c, ${OBJ_DIR}/%.o, ${ERR})
 OBJ_INT				= $(patsubst ${INIT_DIR}/%.c, ${OBJ_DIR}/%.o, ${INT})
-OBJ_MPH				= $(patsubst ${MGE_PHILOS}/%.c, ${OBJ_DIR}/%.o, ${MPH})
-OBJ_MTH				= $(patsubst ${MGE_THREADS}/%.c, ${OBJ_DIR}/%.o, ${MTH})
-OBJ_UTL				= $(patsubst ${UTILS_DIR}/%.c, ${OBJ_DIR}/%.o, ${UTL})
-
-OBJS				= ${OBJ_SRC} ${OBJ_ERR} ${OBJ_INT} \
-					  ${OBJ_MPH} ${OBJ_MTH} ${OBJ_UTL}
+OBJ_SIM				= $(patsubst ${SIM_DIR}/%.c, ${OBJ_DIR}/%.o, ${SIM})
+OBJS				= ${OBJ_SRC} ${OBJ_INT} ${OBJ_SIM}
 
 # ═══ Rules ══════════════════════════════════════════════════════════════════ #
 
@@ -96,35 +85,13 @@ ${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
-${OBJ_DIR}/%.o: ${ERRORS_DIR}/%.c
-	@${MKD} $(dir $@)
-	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
-
 ${OBJ_DIR}/%.o: ${INIT_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
-${OBJ_DIR}/%.o: ${MGE_PHILOS}/%.c
-	@${MKD} $(dir $@)
-	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@	
-
-${OBJ_DIR}/%.o: ${MGE_THREADS}/%.c
+${OBJ_DIR}/%.o: ${SIM_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
-
-${OBJ_DIR}/%.o: ${UTILS_DIR}/%.c
-	@${MKD} $(dir $@)
-	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
-
-clean:
-
-ftlibft:
-	echo Building Libft from: ${LIBRARIES}/${LIBFT_DIR}
-	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${LIBFT_DIR} all
-
-ftprintf:
-	echo Building ft_printf from: ${LIBRARIES}/${PRINTFT_DIR}
-	@$(MAKE) --no-print-directory -C ${LIBRARIES}/${PRINTFT_DIR} all
 
 clean:
 	@echo "$(YELLOW)Removing object files!$(DEF_COLOR)"
