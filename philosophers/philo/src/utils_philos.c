@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:50:46 by marigome          #+#    #+#             */
-/*   Updated: 2024/12/11 17:38:20 by marigome         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:03:49 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	ft_dead(t_data *data, t_philo *philo)
 
 	while (!data->eat_max)
 	{
-		i = 0;
-		while (i < data->philo_count && !data->stopping)
+		i = -1;
+		while (++i < data->philo_count && !data->stopping)
 		{
 			pthread_mutex_lock(&data->mealtime);
 			if ((int)(ft_get_time() - philo[i].last_eat) >= data->time_to_die)

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 09:08:19 by marigome          #+#    #+#             */
-/*   Updated: 2024/12/11 17:37:32 by marigome         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:44:55 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	ft_init_philos(t_data *env)
 	i = 0;
 	while (i < env->philo_count)
 	{
-		env->philos[i].id = i + 1;
 		env->philos[i].eat_count = 0;
+		env->philos[i].id = i + 1;
 		env->philos[i].status = ft_itoa(i + 1);
 		if (!env->philos[i].status)
 			break ;
