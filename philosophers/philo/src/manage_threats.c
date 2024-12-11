@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:41:20 by marigome          #+#    #+#             */
-/*   Updated: 2024/12/10 13:35:29 by marigome         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:53:10 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	*ft_routine(void *args)
 
 	philo = (t_philo *)args;
 	data = philo->data;
-	if (philo->id % 2 == 0 && data->philo_count > 1)
+	if (philo->id % 2 && data->philo_count > 1)
 		ft_sleep(data->time_to_eat / 50, data);
 	while (!data->stopping && !data->eat_max)
 	{
@@ -66,7 +66,7 @@ int	ft_create_thread(t_data *data)
 	{
 		data->philos[i].last_eat = ft_get_time();
 		if (pthread_create(&data->philos[i].thread_id, NULL, \
-		ft_routine, &data->philos[i]))
+		ft_routine, &(data->philos[i])))
 			return (0);
 		i++;
 	}
