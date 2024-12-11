@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:50:46 by marigome          #+#    #+#             */
-/*   Updated: 2024/12/10 12:42:00 by marigome         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:38:20 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	ft_dead(t_data *data, t_philo *philo)
 			break ;
 		i = 0;
 		while (data->eat_max && i < data->philo_count
-			&& philo[i].eat_count < data->philo_eat_limit)
+			&& philo[i].eat_count >= data->philo_eat_limit)
 			i++;
 		data->eat_max = (i == data->philo_count);
 	}
