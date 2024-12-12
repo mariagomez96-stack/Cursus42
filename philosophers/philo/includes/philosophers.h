@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 08:59:15 by marigome          #+#    #+#             */
-/*   Updated: 2024/12/10 14:00:53 by marigome         ###   ########.fr       */
+/*   Updated: 2024/12/12 09:30:35 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ typedef struct s_data
 	int				time_to_die;   // Max time that a philo can be without eating (To die)
 	int				time_to_eat;   // Time that a philo takes to eat
 	int				time_to_sleep; // Time that a philo takes to sleep
-	int				eat_max;	   // Total of meals that philos has eaten
-	int				philo_eat_limit; //Number of meals that a philo must eat to finish the simulation
+	int				eat_count_max;	   // Total of meals that philos has eaten
+	int				max_ate; //Number of meals that a philo must eat to finish the simulation
 	int				stopping;      // Flag to stop the simulation
 	unsigned long	start;          // Time when the simulation starts
 	pthread_mutex_t	*forks;			// Array of mutexes to represent the forks
@@ -93,7 +93,7 @@ int				ft_init_philo_sim(t_data *env);
 void			ft_free_philo(int i, t_data *env);
 
 // UTILS
-int				ft_atoi(char *str);
+int				ft_atoi(const char *str);
 unsigned int	ft_count_digits(int n);
 char			*ft_itoa(int n);
 

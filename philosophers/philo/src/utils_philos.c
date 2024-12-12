@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 11:50:46 by marigome          #+#    #+#             */
-/*   Updated: 2024/12/11 18:03:49 by marigome         ###   ########.fr       */
+/*   Updated: 2024/12/12 09:36:03 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ft_sleep(unsigned long time, t_data *data)
 			break ;
 		usleep(data->philo_count * 2);
 	}
-	return ;
 }
 
 unsigned long	ft_get_time(void)
@@ -49,7 +48,7 @@ void	ft_check_status(char *mesg, t_philo *philo, int lock)
 
 	timestatus = ft_itoa(ft_get_time() - philo->data->start);
 	pthread_mutex_lock(&philo->data->print);
-	if (!philo->data->stopping && !philo->data->eat_max)
+	if (!philo->data->stopping && !philo->data->max_ate)
 		printf("%s %s %s\n", timestatus, philo->status, mesg);
 	if (lock)
 		pthread_mutex_unlock(&philo->data->print);
@@ -60,7 +59,7 @@ void	ft_dead(t_data *data, t_philo *philo)
 {
 	int	i;
 
-	while (!data->eat_max)
+	while (!data->max_ate)
 	{
 		i = -1;
 		while (++i < data->philo_count && !data->stopping)
@@ -76,10 +75,10 @@ void	ft_dead(t_data *data, t_philo *philo)
 		if (data->stopping)
 			break ;
 		i = 0;
-		while (data->eat_max && i < data->philo_count
-			&& philo[i].eat_count >= data->philo_eat_limit)
+		while (data->eat_count_max && i < data->philo_count
+			&& philo[i].eat_count >= data->eat_count_max)
 			i++;
-		data->eat_max = (i == data->philo_count);
+		data->max_ate = (i == data->philo_count);
 	}
 }
 
@@ -90,6 +89,7 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
 	ft_check_status(TAKEN_FORK, philo, UNLOCK);
 	pthread_mutex_lock(&philo->data->mealtime);
+	ft_check_status("Is eating", philo, UNLOCK);
 	philo->last_eat = ft_get_time();
 	pthread_mutex_unlock(&philo->data->mealtime);
 	ft_sleep(philo->data->time_to_eat, philo->data);
@@ -97,6 +97,3 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->data->forks[philo->right_fork]);
 	pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
 }
-
-
-

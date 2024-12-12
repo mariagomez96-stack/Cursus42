@@ -6,43 +6,45 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 10:58:10 by marigome          #+#    #+#             */
-/*   Updated: 2024/12/10 14:11:12 by marigome         ###   ########.fr       */
+/*   Updated: 2024/12/12 09:30:14 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
 
-int ft_atoi(char *str)
+static int	ft_isdigit(int c)
 {
-    int i;
-    int sign;
-	int	result;
+	if (c >= 48 && c <= 57)
+		return (1);
+	return (0);
+}
 
-	static int calls = 0;
-    calls++;
-    printf("ft_atoi llamado %d veces. Cadena: %s\n", calls, str);
+int	ft_atoi(const char *nptr)
+{
+	int		i;
+	int		neg;
+	long	value;
 
-    if (!str || *str == '\0')
-		return (0);
 	i = 0;
-    sign = 1;
-	result = 0;
-    while ((str[i] >= 9 && str[i] <= 13)
-        || (str[i] == 32))
-        i++;
-    if (str[i] == '-' || str[i] == '+')
-    {
-        if (str[i] == '-')
-            sign = -1;
-        i++;
-    }
-    while (str[i] >= '0' && str[i] <= '9' && str[i] != '\0')
-    {
-        result = result * 10 + (str[i] - '0');
+	value = 0;
+	neg = 0;
+	while ((nptr[i] == ' ' || (nptr[i] >= 9 && nptr[i] <= 13)))
 		i++;
-    }
-	printf("Result: %i Sign: %i\n\n", result, sign);
-	return (result * sign);
+	if (nptr[i] == '-')
+		neg = 1;
+	if (nptr[i] == '-' || nptr[i] == '+')
+		i++;
+	while (nptr[i] != '\0' && ft_isdigit(nptr[i]))
+	{
+		if (value > 922337203685477580 || (value == 922337203685477580
+				&& ((!neg && nptr[i] - '0' > 7) || (neg && nptr[i] - '0' > 8))))
+			return (-1 * !neg);
+		else
+			value = (value * 10) + nptr[i++] - '0';
+	}
+	if (neg)
+		value = -value;
+	return (value);
 }
 static int	ft_strlen(char *str)
 {
@@ -72,47 +74,45 @@ static void	ft_rev_str(char *str)
 	}
 }
 
-unsigned int ft_count_digits(int n)
+static int	ft_getlen(int n)
 {
-	int count;
+	int	i;
 
-	count = 0;
-	if (n == 0)
-		return (1);
-	if (n < 0)
-		count++;
+	i = 0;
+	if (n <= 0)
+		i++;
 	while (n != 0)
 	{
-		n = n / 10;
-		count++;
+		n /= 10;
+		i++;
 	}
-	return (count);
+	return (i);
 }
 
 char	*ft_itoa(int n)
 {
-	char			*str;
+	char			*ret;
 	int				i;
-	unsigned int	number;
+	unsigned int	tmp_nbr;
 
 	i = 0;
-	str = malloc((ft_count_digits(n) + 1) * sizeof(*str));
-	if (!str)
+	ret = malloc(sizeof(*ret) * (ft_getlen(n) + 1));
+	if (!ret)
 		return (NULL);
 	if (n < 0)
-		number = -1 * n;
+		tmp_nbr = -1 * n;
 	else
-		number = n;
-	while (number != 0)
+		tmp_nbr = n;
+	while (tmp_nbr != 0)
 	{
-		str[i++] = (number % 10) + '0';
-		number /= 10;
+		ret[i++] = (tmp_nbr % 10) + '0';
+		tmp_nbr /= 10;
 	}
 	if (n == 0)
-		str[i++] = '0';
+		ret[i++] = '0';
 	if (n < 0)
-		str[i++] = '-';
-	str[i] = '\0';
-	ft_rev_str(str);
-	return (str);
+		ret[i++] = '-';
+	ret[i] = '\0';
+	ft_rev_str(ret);
+	return (ret);
 }

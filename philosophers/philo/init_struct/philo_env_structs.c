@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 09:08:19 by marigome          #+#    #+#             */
-/*   Updated: 2024/12/11 17:44:55 by marigome         ###   ########.fr       */
+/*   Updated: 2024/12/12 09:26:47 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,14 @@
 
 void	ft_init_env(t_data *env, int argc, char *argv[])
 {
-	env->philo_count = 0;
-	env->time_to_die = 0;
-	env->time_to_eat = 0;
-	env->time_to_sleep = 0;
-	env->philo_eat_limit = 0;
 	env->philo_count = ft_atoi(argv[1]);
 	env->time_to_die = ft_atoi(argv[2]);
 	env->time_to_eat = ft_atoi(argv[3]);
 	env->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		env->philo_eat_limit = ft_atoi(argv[5]);
+		env->eat_count_max= ft_atoi(argv[5]);
 	else
-		env->philo_eat_limit = 0;
+		env->eat_count_max = 0;
 }
 
 int	ft_init_philos(t_data *env)
@@ -36,8 +31,8 @@ int	ft_init_philos(t_data *env)
 	i = 0;
 	while (i < env->philo_count)
 	{
-		env->philos[i].eat_count = 0;
 		env->philos[i].id = i + 1;
+		env->philos[i].eat_count = 0;
 		env->philos[i].status = ft_itoa(i + 1);
 		if (!env->philos[i].status)
 			break ;
