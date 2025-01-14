@@ -53,6 +53,7 @@ INCLUDES_DIR			= ./includes
 MLX42_LIB				= ./MLX42/lib
 MLX42_INCLUDE			= ./MLX42/include/MLX42
 PARSING_DIR				= ./parsing
+PLAY_DIR				= ./play
 
 ERROR_DIR				= ./error
 PROJECTION_DIR			= ./projection
@@ -98,7 +99,9 @@ GNL					= ${LIBRARIES}/${GNL_DIR}/get_next_line.c \
 						${LIBRARIES}/${GNL_DIR}/get_next_line_bonus.c \
 						${LIBRARIES}/${GNL_DIR}/get_next_line_utils_bonus.c
 
-PARSING				= ${CHECKER_DIR}/
+PARSING				= ${PARSING_DIR}/
+
+PLAY				= ${PLAY_DIR}/
 
 CHECKER			= ${CHECKER_DIR}/check_arg.c
 
