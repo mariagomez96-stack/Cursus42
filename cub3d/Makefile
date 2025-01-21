@@ -41,9 +41,9 @@ MK_					= && make
 # ══ Directories ═════════════════════════════════════════════════════════════ #
 #    -----------                                                               #
 
-CHECKER_DIR				= ./checker
+READ_DIR				= ./read_map
 MAPS_DIR				= ./maps
-MAPS_ERR				= ./maps_error
+MAPS_ERR_DIR			= ./maps_error
 LIBRARIES				= ./libs
 OBJ_DIR					= ./obj
 LIBFT_DIR				= libft
@@ -52,14 +52,10 @@ GNL_DIR					= gnl
 INCLUDES_DIR			= ./includes
 MLX42_LIB				= ./MLX42/lib
 MLX42_INCLUDE			= ./MLX42/include/MLX42
-PARSING_DIR				= ./parsing
+PARSING_DIR				= ./parser
 PLAY_DIR				= ./play
+INIT_DIR				= ./init
 
-ERROR_DIR				= ./error
-PROJECTION_DIR			= ./projection
-SRC_DIR					= ./src
-SRC_CAM_DIR				=./src_cam
-SRC_MAP_DIR				= ./src_map
 
 # ══ Bonus Directories ═══════════════════════════════════════════════════════ #
 #    -----------------                                                         #
@@ -99,37 +95,28 @@ GNL					= ${LIBRARIES}/${GNL_DIR}/get_next_line.c \
 						${LIBRARIES}/${GNL_DIR}/get_next_line_bonus.c \
 						${LIBRARIES}/${GNL_DIR}/get_next_line_utils_bonus.c
 
-PARSING				= ${PARSING_DIR}/
+PARSING				= ${PARSING_DIR}/parser.c
 
-PLAY				= ${PLAY_DIR}/
+PLAY				= ${PLAY_DIR}/main.c
 
-CHECKER			= ${CHECKER_DIR}/check_arg.c
-
-ERROR			= ${ERROR_DIR}/ft_error_and_free.c \
-
-PROJECTION		= ${PROJECTION_DIR}/draw.c \
-					${PROJECTION_DIR}/ft_angles.c \
-					${PROJECTION_DIR}/conf_events.c \
-					${PROJECTION_DIR}/project.c \
-					${PROJECTION_DIR}/pixel.c \
-					${PROJECTION_DIR}/manage_events.c 
-
-SRC 				= ${SRC_DIR}/fdf.c \
-						${SRC_DIR}/init_mlx.c
-
-SRC_CAM				= ${SRC_CAM_DIR}/cam.c
-
-SRC_MAP			= ${SRC_MAP_DIR}/init_map.c \
-					${SRC_MAP_DIR}/read_z.c 
+INIT				= ${INIT_DIR}/init_structures.c \
+       				${INIT_DIR}/init_walls_and_rays.c
 
 
-OBJ_CHECKER				= $(patsubst ${CHECKER_DIR}/%.c, ${OBJ_DIR}/%.o, ${CHECKER})
-OBJ_ERR				= $(patsubst ${ERROR_DIR}/%.c, ${OBJ_DIR}/%.o, ${ERROR})
-OBJ_PROJECTION				= $(patsubst ${PROJECTION_DIR}/%.c, ${OBJ_DIR}/%.o, ${PROJECTION})
-OBJ_SRC				= $(patsubst ${SRC_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC})
-OBJ_SRC_CAM				= $(patsubst ${SRC_CAM_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC_CAM})
-OBJ_SRC_MAP				= $(patsubst ${SRC_MAP_DIR}/%.c, ${OBJ_DIR}/%.o, ${SRC_MAP})
+READ = ${READ_DIR}/checker_map.c \
+       ${READ_DIR}/checker_sides.c \
+       ${READ_DIR}/checker_spaces.c \
+       ${READ_DIR}/checker_start_end.c \
+       ${READ_DIR}/load_map.c \
+       ${READ_DIR}/tools_map.c \
+       ${READ_DIR}/tools_map_2.c
 
+
+
+OBJ_PARSING			= $(patsubst ${PARSING_DIR}/%.c, ${OBJ_DIR}/%.o, ${PARSING})
+OBJ_PLAY			= $(patsubst ${PLAY_DIR}/%.c, ${OBJ_DIR}/%.o, ${PLAY})
+OBJ_INIT			= $(patsubst ${INIT_DIR}/%.c, ${OBJ_DIR}/%.o, ${INIT})
+OBJ_READ			= $(patsubst ${READ_DIR}/%.c, ${OBJ_DIR}/%.o, ${READ})
 OBJ_GNL				= $(patsubst ${LIBRARIES}/${GNL_DIR}/%.c, ${OBJ_DIR}/%.o, \
 						${GNL})
 
@@ -150,17 +137,17 @@ OBJ_GNL				= $(patsubst ${LIBRARIES}/${GNL_DIR}/%.c, ${OBJ_DIR}/%.o, \
 
 all: ${NAME}
 
-${NAME}: ftlibft ftprintf ${LIBMLX42_A} ${OBJ_CHECKER} ${OBJ_GNL} \
-									${OBJ_ERR} ${OBJ_PROJECTION} \
-									${OBJ_SRC} ${OBJ_SRC_CAM} ${OBJ_SRC_MAP}
+${NAME}: ftlibft ftprintf ${LIBMLX42_A} ${OBJ_PARSING} ${OBJ_GNL} \
+									${OBJ_PLAY} ${OBJ_INIT} \
+									${OBJ_READ}
 
 	@echo "$(YELLOW)Compiling ...$(DEF_COLOR)"
-	@${CC} ${CFLAGS} ${IFLAGS} -o ${NAME} ${OBJ_CHECKER} ${OBJ_GNL} ${OBJ_ERR} \
-									${OBJ_PROJECTION} ${OBJ_SRC} \
-									${OBJ_SRC_CAM} ${OBJ_SRC_MAP} ${LFLAGS}
+	@${CC} ${CFLAGS} ${IFLAGS} -o ${NAME} ${OBJ_PARSING} ${OBJ_GNL} \
+									${OBJ_PLAY} ${OBJ_INIT} \
+									${OBJ_READ} ${LFLAGS}
 	@echo "$(GREEN) $(NAME) all created ✓$(DEF_COLOR)"
 
-${OBJ_DIR}/%.o: ${CHECKER_DIR}/%.c
+${OBJ_DIR}/%.o: ${PARSING_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
@@ -168,23 +155,15 @@ ${OBJ_DIR}/%.o: ${LIBRARIES}/${GNL_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
-${OBJ_DIR}/%.o: ${ERROR_DIR}/%.c
+${OBJ_DIR}/%.o: ${PLAY_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
-${OBJ_DIR}/%.o: ${PROJECTION_DIR}/%.c
+${OBJ_DIR}/%.o: ${INIT_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
-${OBJ_DIR}/%.o: ${SRC_DIR}/%.c
-	@${MKD} $(dir $@)
-	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
-
-${OBJ_DIR}/%.o: ${SRC_CAM_DIR}/%.c
-	@${MKD} $(dir $@)
-	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
-
-${OBJ_DIR}/%.o: ${SRC_MAP_DIR}/%.c
+${OBJ_DIR}/%.o: ${READ_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
