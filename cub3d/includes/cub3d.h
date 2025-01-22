@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:38:05 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/21 21:32:56 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:05:11 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,35 +110,59 @@ typedef struct s_data
 // ----- Functions ---------------------------------------------------------- //
 
 /* INIT STRUCTURES */
-int ft_info_update(t_data *info);
+int ft_init_game(t_data *info);
 
 
 /* WALLS & RAYS */
 void ft_walls(t_data *data, mlx_image_t **img);
 
-/* MAP */
-void ft_calculate_map_size(t_map *map);
-int ft_validate_map(t_data *data);
-int ft_process_map(t_data *info, char *map_str);
-char *ft_read_map(int fd);
-int ft_open_map_file(char *file);
+// Textures //
+int	ft_check_file(char *file, char *img, int i);
+int	ft_get_walls(t_data *info, int *fd, int *res);
+int	ft_update_textures(t_data *info, int *res, int *fd);
+void	ft_store_texture(t_data *info, char **c);
+
+// MAP.C//
+int	ft_process_line(char ***tokens, int fd);
+void	ft_checker_textures(t_data *info, int *fd, int i);
+int	ft_texture_missed(t_data *info);
+void	ft_new_fd(t_data *info, int i, int *fd);
+char	*ft_remove_newline(char *str);
+
+// CHECKER //
+int	ft_check_cardinal(char **c, int line);
+int	ft_check_path(char **c, int i);
+int	ft_check_bad_argument(char **c, int i);
+int	ft_check_file(char *file, char *img, int i);
+int	ft_check_colors(char **c, int i);
+int	ft_check_imgs(char **c, int i);
+int	ft_check_text(t_data *info, char **c, int *i, int line);
+int	ft_check_colors_num(char **c, int line);
+int	ft_check_comma(char **c);
 int ft_checker_extension(char *file);
-char	*ft_strjoin_free(char *s1, char *s2);
-char	*ft_trim_str(char *s1, char *set);
-char	*ft_strtrim(const char *s1, const char *set);
-int	ft_split_map(t_data *info, char *map);
-int	ft_check_extra(char *map);
+int	ft_check_imgs(char **c, int i);
+int	ft_check_colors_num(char **c, int line);
+
+// ERROR //
+void	ft_error_color(char **path, int r, int g, int b);
+void	ft_error_rgb_num(char **rgb, int i, int j, int line);
+int ft_strcmp(const char *s1, const char *s2);
+
+// SPLIT //
+char	*ft_realloc(char *ptr, int size);
 int	ft_split_len(char **str);
-int	ft_check_start_and_end(char **map, int end);
-int	ft_check_first_last(t_data *info, char **map);
-int	ft_check_map_closed(t_data *info);
-int	ft_check_spaces_map(char **map, int i, int j, int res);
-int	ft_check_spaces_map_2(char **map, int i, int j, int res);
-int	ft_check_spaces(char **map);
-void	ft_error_bad_spc(int line, int i);
-int	ft_players_num(char **map);
-int ft_load_map(char *file, t_data *info);
-int ft_check_inside(char **map);
+void	*ft_split_free(char **str);
 
+// MANAGE COLORS //
+unsigned int	ft_rgb_get(char **c);
+unsigned int	ft_rgb_to_hex(char **c);
+unsigned int	ft_rgb_to_hex_split(char **c);
 
+// PARSER //
+int	ft_parse(char *cub, t_data *info);
+int	ft_get_imgs_info(t_data *info, int *res, int *fd);
+
+// FREE //
+void free_textures(t_texture *textures);
+void free_mlx_textures(t_texture *textures);
 #endif

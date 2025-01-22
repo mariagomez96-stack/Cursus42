@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:45:12 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/21 21:20:29 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:06:19 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 int	main(int argc, char **argv)
 {
 	t_data	data;
+    (void)argv;
 
-	if (argc != 2)
-		return (printf("Wrong number of args, please insert 2 arguments"), 1);
-	ft_info_update(&data);
-	if (ft_load_map(argv[1], &data) == FAILURE)
+	if (argc != 2 && ft_checker_extension(argv[1]))
+		return (FAILURE);
+	ft_init_game(&data);
+	if (ft_parse(argv[1], &data))
     {
-        printf("Error: Failed to load map.\n");
-        return (1);
+        printf("Mapa abierto con éxito!\n");
     }
-
+    free_textures(&data.textures);
+    free_mlx_textures(&data.textures);
     printf("Map loaded successfully!\n");
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:02:20 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/21 21:21:34 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:25:36 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void    ft_init_player(t_player *player)
 
 static void    ft_init_images(t_texture *info)
 {
+     ft_init_flags_images(info);
     info->no_path = NULL;
     info->so_path = NULL;
     info->we_path = NULL;
@@ -47,10 +48,9 @@ static void    ft_init_images(t_texture *info)
     info->ea_texture = NULL;
     info->ceiling_color = 0;
     info->floor_color = 0;
-    ft_init_flags_images(info);
 }
 
-int ft_info_update(t_data *info)
+int ft_init_game(t_data *info)
 {
     ft_init_images(&info->textures);
     ft_init_player(&info->player);

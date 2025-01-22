@@ -103,13 +103,14 @@ INIT				= ${INIT_DIR}/init_structures.c \
        				${INIT_DIR}/init_walls_and_rays.c
 
 
-READ = ${READ_DIR}/checker_map.c \
-       ${READ_DIR}/checker_sides.c \
-       ${READ_DIR}/checker_spaces.c \
-       ${READ_DIR}/checker_start_end.c \
-       ${READ_DIR}/load_map.c \
-       ${READ_DIR}/tools_map.c \
-       ${READ_DIR}/tools_map_2.c
+READ = ${READ_DIR}/checker.c \
+       ${READ_DIR}/error.c \
+       ${READ_DIR}/manage_color.c \
+       ${READ_DIR}/map.c \
+       ${READ_DIR}/utils.c \
+       ${READ_DIR}/textures.c \
+	   ${READ_DIR}/checker_2.c \
+	   ${READ_DIR}/free.c 
 
 
 

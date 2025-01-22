@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 07:07:34 by rdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/17 10:13:32 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/22 14:16:38 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,3 +108,4 @@ char	*ft_substr1(char const *s, unsigned int start, size_t len)
 	ft_strlcpy1(str, (s + start), len + 1);
 	return (str);
 }
+
