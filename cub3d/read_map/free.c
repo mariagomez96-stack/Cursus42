@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 14:00:55 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 14:05:05 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:21:07 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ void free_mlx_textures(t_texture *textures)
         mlx_delete_texture(textures->we_texture);
     if (textures->ea_texture)
         mlx_delete_texture(textures->ea_texture);
+}
+void	free_map(char **map)
+{
+	int	i;
+
+	if (!map)
+		return;
+	for (i = 0; map[i]; i++)
+	{
+		free(map[i]);  // 🔹 Liberar cada línea del mapa
+		map[i] = NULL;
+	}
+	free(map);  // 🔹 Liberar el array de punteros
 }
 
 

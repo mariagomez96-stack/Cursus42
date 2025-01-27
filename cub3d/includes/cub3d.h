@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:38:05 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 14:05:11 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:05:15 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ void	ft_checker_textures(t_data *info, int *fd, int i);
 int	ft_texture_missed(t_data *info);
 void	ft_new_fd(t_data *info, int i, int *fd);
 char	*ft_remove_newline(char *str);
+int	ft_get_map(t_data *info, int fd);
+void print_map(t_data *info);
 
 // CHECKER //
 int	ft_check_cardinal(char **c, int line);
@@ -165,4 +167,13 @@ int	ft_get_imgs_info(t_data *info, int *res, int *fd);
 // FREE //
 void free_textures(t_texture *textures);
 void free_mlx_textures(t_texture *textures);
+void	free_map(char **map);
+
+// CHECKER MAP //
+int	ft_check_map(t_data *info);
+int	ft_check_spaces(char **map);
+int	ft_players_num(char **map);
+void	ft_map_error(const char *error_type, int line, int col, char c);
+int	ft_check_inside(char **map);
+
 #endif

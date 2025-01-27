@@ -6,106 +6,150 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 07:07:34 by rdel-olm          #+#    #+#             */
-/*   Updated: 2025/01/22 14:16:38 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:21:12 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/get_next_line.h"
 
-size_t	ft_strlen1(const char *s)
+char	*ft_gnlstrjoin(char *str1, char *str2)
 {
-	size_t	i;
+	size_t		i;
+	size_t		j;
+	char		*end;
 
-	i = 0;
-	while (s[i] != '\0')
+	if (!str1)
 	{
-		i++;
+		str1 = (char *)malloc(sizeof(char) * 1);
+		str1[0] = '\0';
 	}
-	return (i);
+	if (!str2)
+		return (NULL);
+	end = (char *)malloc(sizeof(char) * (ft_len(str1) + ft_len(str2) + 1));
+	if (end == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str1[i])
+		end[j++] = str1[i++];
+	i = 0;
+	while (str2[i])
+		end[j++] = str2[i++];
+	end[j] = '\0';
+	free(str1);
+	return (end);
 }
 
-char	*ft_strdup1(const char *s)
+char	*ft_alloc(int fd, char *str)
 {
-	char	*str;
-	size_t	i;
-	size_t	j;
+	char	*buff;
+	ssize_t	len;
 
-	i = 0;
-	j = ft_strlen1(s);
-	str = (char *) malloc((j + 1) * sizeof(char));
-	if (str == NULL)
-		return (0);
-	while (s[i] != '\0')
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
+		return (NULL);
+	len = 1;
+	while (!(ft_gnlstrchr(str, '\n')) && len > 0)
 	{
-		str[i] = s[i];
-		i++;
+		len = read(fd, buff, BUFFER_SIZE);
+		if (len == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff[len] = '\0';
+		str = ft_gnlstrjoin(str, buff);
 	}
-	str[i] = '\0';
+	free(buff);
 	return (str);
 }
 
-size_t	ft_strlcpy1(char *dest, const char *src, size_t size)
+/*char	*ft_nline(char *str)
 {
-	size_t			i;
-	unsigned int	count;
+	char	*new;
+	int		i;
 
 	i = 0;
-	count = 0;
-	while (src[count] != '\0')
-		count++;
-	if (size < 1)
-		return (count);
-	while (src[i] != '\0' && i < size - 1)
+	if (str[i] == 0)
+		return (NULL);
+	while (str[i] && str[i] != '\n')
+		i++;
+	new = (char *)malloc(sizeof(char) * (i + 2));
+	if (!new)
+		return (NULL);
+	i = 0;
+	while (str[i] && str[i] != '\n')
 	{
-		dest[i] = src[i];
+		new[i] = str[i];
 		i++;
 	}
-	dest[i] = '\0';
-	return (count);
+	if (str[i] == '\n')
+	{
+		new[i] = '\n';
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}*/
+
+char	*ft_nline(char *str)
+{
+	char	*new;
+	int		i;
+
+	if (!str || str[0] == '\0') // ✅ Evita accesos a NULL o cadena vacía
+	{	
+		free(str);
+		return (NULL);
+	}
+	i = 0;
+	while (str[i] && str[i] != '\n')
+		i++;
+	new = (char *)malloc(sizeof(char) * (i + 2));
+	if (!new)
+	{
+		free(new);
+		return (NULL);
+	}
+	i = 0;
+	while (str[i] && str[i] != '\n')
+	{
+		new[i] = str[i];
+		i++;
+	}
+	if (str[i] == '\n')
+	{
+		new[i] = '\n';
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
 }
 
-char	*ft_strjoin1(char const *s1, char const *s2)
+
+char	*ft_rline(char *line)
 {
-	char	*str3;
-	size_t	totallen;
+	char	*str;
 	int		i;
 	int		j;
 
-	totallen = ft_strlen1(s1) + ft_strlen1(s2);
 	i = 0;
-	j = 0;
-	str3 = (char *) malloc((totallen + 1) * sizeof(char));
-	if (!str3)
-		return (0);
-	while (s1[i] != '\0')
-	{
-		str3[i] = s1[i];
+	while (line[i] && line[i] != '\n')
 		i++;
-	}
-	while (s2[j] != '\0')
+	if (!line[i])
 	{
-		str3[i] = s2[j];
-		i++;
-		j++;
-	}
-	str3[i] = '\0';
-	return (str3);
-}
-
-char	*ft_substr1(char const *s, unsigned int start, size_t len)
-{
-	char	*str;
-
-	if (!s)
+		free(line);
 		return (NULL);
-	if (start >= ft_strlen1(s))
-		return (ft_strdup1(""));
-	if (len > ft_strlen1(s + start))
-		len = ft_strlen1(s + start);
-	str = (char *) malloc((len + 1) * sizeof(char));
+	}
+	str = (char *)malloc(sizeof(char) * (ft_len(line) - i + 1));
 	if (!str)
 		return (NULL);
-	ft_strlcpy1(str, (s + start), len + 1);
+	i++;
+	j = 0;
+	while (line[i])
+		str[j++] = line[i++];
+	str[j] = '\0';
+	free(line);
 	return (str);
 }
 

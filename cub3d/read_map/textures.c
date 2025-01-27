@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:01:51 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 14:00:28 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:21:16 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,45 +24,6 @@ int	ft_update_textures(t_data *info, int *res, int *fd)
 	return (SUCCESS);
 }
 
-/*
-void	ft_add_text_path_2(t_data *info, char **c)
-{
-	if (c[0] && c[1] && !ft_strcmp(c[0], "C"))
-	{
-		info->textures.ceiling_color = ft_rgb_get(c);
-		info->textures.color_flag = 1;
-	}
-	else if (c[0] && c[1] && !ft_strcmp(c[0], "F"))
-	{
-		info->textures.floor_color = ft_rgb_get(c);
-		info->textures.floor_flag = 1;
-	}
-}
-
-void	ft_add_text_path(t_data *info, char **c)
-{
-	if (c[0] && c[1] && !ft_strcmp(c[0], "NO"))
-	{
-		info->textures.no_path = ft_strdup(c[1]);
-		info->textures.no_flag = 1;
-	}
-	else if (c[0] && c[1] && !ft_strcmp(c[0], "SO"))
-	{
-		info->textures.so_path = ft_strdup(c[1]);
-		info->textures.so_flag = 1;
-	}
-	else if (c[0] && c[1] && !ft_strcmp(c[0], "EA"))
-	{
-		info->textures.ea_path = ft_strdup(c[1]);
-		info->textures.ea_flag = 1;
-	}
-	else if (c[0] && c[1] && !ft_strcmp(c[0], "WE"))
-	{
-		info->textures.we_path = ft_strdup(c[1]);
-		info->textures.we_flag = 1;
-	}
-	ft_add_text_path_2(info, c);
-}*/
 void	ft_init_texture_arrays(char **textures, char ***paths, int **flags, t_data *info)
 {
 	textures[0] = "NO";

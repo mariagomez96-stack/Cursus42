@@ -54,6 +54,7 @@ MLX42_LIB				= ./MLX42/lib
 MLX42_INCLUDE			= ./MLX42/include/MLX42
 PARSING_DIR				= ./parser
 PLAY_DIR				= ./play
+CHECKER_DIR				= ./checker_map
 INIT_DIR				= ./init
 
 
@@ -97,6 +98,11 @@ GNL					= ${LIBRARIES}/${GNL_DIR}/get_next_line.c \
 
 PARSING				= ${PARSING_DIR}/parser.c
 
+CHECKER				= ${CHECKER_DIR}/checker_borders.c \
+		            	${CHECKER_DIR}/checker_inside.c \
+						${CHECKER_DIR}/checker_spaces.c \
+						${CHECKER_DIR}/map_error.c
+
 PLAY				= ${PLAY_DIR}/main.c
 
 INIT				= ${INIT_DIR}/init_structures.c \
@@ -110,7 +116,8 @@ READ = ${READ_DIR}/checker.c \
        ${READ_DIR}/utils.c \
        ${READ_DIR}/textures.c \
 	   ${READ_DIR}/checker_2.c \
-	   ${READ_DIR}/free.c 
+	   ${READ_DIR}/free.c \
+	   ${READ_DIR}/update_map.c 
 
 
 
@@ -118,6 +125,7 @@ OBJ_PARSING			= $(patsubst ${PARSING_DIR}/%.c, ${OBJ_DIR}/%.o, ${PARSING})
 OBJ_PLAY			= $(patsubst ${PLAY_DIR}/%.c, ${OBJ_DIR}/%.o, ${PLAY})
 OBJ_INIT			= $(patsubst ${INIT_DIR}/%.c, ${OBJ_DIR}/%.o, ${INIT})
 OBJ_READ			= $(patsubst ${READ_DIR}/%.c, ${OBJ_DIR}/%.o, ${READ})
+OBJ_CHECKER			= $(patsubst ${CHECKER_DIR}/%.c, ${OBJ_DIR}/%.o, ${CHECKER})
 OBJ_GNL				= $(patsubst ${LIBRARIES}/${GNL_DIR}/%.c, ${OBJ_DIR}/%.o, \
 						${GNL})
 
@@ -140,11 +148,11 @@ all: ${NAME}
 
 ${NAME}: ftlibft ftprintf ${LIBMLX42_A} ${OBJ_PARSING} ${OBJ_GNL} \
 									${OBJ_PLAY} ${OBJ_INIT} \
-									${OBJ_READ}
+									${OBJ_READ} ${OBJ_CHECKER}
 
 	@echo "$(YELLOW)Compiling ...$(DEF_COLOR)"
 	@${CC} ${CFLAGS} ${IFLAGS} -o ${NAME} ${OBJ_PARSING} ${OBJ_GNL} \
-									${OBJ_PLAY} ${OBJ_INIT} \
+									${OBJ_PLAY} ${OBJ_INIT} ${OBJ_CHECKER} \
 									${OBJ_READ} ${LFLAGS}
 	@echo "$(GREEN) $(NAME) all created ✓$(DEF_COLOR)"
 
@@ -165,6 +173,10 @@ ${OBJ_DIR}/%.o: ${INIT_DIR}/%.c
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 
 ${OBJ_DIR}/%.o: ${READ_DIR}/%.c
+	@${MKD} $(dir $@)
+	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
+
+${OBJ_DIR}/%.o: ${CHECKER_DIR}/%.c
 	@${MKD} $(dir $@)
 	@$(CC) ${CFLAGS} ${IFLAGS} -c $< -o $@
 

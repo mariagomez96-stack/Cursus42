@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:35:59 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 13:09:37 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:54:21 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	ft_parse(char *cub, t_data *info)
 		return (FAILURE);
 	}
 	if (!ft_update_textures(info, &fault_flag, &fd))
-        printf("Todo ok en ft_get_imgs_info.\n"); 
+        printf("Todo ok en ft_get_imgs_info.\n");
+	if (!ft_get_map(info, fd))
+		print_map(info);
+	if (!ft_check_map(info))
+	{
+		printf("Mapa abierto con éxito!\n");
+	}
 	return (fault_flag);
 }

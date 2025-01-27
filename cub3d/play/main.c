@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:45:12 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 14:06:19 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/27 13:21:05 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
     }
     free_textures(&data.textures);
     free_mlx_textures(&data.textures);
+    free_map(data.map.map);
     printf("Map loaded successfully!\n");
     return (0);
 }

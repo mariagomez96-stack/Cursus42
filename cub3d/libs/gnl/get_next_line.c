@@ -23,101 +23,59 @@
  * 
 */
 
-char	*ft_strchr1(const char *s, int c)
+size_t	ft_len(char *str)
 {
-	while (*s != '\0')
-	{
-		if (*s == (char) c)
-			return ((char *) s);
-		else
-			s++;
-	}
-	if ((char) c == '\0')
-		return ((char *)s);
-	return (0);
-}
-
-static void	ft_free(char *buffer_readed, char *buffer_print)
-{
-	free(buffer_readed);
-	free(buffer_print);
-}
-
-static char	*manage_readed_line(char	*treat_line)
-{
-	char	*new_buffer_print;	
 	size_t	i;
 
 	i = 0;
-	while (treat_line[i] != '\n' && treat_line[i] != '\0')
+	if (!str)
+		return (0);
+	while (str[i])
 		i++;
-	if (treat_line[i] == 0 || treat_line[1] == 0)
-	{
-		free(treat_line);
-		return (NULL);
-	}
-	new_buffer_print = ft_substr1(treat_line, i + 1, ft_strlen1(treat_line) \
-	- i);
-	if (*new_buffer_print == 0 || *new_buffer_print == '\0')
-	{
-		free(new_buffer_print);
-		new_buffer_print = NULL;
-	}
-	treat_line[i + 1] = '\0';
-	return (new_buffer_print);
+	return (i);
 }
 
-static char	*read_fill_line(int fd, char *buffer_readed, char *buffer_print)
+char	*ft_gnlstrchr(char *str, int c)
 {
-	ssize_t			bytes_readed;	
-	char			*buffer_tmp;
+	size_t	i;
 
-	bytes_readed = 1;
-	while (bytes_readed > 0)
+	i = 0;
+	if (!str)
+		return (0);
+	if (c == '\0')
+		return ((char *)&str[ft_len(str)]);
+	while (str[i])
 	{
-		bytes_readed = read(fd, buffer_readed, BUFFER_SIZE);
-		if (bytes_readed < 0)
-		{
-			ft_free(buffer_readed, buffer_print);
-			return (NULL);
-		}
-		else if (bytes_readed == 0)
-			break ;
-		buffer_readed[bytes_readed] = '\0';
-		if (!buffer_print)
-			buffer_print = ft_strdup1("");
-		buffer_tmp = buffer_print;
-		buffer_print = ft_strjoin1(buffer_tmp, buffer_readed);
-		free(buffer_tmp);
-		buffer_tmp = NULL;
-		if (ft_strchr1(buffer_readed, '\n'))
-			break ;
+		if (str[i] == (char) c)
+			return ((char *)&str[i]);
+		i++;
 	}
-	return (buffer_print);
+	return (0);
 }
 
 char	*get_next_line(int fd)
 {
-	char			*buffer_readed;
-	char			*line_print;
-	static char		*buffer_print;
+	char		*out;
+	static char	*str;
 
-	buffer_readed = (void *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read (fd, 0, 0) < 0)
+	if (BUFFER_SIZE <= 0 || fd < 0 || read(fd, 0, 0) == -1)
 	{
-		free(buffer_print);
-		free(buffer_readed);
-		buffer_print = NULL;
-		buffer_readed = NULL;
+		free (str);
+		str = NULL;
 		return (NULL);
 	}
-	if (!buffer_readed)
+	str = ft_alloc(fd, str);
+	if (!str)
+	{
+		free(str);
 		return (NULL);
-	line_print = read_fill_line(fd, buffer_readed, buffer_print);
-	free(buffer_readed);
-	buffer_readed = NULL;
-	if (!line_print)
+	}
+	out = ft_nline(str);
+	if (!out)
+	{
+		free(out);
 		return (NULL);
-	buffer_print = manage_readed_line(line_print);
-	return (line_print);
+	}
+	str = ft_rline(str);
+	return (out);
 }
