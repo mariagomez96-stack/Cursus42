@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:34:23 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/27 13:17:18 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:15:06 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,5 @@ int	ft_get_map(t_data *info, int fd)
 	ft_trim_str_inline(map, "\n");
 	if (ft_split_map(info, map))  // 🔹 Separa el mapa en `info->map`
         return (FAILURE);
-    print_map(info);
 	return (SUCCESS);
 }
