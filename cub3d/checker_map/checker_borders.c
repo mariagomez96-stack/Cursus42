@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:33:05 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/29 13:59:32 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 14:06:51 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,23 +92,18 @@ int	ft_check_map(t_data *info)
 	ft_printf("Entro en ft_check_map\n");
 	if (!info || !info->map.map)
 		return (FAILURE);
-
 	// Chequear que la primera y última línea son paredes
 	else if (ft_check_first_last(info, info->map.map))
 		return (FAILURE);
-
 	// Chequear que los lados izquierdo y derecho están cerrados
 	else if (ft_check_sides(info->map.map))
 		return (FAILURE);
-
 	// Chequear caracteres inválidos dentro del mapa
 	else if (ft_check_inside(info->map.map))
 		return (FAILURE);
-
 	// Chequear que los espacios no están incorrectamente rodeando "0" o jugadores
 	else if (ft_check_spaces(info->map.map))
 		return (FAILURE);
-
 	// Chequear que haya **exactamente 1 jugador
 	else if (ft_players_num(info->map.map))
 		return (FAILURE);
