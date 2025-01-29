@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:34:23 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/27 14:15:06 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:33:42 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ int	ft_get_map(t_data *info, int fd)
 	if (!*map)
 		return (printf(RED"Failed reading map, empty content.\n"RESET), FAILURE);
 	// 🔹 Eliminamos saltos de línea innecesarios sin reasignar memoria
+	printf("Mapa leído: %s\n", map);
 	ft_trim_str_inline(map, "\n");
 	if (ft_split_map(info, map))  // 🔹 Separa el mapa en `info->map`
         return (FAILURE);

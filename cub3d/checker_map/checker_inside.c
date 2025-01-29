@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:58:38 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/27 13:59:39 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:40:34 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	ft_players_num(char **map)
 	int	count;
 
 	count = ft_players_count(map);
-	if (count == FAILURE)
-		return (FAILURE);
 	if (count == 0 || count > 1)
 	{
 		ft_map_error("players", count, 0, 0);

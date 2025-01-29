@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:01:51 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/27 13:21:16 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:33:05 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	ft_update_textures(t_data *info, int *res, int *fd)
 		*res = 1;
 		return (FAILURE);
 	}
+	printf("Entro en ft_update_textures\n");
 	return (SUCCESS);
 }
 

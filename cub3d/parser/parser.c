@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 19:35:59 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/27 14:20:20 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 09:31:31 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,19 @@ void	ft_get_size_map(t_map *map)
 
 	i = 0;
 	j = 0;
+	printf("Map readed: %s\n", map->map[0]);
 	if (!map->map)
 		return ;
 	while (map->map[i])
 	{
 		if ((int)ft_strlen(map->map[i]) > j)
+		{	
 			j = ft_strlen(map->map[i]);
+			printf("j: %d\n", j);
+		}
+
 		i++;
+		printf("i: %d\n", i);
 	}
 	map->map_size_x = j;
 	map->map_size_y = i;
