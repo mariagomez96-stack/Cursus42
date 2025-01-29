@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:01:51 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/29 11:32:46 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:42:29 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,22 @@
 
 int	ft_update_textures(t_data *info, int *res, int *fd)
 {
-	if (ft_get_walls(info, fd, res))
+	char	**split_line;
+	int		i;
+	int		j;
+
+	split_line = NULL;
+	i = 0;
+	j = 0;
+	while (i < 6)
 	{
-		*res = 1;
-		return (FAILURE);
+		if (ft_process_line(&split_line, *fd))
+			return (FAILURE);
+		j++;
+		if (ft_check_text(info, split_line, &i, j))
+			*res = 1;
 	}
-	printf("Entro en ft_update_textures\n");
+	ft_checker_textures(info, fd, i);
 	return (SUCCESS);
 }
 
@@ -86,7 +96,12 @@ void	ft_store_texture(t_data *info, char **c)
 	ft_store_color(info, c);
 }
 
-int	ft_get_walls(t_data *info, int *fd, int *res)
+/* FT_GET_WALLS:
+	- ft_process_line: Leemos la línea, eliminamos el salto de línea
+		y cada palabra forma un token 
+	- ft_check_text: */
+
+/*int	ft_get_walls(t_data *info, int *fd, int *res)
 {
 	char	**split_line;
 	int		i;
@@ -105,5 +120,5 @@ int	ft_get_walls(t_data *info, int *fd, int *res)
 	}
 	ft_checker_textures(info, fd, i);
 	return (SUCCESS);
-}
+}*/
 

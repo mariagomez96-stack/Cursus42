@@ -6,13 +6,13 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:04:08 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/29 12:05:59 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:45:43 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	ft_texture_missed(t_data *info)
+/*int	ft_texture_missed(t_data *info)
 {
 	int		count;
 	int		i;
@@ -30,10 +30,10 @@ int	ft_texture_missed(t_data *info)
 		i++;
 	}
 	return (count);
-}
+}*/
 
 
-void	ft_new_fd(t_data *info, int i, int *fd)
+/*void	ft_new_fd(t_data *info, int i, int *fd)
 {
 	int		j;
 	int		k = 0;
@@ -57,7 +57,7 @@ void	ft_new_fd(t_data *info, int i, int *fd)
 			free(line);
 		}
 	}
-}
+}*/
 
 char	*ft_remove_newline(char *str)
 {
@@ -119,11 +119,16 @@ void	ft_checker_textures(t_data *info, int *fd, int i)
 	                 &info->textures.we_flag, &info->textures.ea_flag };
 
 	j = 0;
-	ft_new_fd(info, i, fd);
+	(void)i;
+	(void)fd;
+	//ft_new_fd(info, i, fd); Pendiente de ver si lo usamos o no.
 	while(j < 6)
 	{
 		if (*flags[j] != 1)
+		{	
 			printf(RED"Error: \"%s\" identifier is missing.\n"RESET, identifiers[j]);
+			exit(EXIT_FAILURE);
+		}
 		j++;
 	}
 

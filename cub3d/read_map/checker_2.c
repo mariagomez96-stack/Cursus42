@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:35:55 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/29 12:38:27 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:31:17 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,7 @@ int	ft_check_text(t_data *info, char **c, int *i, int line)
 		return (SUCCESS);
 	}
 	if (ft_check_imgs(c, line))
-	{
-		ft_store_texture(info, c);
-		ft_split_free(c);
-		(*i)++;
 		return (FAILURE);
-	}
 	ft_store_texture(info, c);
 	ft_split_free(c);
 	(*i)++;
