@@ -6,25 +6,11 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:15:44 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 12:28:13 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:05:38 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
-void	*ft_split_free(char **str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	return (NULL);
-}
 
 int	ft_split_len(char **str)
 {

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:38:05 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/27 14:05:15 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:14:15 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ typedef struct s_data
 // ----- Functions ---------------------------------------------------------- //
 
 /* INIT STRUCTURES */
-int ft_init_game(t_data *info);
+int ft_init_info_game(t_data *info);
 
 
 /* WALLS & RAYS */

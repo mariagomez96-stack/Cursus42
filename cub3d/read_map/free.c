@@ -6,11 +6,25 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 14:00:55 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/27 13:21:07 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:05:42 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+void	*ft_split_free(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+	return (NULL);
+}
 
 void free_textures(t_texture *textures)
 {

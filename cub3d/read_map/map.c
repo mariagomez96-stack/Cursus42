@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:04:08 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 13:37:54 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:05:59 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ char	*ft_remove_newline(char *str)
 		free(str);
 		return (NULL);
 	}
-	ft_memcpy(new_str, str, len - 1); // Copia sin el '\n'
-	new_str[len - 1] = '\0'; // Termina el string manualmente
+	ft_memcpy(new_str, str, len - 1); // Copiamos sin '\n'
+	new_str[len - 1] = '\0';
 	free(str);
 	return (new_str);
 }
 
 /*FT_PROCESS_LINE:
-	Lee una línea del archivo y elimina el salto de línea \n*/
+	Lee una línea del archivo y elimina el salto de línea \n */
 
 int	ft_process_line(char ***tokens, int fd)
 {

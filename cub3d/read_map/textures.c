@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:01:51 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/29 09:33:05 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:32:46 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,6 @@ void	ft_store_texture(t_data *info, char **c)
 	}
 	ft_store_color(info, c);
 }
-
-/* FT_GET_WALLS:
-	- ft_process_line: Leemos la línea, eliminamos el salto de línea
-		y cada palabra forma un token 
-	- ft_check_text: */
 
 int	ft_get_walls(t_data *info, int *fd, int *res)
 {

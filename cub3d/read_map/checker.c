@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:10:37 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 12:33:28 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:36:41 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,27 @@
 
 int	ft_check_colors(char **c, int i)
 {
+	int	len;
+
 	(void)i;
+	len = ft_split_len(c);
 	if (ft_strcmp(c[0], "C") && ft_strcmp(c[0], "F"))
 		return (SUCCESS);
-	if (ft_split_len(c) == 2 && ft_check_comma(c) == 2)
-		return (SUCCESS);
-	else if (ft_split_len(c) == 4 && ft_check_comma(c) == 2)
-		return (SUCCESS);
-	else
+	if (len != 2 && len != 4)
 	{
-		if (ft_check_comma(c) != 2)
-			printf(RED"Bad rgb format"RESET);
-		if (ft_split_len(c) != 2 && ft_split_len(c) != 4)
-			printf(RED"Bad rgb format"RESET);
-		return (FAILURE);
+		printf(RED"Bad rgb format\n"RESET);
+		printf(RED"Debug: Saliendo por longitud inválida en línea %d\n"RESET, i);
+		exit(EXIT_FAILURE);
+	}
+	if (ft_check_comma(c) != 2)
+	{
+		printf(RED"Bad rgb format\n"RESET);
+		printf(RED"Debug: Saliendo por cantidad de comas inválida en línea %d\n"RESET, i);
+		exit(EXIT_FAILURE);
 	}
 	return (SUCCESS);
 }
+
 
 int	ft_check_file(char *file, char *img, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:17:39 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 12:30:46 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:35:26 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,12 @@ void	ft_error_color(char **path, int r, int g, int b)
 		ft_putstr_fd(".", 2);
 	}
 	ft_putstr_fd("\n", 2);
+	exit(EXIT_FAILURE);
 }
 void	ft_error_rgb_num(char **rgb, int i, int j, int line)
 {
-	printf(RED"Bad argument:\n" RESET);
-	ft_putchar_fd(rgb[i][j], 2);
-	ft_putstr_fd("\" in line ", 2);
-	ft_putnbr_fd(line, 2);
-	ft_putstr_fd(". \n", 2);
+	printf("Bad argument: %c in line: %d\n", rgb[i][j], line);
+	exit(EXIT_FAILURE);
 }
 
 int ft_strcmp(const char *s1, const char *s2)

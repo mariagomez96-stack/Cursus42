@@ -6,7 +6,7 @@
 /*   By: marigome <marigome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:35:55 by marigome          #+#    #+#             */
-/*   Updated: 2025/01/22 13:52:01 by marigome         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:38:27 by marigome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,14 @@ int	ft_check_comma(char **c)
 
 int	ft_check_imgs(char **c, int i)
 {
-	return (ft_check_cardinal(c, i) ||
+	if (ft_check_cardinal(c, i) ||
 			ft_check_path(c, i) ||
 			ft_check_bad_argument(c, i) ||
 			ft_check_file(c[0], c[1], i) ||
 			ft_check_colors(c, i) ||
-			ft_check_colors_num(c, i));
+			ft_check_colors_num(c, i))
+			exit(EXIT_FAILURE);
+	return (SUCCESS);
 }
 
 int	ft_check_colors_num(char **c, int line)
