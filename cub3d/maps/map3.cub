@@ -1,7 +1,7 @@
-NO ./imgs/nature_04.png
-SO ./imgs/nature_01.png
-EA ./imgs/nature_03.png
-WE ./imgs/nature_02.png
+NO ./imgs/wooden_wall_chopper.png
+SO ./imgs/wooden_wall_nami.png
+EA ./imgs/wooden_wall_monkey.png
+WE ./imgs/wooden_wall_nico.png
 
 C 9, 24, 51
 F 48, 27, 104
